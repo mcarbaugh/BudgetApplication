@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 26, 2017, 12:06:16 AM
+    Author     : mcarb
+*/
+
+.loginFormContainer {
+    margin: 5px;
+    padding: 0px;
+    border: 0px;
+    background-color: #B1B1B1;
+    float: left;
+}
+
+.loginForm {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.loginFormTextInput {
+    margin: 5px;
+    padding: 5px;
+    width: 250px;
+    font-size: 1.1em;
+}
+
+.loginFormPasswordInput {
+    margin: 5px;
+    padding: 5px;
+    width: 250px;
+    font-size: 1.1em;
+}
+
+.loginFormButtonInput {
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.1em;
+}
+
+.loginFormSubmitInput {
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.1em;
+}
+
