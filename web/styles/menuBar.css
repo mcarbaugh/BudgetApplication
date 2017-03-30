@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .menuBarContainer {
-    height: 40px;
+    height: 3.5em;
     width: 100%;
     margin: 0px;
     background-color: #B1B1B1;
@@ -24,7 +24,7 @@ and open the template in the editor.
     padding: 0px;
     display: table-cell;
     vertical-align: middle;
-    line-height: 40px;
+    line-height: 3.5em;
 }
 
 .menuBarItem {

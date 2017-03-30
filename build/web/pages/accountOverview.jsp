@@ -19,7 +19,7 @@
             <jsp:include page="/includes/menuBar.jsp"/>
         </div>
         <div class="wrapper">
-            <h1>Hello World!</h1>
+            <h1>Account</h1>
             username: ${user.userName}<br/>
             name: ${user.firstName}<br/>
             phone: ${user.phoneNumber} <br/>

@@ -34,7 +34,8 @@ public class loginFormController extends HttpServlet {
             
             int userId = user.getId();
             if(userId == 0) {
-                request.getRequestDispatcher("index.jsp").include(request, response); 
+                request.setAttribute("message", "Username or password invalid.");
+                request.getRequestDispatcher("index.jsp").include(request, response);
             } 
             else {
                 request.setAttribute("user", user);
