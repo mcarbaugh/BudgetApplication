@@ -8,13 +8,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles/main.css">  
+        <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Budget Application | Overview</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        username: ${user.userName}<br/>
-        name: ${user.firstName}<br/>
-        phone: ${user.phoneNumber} <br/>
+        <div class="header">
+            <jsp:include page="/includes/menuBar.jsp"/>
+        </div>
+        <div class="wrapper">
+            <h1>Hello World!</h1>
+            username: ${user.userName}<br/>
+            name: ${user.firstName}<br/>
+            phone: ${user.phoneNumber} <br/>
+        </div>
     </body>
 </html>

@@ -5,10 +5,6 @@ import java.sql.*;
 
 public class LoginFormDataAccess implements AutoCloseable {
     
-    private static final String url = "jdbc:mysql://localhost:3306/test";
-    private static final String dbUser = "root";
-    private static final String dbPassword = "sesame";
-    
     public void createNewUser(User user){
         //TODO: write code to create a new user record
     }
@@ -22,12 +18,10 @@ public class LoginFormDataAccess implements AutoCloseable {
             
             User user;
             ResultSet userData;
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            try (Connection connection = DriverManager.getConnection(
-                    url, dbUser, dbPassword)) {
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 
                 PreparedStatement statement;
-                statement = connection.prepareStatement(query);
+                statement = mySqlConnection.prepareStatement(query);
                 statement.setString(1, username);
                 statement.setString(2, password);
                 userData = statement.executeQuery();
