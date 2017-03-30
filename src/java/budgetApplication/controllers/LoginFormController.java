@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import budgetApplication.businessLogic.LoginFormManager;
 import budgetApplication.dataContracts.User;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "loginFormController", urlPatterns = {"/loginForm"})
-public class loginFormController extends HttpServlet {
+public class LoginFormController extends HttpServlet {
 
     private static final String MESSAGE = "Username or password not recognized.";
     
@@ -38,6 +40,17 @@ public class loginFormController extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").include(request, response);
             } 
             else {
+                
+                /****** replace this with "Get Budgets" code ********/
+                List users = new ArrayList();
+                users.add(new User(1, "abc", "micky", "mouse", "850-111-2222", "password"));
+                users.add(new User(1, "abc", "micky", "mouse", "850-111-2222", "password"));
+                users.add(new User(1, "abc", "micky", "mouse", "850-111-2222", "password"));
+                users.add(new User(1, "abc", "micky", "mouse", "850-111-2222", "password"));
+                users.add(new User(1, "abc", "micky", "mouse", "850-111-2222", "password"));
+                request.setAttribute("users", users);
+                /*****************************************************/
+                
                 request.setAttribute("user", user);
                 request.setAttribute("pageTitle", "Budget Application - Account Overview");
                 request.getRequestDispatcher("pages/accountOverview.jsp").forward(request, response);

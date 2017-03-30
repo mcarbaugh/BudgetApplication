@@ -13,7 +13,7 @@ and open the template in the editor.
     padding: 0px;
     border: 0px;
     background-color: #B1B1B1;
-    float: left;
+    display: inline-block;
 }
 
 .loginForm {

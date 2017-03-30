@@ -20,6 +20,9 @@
                 <label>${message}</label>                
             </div>
             <jsp:include page="/includes/loginForm.jsp"/>
+            <br/><br/>
+            <label>Test Username: j.smith</label><br/>
+            <label>Test Password: sesame</label>
         </div>
     </body>
 </html>
