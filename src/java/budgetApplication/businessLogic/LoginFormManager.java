@@ -11,7 +11,7 @@ public class LoginFormManager implements AutoCloseable {
             return dataAccess.getUserByUsernameAndPassword(username, password);
         }
         catch (Exception ex) {
-            throw new Exception(ex);
+            throw ex;
         }
     }
 
@@ -21,7 +21,7 @@ public class LoginFormManager implements AutoCloseable {
             
         } 
         catch(Exception ex) {
-            throw new Exception (ex);
+            throw ex;
         }
     }
 }

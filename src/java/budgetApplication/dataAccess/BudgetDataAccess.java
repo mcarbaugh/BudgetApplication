@@ -62,6 +62,11 @@ public class BudgetDataAccess implements AutoCloseable {
     
     @Override
     public void close() throws Exception {
-        
+        try {
+            
+        } 
+        catch(Exception ex) {
+            throw ex;
+        }
     }
 }

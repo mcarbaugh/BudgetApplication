@@ -40,7 +40,6 @@ public class LoginFormDataAccess implements AutoCloseable {
             return user;
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            System.out.println(ex);
             throw ex;
         }
     }
@@ -51,7 +50,7 @@ public class LoginFormDataAccess implements AutoCloseable {
             
         } 
         catch(Exception ex) {
-            throw new Exception (ex);
+            throw ex;
         }
     }
 }

@@ -13,9 +13,6 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Budget Application</title>
-        <script>
-            
-        </script>
     </head>
     <body>
         <div class="wrapper">
