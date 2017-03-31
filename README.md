@@ -1,6 +1,6 @@
 # budgetApplication
 A dynamic web application to help users manage their monthly spending.
-<br/>
+<br/><br/>
 
 #### External Dependencies (needed to build the project):
 MySQL Connector (https://dev.mysql.com/downloads/connector/j/5.1.html) <br/>
