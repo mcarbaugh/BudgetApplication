@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : mcarb
 */
 
+.listWrapper {
+    display: table;
+    width: 66%;
+    margin: 0 auto;
+}
+
 .menuBarContainer {
     height: 3.5em;
     width: 100%;
@@ -25,6 +31,7 @@ and open the template in the editor.
     display: table-cell;
     vertical-align: middle;
     line-height: 3.5em;
+    width: 100%;
 }
 
 .menuBarItem {
@@ -40,6 +47,10 @@ and open the template in the editor.
     color: black;
     display: block;
     padding: 0px 16px;
+}
+
+#signOutButton {
+    float: right;
 }
 
 .menuBarItem a:hover {

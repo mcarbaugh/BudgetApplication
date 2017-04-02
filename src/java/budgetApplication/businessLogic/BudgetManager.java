@@ -8,7 +8,7 @@ public class BudgetManager implements AutoCloseable {
     
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {            
             return budgetDataAccess.getAllBudgetsByUserId(userId);
         }
         catch(Exception ex) {

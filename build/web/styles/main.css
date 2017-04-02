@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +18,10 @@ body {
     font-size: 16px;
 }
 
+h2 {
+    text-decoration: underline;
+}
+
 .header {
     width: 100%;
     height: 3.5em;
@@ -27,7 +30,8 @@ body {
 }
 
 .wrapper {
-    
+    width: 66%;
+    margin: 0 auto;
 }
 
 .errorNotification {

@@ -17,7 +17,7 @@
             <tbody>
                 <c:forEach items="${budgets}" var="budget" varStatus="counter">
                     <tr>
-                        <td><c:out value="${budget.year} ${budget.month}"/></td>
+                        <td><a href="/#budgetDetails"><c:out value="${budget.year} ${budget.month}"/></a></td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
@@ -27,5 +27,4 @@
             </tbody>
         </c:if>
     </table>
-    <input type="button" value="New Budget"/>
 </div>

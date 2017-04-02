@@ -2,24 +2,32 @@
     margin: 5px;
 }
 
-table {
-    border: 1px #B1B1B1 solid;
-}
-
 th {
     background-color: #4CAF50;
     color: white;
 }
 
-table, tr, td {
+table {
+    border: 1px solid #e0e0e0;
     border-collapse: collapse;
+    width: 100%;
+}
+
+tr, th {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 th, td {
     padding: 2px 20px;
 }
 
-tr:nth-child(even) {
+td {
+    text-align: center;
+}
+
+
+tr:hover {
     background-color: #f2f2f2
 }
 
