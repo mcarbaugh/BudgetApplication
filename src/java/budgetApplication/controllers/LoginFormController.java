@@ -17,6 +17,10 @@ public class LoginFormController extends HttpServlet {
     private static final String MESSAGE = "Username or password not recognized.";
     private static final String USERNAME_FIELD = "username";
     private static final String PASSWORD_FIELD = "password";
+    private static final String USER_FIELD = "user";
+    private static final String BUDGETS_FIELD = "budgets";
+    private static final String MESSAGE_FIELD = "message";
+    private static final String LOGIN_ERROR_MESSAGE = "Username or password invalid.";
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,12 +61,12 @@ public class LoginFormController extends HttpServlet {
             }
             
             if(userId != 0) {
-                request.setAttribute("user", user);
-                request.setAttribute("budgets", budgets);
+                request.setAttribute(USER_FIELD, user);
+                request.setAttribute(BUDGETS_FIELD, budgets);
                 request.getRequestDispatcher("pages/accountOverview.jsp").forward(request, response);
             }
             else {
-                request.setAttribute("message", "Username or password invalid.");
+                request.setAttribute(MESSAGE_FIELD, LOGIN_ERROR_MESSAGE);
                 request.getRequestDispatcher("index.jsp").include(request, response);
             }
         }

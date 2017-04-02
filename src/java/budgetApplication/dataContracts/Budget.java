@@ -10,7 +10,11 @@ public class Budget implements Serializable {
     private Double totalAmount;
     
     public Budget() {
-        
+        id = 0;
+        month = "January";
+        year = "1980";
+        totalSpent = 0.0;
+        totalAmount = 0.0;
     }
     
     public int getId() {
@@ -31,6 +35,10 @@ public class Budget implements Serializable {
     
     public Double getTotalAmount() {
         return totalAmount;
+    }
+    
+    public Double getRemainingBalance() {
+        return totalAmount - totalSpent;
     }
     
     public void setId(int value) {
