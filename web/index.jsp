@@ -16,13 +16,10 @@
     </head>
     <body>
         <div class="wrapper">
+            <jsp:include page="/includes/loginForm.jsp"/>
             <div class="errorNotification">
                 <label>${message}</label>                
             </div>
-            <jsp:include page="/includes/loginForm.jsp"/>
-            <br/><br/>
-            <label>Test Username: j.smith</label><br/>
-            <label>Test Password: sesame</label>
         </div>
     </body>
 </html>

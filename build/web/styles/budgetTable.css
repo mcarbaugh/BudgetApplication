@@ -1,0 +1,33 @@
+.budgetTableContainer {
+    margin: 5px;
+}
+
+table {
+    border: 1px #B1B1B1 solid;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table, tr, td {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 2px 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.deleteBudgetButton {
+    margin: 0 auto;    
+    display: block;
+}
+
+.moneyCell {
+    
+}

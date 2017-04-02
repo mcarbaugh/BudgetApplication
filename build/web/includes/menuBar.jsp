@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="menuBarContainer">
     <ul class="menuBarList">
         <li class="menuBarItem"><a href="#overview">Overview</a></li>

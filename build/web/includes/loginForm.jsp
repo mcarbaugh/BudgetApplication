@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="loginFormContainer">
     <form method="post" action="loginForm" class="loginForm">
         <input class="loginFormTextInput" type="text" placeholder="Username" name="username"/><br/>
