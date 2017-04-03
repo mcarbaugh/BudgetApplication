@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseFactory implements AutoCloseable {
-    private static final String url = "jdbc:mysql://localhost:3306/test";
+    private static final String url = "jdbc:mysql://localhost:3306/BudgetDB";
     private static final String dbUser = "root";
     private static final String dbPassword = "sesame";
     

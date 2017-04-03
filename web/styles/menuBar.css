@@ -33,11 +33,11 @@
 }
 
 .menuBarItem a {
-    font-size: 1.1em;
+    font-size: 1.2em;
     text-decoration: none;
     color: black;
     display: block;
-    padding: 0px 16px;
+    padding: 0px 8px;
 }
 
 .menuBarItem a:hover {
