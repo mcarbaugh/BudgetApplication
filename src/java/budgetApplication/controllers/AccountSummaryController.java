@@ -2,8 +2,7 @@
 package budgetApplication.controllers;
 
 import budgetApplication.businessLogic.*;
-import budgetApplication.dataContracts.Budget;
-import budgetApplication.dataContracts.User;
+import budgetApplication.dataContracts.*;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,31 +22,43 @@ public class AccountSummaryController extends HttpServlet {
             throws ServletException, IOException {
         
         try {
-            int userId;
-            int budgetId;
+            int userId = 0;
+            int budgetId = 0;
             User user = new User();
             List<Budget> budgets = new ArrayList();
             String operation;
             HttpSession currentSession;
             
-            // get parameters from URL and HttpSession
+            // get budgetOperation and budgetId parameters from URL
             operation = request.getParameter(OPERATION_FIELD);
-            budgetId = Integer.parseInt(request.getParameter(BUDGET_ID_FIELD));
+            
+            // check if budgetId parameter was passed in URL (false if operation is a read)
+            if(request.getParameterMap().containsKey(BUDGET_ID_FIELD)) {
+                budgetId = Integer.parseInt(request.getParameter(BUDGET_ID_FIELD));
+            }
+            
+            // get userId parameter from HTTPSession
             currentSession = request.getSession();
-            userId = (int) currentSession.getAttribute(USER_ID_FIELD);
+            if(currentSession.getAttribute(USER_ID_FIELD) != null) {
+                userId = (int) currentSession.getAttribute(USER_ID_FIELD);
+            }
             
             // process the query and get new data
             switch(operation) {
+                case OPERATION_CREATE:
+                    
+                    break;
+                case OPERATION_READ:
+                    user = getUser(userId);
+                    budgets = getBudgets(userId);
+                    break;
+                case OPERATION_UPDATE:
+                    
+                    break;
                 case OPERATION_DELETE:
                     processDeleteOperation(budgetId);
                     user = getUser(userId);
                     budgets = getBudgets(userId);
-                    break;
-                case OPERATION_ADD:
-                    
-                    break;
-                case OPERATION_UPDATE:
-                    
                     break;
                 default:
                     break;
@@ -117,13 +128,5 @@ public class AccountSummaryController extends HttpServlet {
         catch (Exception ex) {
             throw ex;
         }
-    }
-    
-    private void processAddOperation() {
-        
-    }
-    
-    private void processUpdateOperation() {
-        
     }
 }

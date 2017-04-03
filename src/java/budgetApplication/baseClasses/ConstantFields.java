@@ -21,7 +21,8 @@ public class ConstantFields {
     public static final String LOGIN_ERROR_MESSAGE = "Username or password invalid.";
     
     public static final String OPERATION_FIELD = "operation";
-    public static final String OPERATION_DELETE = "delete";
-    public static final String OPERATION_ADD = "add";
+    public static final String OPERATION_CREATE = "create";
+    public static final String OPERATION_READ = "read";
     public static final String OPERATION_UPDATE = "update";
+    public static final String OPERATION_DELETE = "delete";
 }
