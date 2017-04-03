@@ -19,7 +19,7 @@
                 <c:forEach items="${budgets}" var="budget" varStatus="counter">
                     <tr>
                         <td>
-                            <a href="/#AccountSummary">
+                            <a href="BudgetDetails">
                                 <c:out value="${budget.year} ${budget.month}"/>
                             </a>
                         </td>

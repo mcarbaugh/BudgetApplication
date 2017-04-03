@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="styles/userAccountSummary.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Budget Application | Overview</title>
+        <title>Budget Application | Account Summary</title>
     </head>
     <body>
         <div class="header">
