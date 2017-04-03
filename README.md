@@ -1,4 +1,4 @@
-# budgetApplication
+# BudgetApplication
 A dynamic web application to help users manage their monthly spending.
 <br/><br/>
 
