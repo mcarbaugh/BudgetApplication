@@ -11,12 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "BudgetDetailsController", urlPatterns = {"/BudgetDetails"})
 public class BudgetDetailsController extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getRequestDispatcher("pages/budgetDetails.jsp").forward(request, response);
+        try {
+            // get parameters from HttpSession
+            
+            // get parameters from URL
+            
+            // process query
+            
+            // get new data for page
+            
+            // navigate to page
+            request.getRequestDispatcher("pages/budgetDetails.jsp").forward(request, response);
+        }
+        catch (Exception ex) {
+            throw new ServletException(ex);
+        }
     }
 
     @Override

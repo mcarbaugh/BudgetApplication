@@ -5,7 +5,6 @@ import budgetApplication.businessLogic.*;
 import budgetApplication.dataContracts.*;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +23,16 @@ public class AccountSummaryController extends HttpServlet {
         try {
             int userId = 0;
             int budgetId = 0;
-            User user = new User();
-            List<Budget> budgets = new ArrayList();
+            User user;
+            List<Budget> budgets;
             String operation;
             HttpSession currentSession;
+            
+            // get userId parameter from HTTPSession
+            currentSession = request.getSession();
+            if(currentSession.getAttribute(USER_ID_FIELD) != null) {
+                userId = (int) currentSession.getAttribute(USER_ID_FIELD);
+            }
             
             // get budgetOperation and budgetId parameters from URL
             operation = request.getParameter(OPERATION_FIELD);
@@ -37,33 +42,28 @@ public class AccountSummaryController extends HttpServlet {
                 budgetId = Integer.parseInt(request.getParameter(BUDGET_ID_FIELD));
             }
             
-            // get userId parameter from HTTPSession
-            currentSession = request.getSession();
-            if(currentSession.getAttribute(USER_ID_FIELD) != null) {
-                userId = (int) currentSession.getAttribute(USER_ID_FIELD);
-            }
-            
-            // process the query and get new data
+            // process the query
             switch(operation) {
                 case OPERATION_CREATE:
                     
                     break;
                 case OPERATION_READ:
-                    user = getUser(userId);
-                    budgets = getBudgets(userId);
+                    
                     break;
                 case OPERATION_UPDATE:
                     
                     break;
                 case OPERATION_DELETE:
                     processDeleteOperation(budgetId);
-                    user = getUser(userId);
-                    budgets = getBudgets(userId);
                     break;
                 default:
                     break;
             }
             
+            // get new data for page
+            user = getUser(userId);
+            budgets = getBudgets(userId);
+                    
             // refresh the page
             request.setAttribute(USER_FIELD, user);
             request.setAttribute(BUDGETS_FIELD, budgets);
