@@ -37,7 +37,7 @@ public class BudgetDataAccess implements AutoCloseable {
             
             return user;
         }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        catch (Exception ex) {
             throw ex;
         }
     }
