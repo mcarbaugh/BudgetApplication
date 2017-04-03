@@ -19,4 +19,9 @@ public class ConstantFields {
     public static final String BUDGETS_FIELD = "budgets";
     public static final String MESSAGE_FIELD = "message";
     public static final String LOGIN_ERROR_MESSAGE = "Username or password invalid.";
+    
+    public static final String OPERATION_FIELD = "operation";
+    public static final String OPERATION_DELETE = "delete";
+    public static final String OPERATION_ADD = "add";
+    public static final String OPERATION_UPDATE = "update";
 }
