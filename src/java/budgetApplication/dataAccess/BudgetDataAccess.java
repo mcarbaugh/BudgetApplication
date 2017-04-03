@@ -11,16 +11,14 @@ import java.util.List;
 public class BudgetDataAccess implements AutoCloseable {
 
     public User getUserByUserId(int userId) throws Exception {
-        
         try {
-            String query = "SELECT * "
-                     + "FROM user "
-                     + "WHERE id = ?";
+            String query = "SELECT id, username, firstName, lastName, email, phoneNumber "
+                         + "FROM user "
+                         + "WHERE id = ?";
             
             User user;
             ResultSet userData;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query);
                 statement.setInt(1, userId);
@@ -52,7 +50,6 @@ public class BudgetDataAccess implements AutoCloseable {
             List<Budget> budgets;
             ResultSet data;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
@@ -76,14 +73,12 @@ public class BudgetDataAccess implements AutoCloseable {
     }
     
     public Double getTotalAmountById(int id) throws Exception {
-        
         try {
             String query = "SELECT SUM(amount) AS total FROM item WHERE budgetId = ?";
             
             Double total = 0.0;
             ResultSet data;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, id);
@@ -101,8 +96,7 @@ public class BudgetDataAccess implements AutoCloseable {
         }
     }
     
-    public Double getTotalSpentById(int id) throws Exception {
-              
+    public Double getTotalSpentById(int id) throws Exception {   
         try {
             String query = "SELECT SUM(amount) as total "
                          + "FROM transaction "
@@ -113,7 +107,6 @@ public class BudgetDataAccess implements AutoCloseable {
             Double total = 0.0;
             ResultSet data;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, id);
@@ -133,49 +126,41 @@ public class BudgetDataAccess implements AutoCloseable {
     
     public void deleteBudgetById(int id) throws Exception {
         try {
-            
-            
-            
             String deleteFromTransactionQuery = "DELETE FROM `transaction` "
                                               + "WHERE itemId IN (SELECT i.id "
-                                                                 + "FROM item i "
-                                                                 + "WHERE i.budgetId = ?)";
+                                                               + "FROM item i "
+                                                               + "WHERE i.budgetId = ?)";
             
             String deleteFromItemQuery = "DELETE FROM item WHERE budgetId = ?";
             String deleteFromIncomeQuery = "DELETE FROM income WHERE budgetId = ?";
             String deleteFromBudgetQuery = "DELETE FROM budget WHERE id = ?";
             
-            int userData;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(deleteFromTransactionQuery);
                 statement.setInt(1, id);
-                userData = statement.executeUpdate();
+                statement.executeUpdate();
             }
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(deleteFromItemQuery);
                 statement.setInt(1, id);
-                userData = statement.executeUpdate();
+                statement.executeUpdate();
             }
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(deleteFromIncomeQuery);
                 statement.setInt(1, id);
-                userData = statement.executeUpdate();
+                statement.executeUpdate();
             }
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(deleteFromBudgetQuery);
                 statement.setInt(1, id);
-                userData = statement.executeUpdate();
+                statement.executeUpdate();
             }
         }
         catch (Exception ex) {

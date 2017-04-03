@@ -11,11 +11,10 @@ public class LoginFormDataAccess implements AutoCloseable {
     }
     
     public User getUserByUsernameAndPassword(String username, String password) throws Exception {
-         
         try {
-            String query = "SELECT * "
-                     + "FROM user "
-                     + "WHERE username = ? AND password = ?";
+            String query = "SELECT id, username, firstName, lastName, email, phoneNumber "
+                         + "FROM user "
+                         + "WHERE username = ? AND password = ?";
             
             User user;
             ResultSet userData;
