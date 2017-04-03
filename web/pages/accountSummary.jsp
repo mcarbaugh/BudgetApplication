@@ -1,8 +1,3 @@
-<%-- 
-    Document   : accountOverview
-    Created on : Mar 26, 2017, 7:28:01 PM
-    Author     : mcarb
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,8 +18,7 @@
             <jsp:include page="/includes/menuBar.jsp"/>
         </div>
         <div class="wrapper">
-            <jsp:include page="/includes/userAccountSummary.jsp"/>
-            <br/>
+            <jsp:include page="/includes/accountSummary.jsp"/>
             <br/>
             <jsp:include page="/includes/budgetTable.jsp"/>
         </div>

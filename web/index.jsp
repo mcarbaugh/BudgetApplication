@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Mar 24, 2017, 2:36:52 PM
-    Author     : mcarb
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,11 +18,15 @@
             <tbody>
                 <c:forEach items="${budgets}" var="budget" varStatus="counter">
                     <tr>
-                        <td><a href="/#budgetDetails"><c:out value="${budget.year} ${budget.month}"/></a></td>
+                        <td>
+                            <a href="/#AccountSummary">
+                                <c:out value="${budget.year} ${budget.month}"/>
+                            </a>
+                        </td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
-                        <td><input type="button" value="X" class="deleteBudgetButton"/></td>
+                        <td><a href="AccountSummary?operation=delete&budgetId=${budget.id}">X</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

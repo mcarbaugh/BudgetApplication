@@ -1,3 +1,4 @@
+
 package budgetApplication.businessLogic;
 
 import budgetApplication.dataAccess.BudgetDataAccess;
@@ -5,6 +6,16 @@ import budgetApplication.dataContracts.*;
 import java.util.List;
 
 public class BudgetManager implements AutoCloseable {
+    
+    public User getUserByUserId(int userId) throws Exception {
+        
+        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+            return budgetDataAccess.getUserByUserId(userId);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
     
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         

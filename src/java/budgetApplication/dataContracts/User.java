@@ -1,3 +1,4 @@
+
 package budgetApplication.dataContracts;
 
 import java.io.Serializable;
@@ -7,25 +8,25 @@ public class User implements Serializable {
     private String userName;
     private String firstName;
     private String lastName;
+    private String email;
     private String phoneNumber;
-    private String password;
     
     public User() {
         id = 0;
         userName = null;
         firstName = null;
         lastName = null;
+        email = null;
         phoneNumber = null;
-        password = null;
     }
     
-    public User(int myId, String myUsername, String myFirstName, String myLastName, String myPhoneNumber, String myPassword){
+    public User(int myId, String myUsername, String myFirstName, String myLastName, String myEmail, String myPhoneNumber) {
         id = myId;
         userName = myUsername;
         firstName = myFirstName;
         lastName = myLastName;
+        email = myEmail;
         phoneNumber = myPhoneNumber;
-        password = myPassword;
     }
     
     public int getId() {
@@ -44,12 +45,12 @@ public class User implements Serializable {
         return lastName;
     }
     
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getEmail() {
+        return email;
     }
     
-    public String getPassword() {
-        return password;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
     
     public void setId(int value) {
@@ -72,7 +73,7 @@ public class User implements Serializable {
         phoneNumber = value;
     }
     
-    public void setPassword(String value) {
-        password = value;
+    public void setEmail(String value) {
+        email = value;
     }
 }

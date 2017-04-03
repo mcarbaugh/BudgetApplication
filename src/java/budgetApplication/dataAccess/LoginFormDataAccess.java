@@ -1,3 +1,4 @@
+
 package budgetApplication.dataAccess;
 
 import budgetApplication.dataContracts.*;
@@ -32,8 +33,8 @@ public class LoginFormDataAccess implements AutoCloseable {
                     user.setUsername(userData.getString("username"));
                     user.setFirstName(userData.getString("firstName"));
                     user.setLastName(userData.getString("lastName"));
+                    user.setEmail(userData.getString("email"));
                     user.setPhoneNumber(userData.getString("phoneNumber"));
-                    user.setPassword(userData.getString("password"));
                 }
             }
             

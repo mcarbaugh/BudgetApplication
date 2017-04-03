@@ -1,3 +1,4 @@
+
 package budgetApplication.dataContracts;
 
 import java.io.Serializable;
