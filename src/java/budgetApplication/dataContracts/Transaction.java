@@ -11,7 +11,11 @@ public class Transaction implements Serializable {
     private String dateTime;
     
     public Transaction() {
-        
+        id = 0;
+        itemId = 0;
+        amount = 0;
+        description = "";
+        dateTime = "";
     }
     
     public int getId() {
@@ -32,5 +36,25 @@ public class Transaction implements Serializable {
     
     public String getDateTime() {
         return dateTime;
+    }
+    
+    public void setId(int value) {
+        id = value;
+    }
+    
+    public void setItemId(int value) {
+        itemId = value;
+    }
+    
+    public void setAmount(Double value) {
+        amount = value;
+    }
+    
+    public void setDescription(String value) {
+        description = value;
+    }
+    
+    public void setDateTime(String value) {
+        dateTime = value;
     }
 }
