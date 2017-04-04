@@ -1,8 +1,3 @@
-<%-- 
-    Document   : budgetDetails
-    Created on : Apr 3, 2017, 2:50:53 PM
-    Author     : mcarb
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

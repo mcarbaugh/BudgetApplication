@@ -46,9 +46,11 @@ public class LoginFormController extends HttpServlet {
             }
             
             if(userId != 0) {
+                // if user is valid, tell client to load AccountSummaryController
                 response.sendRedirect("AccountSummary?" + OPERATION_FIELD + "=" + OPERATION_READ);
             }
             else {
+                //if user is not valid, respond with 
                 request.setAttribute(MESSAGE_FIELD, LOGIN_ERROR_MESSAGE);
                 request.getRequestDispatcher("index.jsp").include(request, response);
             }
