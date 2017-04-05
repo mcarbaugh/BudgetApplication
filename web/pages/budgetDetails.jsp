@@ -8,5 +8,6 @@
     </head>
     <body>
         <h1>Budget Content Goes Here</h1>
+        <jsp:include page="/includes/itemTable.jsp"/>
     </body>
 </html>
