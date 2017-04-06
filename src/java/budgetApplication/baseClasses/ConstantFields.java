@@ -17,6 +17,7 @@ public class ConstantFields {
     public static final String BUDGET_ID_FIELD = "budgetId";
     public static final String USER_FIELD = "user";
     public static final String BUDGETS_FIELD = "budgets";
+    public static final String ITEMS_FIELD = "items";
     public static final String MESSAGE_FIELD = "message";
     public static final String LOGIN_ERROR_MESSAGE = "Username or password invalid.";
     

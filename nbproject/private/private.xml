@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Dev/BudgetApplication/web/includes/budgetTable.jsp</file>
+=======
+            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/controllers/BudgetDetailsController.java</file>
+            <file>file:/C:/Dev/BudgetApplication/web/pages/budgetDetails.jsp</file>
+>>>>>>> item27
         </group>
     </open-files>
 </project-private>
