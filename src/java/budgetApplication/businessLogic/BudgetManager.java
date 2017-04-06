@@ -3,6 +3,7 @@ package budgetApplication.businessLogic;
 
 import budgetApplication.dataAccess.BudgetDataAccess;
 import budgetApplication.dataContracts.*;
+import java.util.Collections;
 import java.util.List;
 
 public class BudgetManager implements AutoCloseable {
@@ -20,7 +21,10 @@ public class BudgetManager implements AutoCloseable {
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         
         try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {            
-            return budgetDataAccess.getAllBudgetsByUserId(userId);
+            List<Budget> budgets =budgetDataAccess.getAllBudgetsByUserId(userId);
+            Collections.sort(budgets, (final Budget b1, final Budget b2) -> (b1.getYear() - b2.getYear()));
+            Collections.sort(budgets, (final Budget b1, final Budget b2) -> (b1.getMonth().compareTo(b2.getMonth())));            
+            return budgets;
         }
         catch(Exception ex) {
             throw ex;

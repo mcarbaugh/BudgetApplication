@@ -63,7 +63,7 @@ public class BudgetDataAccess implements AutoCloseable {
                     budget.setId(data.getInt("id"));
                     month = MonthEnum.valueOf(data.getString("month"));
                     budget.setMonth(month);                    
-                    budget.setYear(data.getString("year"));
+                    budget.setYear(data.getInt("year"));
                     budgets.add(budget);
                 }
                 

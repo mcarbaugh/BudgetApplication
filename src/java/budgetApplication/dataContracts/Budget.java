@@ -7,14 +7,14 @@ import java.io.Serializable;
 public class Budget implements Serializable {
     private int id;
     private MonthEnum month;
-    private String year;
+    private int year;
     private Double totalSpent;
     private Double totalAmount;
     
     public Budget() {
         id = 0;
         month = MonthEnum.JANUARY;
-        year = "1980";
+        year = 1980;
         totalSpent = 0.0;
         totalAmount = 0.0;
     }
@@ -27,7 +27,7 @@ public class Budget implements Serializable {
         return month;
     }
     
-    public String getYear() {
+    public int getYear() {
         return year;
     }
     
@@ -51,7 +51,7 @@ public class Budget implements Serializable {
         month = value;
     }
     
-    public void setYear(String value) {
+    public void setYear(int value) {
         year = value;
     }
     
