@@ -27,4 +27,6 @@ public class ConstantFields {
     public static final String OPERATION_UPDATE = "update";
     public static final String OPERATION_DELETE = "delete";
     public static final String OPERATION_SIGN_OUT = "signOut";
+    
+    public static final String MONTHS_FIELD = "months";
 }

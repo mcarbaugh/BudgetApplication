@@ -61,6 +61,15 @@ public class BudgetManager implements AutoCloseable {
         }
     }
     
+    public void insertBudgetByUserId(int userId, Budget budget) throws Exception {
+        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+            budgetDataAccess.insertBudgetByUserId(userId, budget);
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
     @Override
     public void close() throws Exception {
         try {

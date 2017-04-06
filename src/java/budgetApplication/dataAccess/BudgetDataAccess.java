@@ -171,6 +171,25 @@ public class BudgetDataAccess implements AutoCloseable {
         }
     }
     
+    public void insertBudgetByUserId(int userId, Budget budget) throws Exception {
+        try {
+            String query = "INSERT INTO Budget (userId, month, year) "
+                         + "VALUES (?, ?, ?)";
+                       
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, userId);
+                statement.setString(2, budget.getMonth().toString());
+                statement.setInt(3, budget.getYear());
+                statement.executeUpdate();
+            }
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
     @Override
     public void close() throws Exception {
         try {

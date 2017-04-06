@@ -4,6 +4,7 @@ package budgetApplication.controllers;
 import budgetApplication.businessLogic.*;
 import budgetApplication.dataContracts.*;
 import static budgetApplication.baseClasses.ConstantFields.*;
+import budgetApplication.baseClasses.MonthEnum;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -45,7 +46,7 @@ public class AccountSummaryController extends HttpServlet {
             // process the query
             switch(operation) {
                 case OPERATION_CREATE:
-                    
+                    //processInsertOperation(userId, null);
                     break;
                 case OPERATION_READ:
                     
@@ -67,6 +68,7 @@ public class AccountSummaryController extends HttpServlet {
             // refresh the page
             request.setAttribute(USER_FIELD, user);
             request.setAttribute(BUDGETS_FIELD, budgets);
+            request.setAttribute(MONTHS_FIELD, MonthEnum.values());
             request.getRequestDispatcher("pages/accountSummary.jsp").forward(request, response);
         }
         catch (Exception ex) {
@@ -117,6 +119,17 @@ public class AccountSummaryController extends HttpServlet {
         catch (Exception ex) {
             throw ex;
         }
+    }
+    
+    private void processInsertOperation(int userId, Budget budget) throws Exception {
+        try {
+            try (BudgetManager budgetManager = new BudgetManager()) {
+                budgetManager.insertBudgetByUserId(userId, budget);
+            }    
+        }
+        catch (Exception ex) {
+            throw ex;
+        }   
     }
     
     private void processDeleteOperation(int budgetId) throws Exception {
