@@ -25,4 +25,5 @@ public class ConstantFields {
     public static final String OPERATION_READ = "read";
     public static final String OPERATION_UPDATE = "update";
     public static final String OPERATION_DELETE = "delete";
+    public static final String OPERATION_SIGN_OUT = "signOut";
 }

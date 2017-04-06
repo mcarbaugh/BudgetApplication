@@ -54,7 +54,7 @@ public class AccountSummaryController extends HttpServlet {
                     
                     break;
                 case OPERATION_DELETE:
-                    processDeleteOperation(budgetId);
+                    processDeleteOperation(budgetId);                    
                     break;
                 default:
                     break;
@@ -63,7 +63,7 @@ public class AccountSummaryController extends HttpServlet {
             // get new data for page
             user = getUser(userId);
             budgets = getBudgets(userId);
-                    
+            
             // refresh the page
             request.setAttribute(USER_FIELD, user);
             request.setAttribute(BUDGETS_FIELD, budgets);

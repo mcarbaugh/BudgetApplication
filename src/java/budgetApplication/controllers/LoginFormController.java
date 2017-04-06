@@ -12,14 +12,28 @@ import budgetApplication.businessLogic.LoginFormManager;
 import budgetApplication.dataContracts.*;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "loginFormController", urlPatterns = {"/loginForm"})
+@WebServlet(name = "loginFormController", urlPatterns = {"/LoginForm"})
 public class LoginFormController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String operation = "";
+        HttpSession currentSession;
         
+        if(request.getParameterMap().containsKey(OPERATION_FIELD)) {
+            operation = request.getParameter(OPERATION_FIELD);
+        }
+        
+        switch (operation) {
+            case (OPERATION_SIGN_OUT):
+                currentSession = request.getSession();
+                currentSession.invalidate();
+                break;
+        }
+        
+        request.getRequestDispatcher("index.jsp").include(request, response);
     }
 
     @Override
