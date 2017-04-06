@@ -34,12 +34,3 @@ td {
 tr:hover {
     background-color: #f2f2f2
 }
-
-.deleteBudgetButton {
-    margin: 0 auto;    
-    display: block;
-}
-
-.moneyCell {
-    
-}

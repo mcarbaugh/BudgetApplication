@@ -27,9 +27,9 @@
                         </td>
                         <td><c:out value="${budget.year}"/></td>
                         <td><c:out value="${budget.month.toString()}"/></td>
-                        <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
-                        <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
-                        <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
+                        <td><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
+                        <td><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
+                        <td><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
                         <td><a href="AccountSummary?operation=delete&budgetId=${budget.id}">X</a></td>
                     </tr>
                 </c:forEach>

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ItemDataAccess implements AutoCloseable {
     
-    public List<Item> getAllItemsByBudgetIdAndCategoryId(int budgetId) throws Exception {
+    public List<Item> getAllItemsByBudgetId(int budgetId) throws Exception {
         try {
             String query = "SELECT i.id, c.name, i.amount, i.description "
                          + "FROM item i, category c "

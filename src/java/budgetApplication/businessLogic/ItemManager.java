@@ -16,7 +16,7 @@ public class ItemManager implements AutoCloseable {
     public List<Item> getAllItemsByBudgetId(int budgetId) throws Exception {
         
         try(ItemDataAccess itemDataAccess = new ItemDataAccess()) {            
-            return itemDataAccess.getAllItemsByBudgetIdAndCategoryId(budgetId);
+            return itemDataAccess.getAllItemsByBudgetId(budgetId);
         }
         catch(Exception ex) {
             throw ex;

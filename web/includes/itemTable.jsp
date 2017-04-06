@@ -13,19 +13,19 @@
         <c:if test="${fn:length(items) gt 0}">
             <thead>
                 <tr>
-                    <th>Description</th>
+                    <th>Budget Item</th>
                     <th>Amount</th>
                     <th>Category</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${items}" var="item" varStatus="counter">
                     <tr>
                         <td><c:out value="${item.description}"/></td>
-                        <td><c:out value="${item.amount}"/></td>
+                        <td><fmt:formatNumber type="currency" value="${item.amount}"/></td>
                         <td><c:out value="${item.category.toString()}"/></td>
-                        <td><input type="button" value="Modify" class="updateItemButton"/></td>
-                        <td><input type="button" value="X" class="deleteBudgetButton"/></td>
+                        <td><a href="#">X</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
