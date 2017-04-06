@@ -20,7 +20,7 @@
                     <tr>
                         <td>
                             <a href="BudgetDetails?operation=read&budgetId=${budget.id}">
-                                <c:out value="${budget.year} ${budget.month}"/>
+                                <c:out value="${budget.year} ${budget.month.toString()}"/>
                             </a>
                         </td>
                         <td class="moneyCell"><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>

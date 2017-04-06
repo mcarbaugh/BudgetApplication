@@ -1,18 +1,19 @@
 
 package budgetApplication.dataContracts;
 
+import budgetApplication.baseClasses.MonthEnum;
 import java.io.Serializable;
 
 public class Budget implements Serializable {
     private int id;
-    private String month;
+    private MonthEnum month;
     private String year;
     private Double totalSpent;
     private Double totalAmount;
     
     public Budget() {
         id = 0;
-        month = "January";
+        month = MonthEnum.JANUARY;
         year = "1980";
         totalSpent = 0.0;
         totalAmount = 0.0;
@@ -22,7 +23,7 @@ public class Budget implements Serializable {
         return id;
     }
     
-    public String getMonth() {
+    public MonthEnum getMonth() {
         return month;
     }
     
@@ -46,7 +47,7 @@ public class Budget implements Serializable {
         id = value;
     }
     
-    public void setMonth(String value) {
+    public void setMonth(MonthEnum value) {
         month = value;
     }
     

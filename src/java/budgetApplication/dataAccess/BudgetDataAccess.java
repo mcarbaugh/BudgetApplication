@@ -1,6 +1,7 @@
 
 package budgetApplication.dataAccess;
 
+import budgetApplication.baseClasses.MonthEnum;
 import budgetApplication.dataContracts.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,6 +51,7 @@ public class BudgetDataAccess implements AutoCloseable {
             List<Budget> budgets;
             ResultSet data;
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                MonthEnum month;
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
@@ -59,7 +61,8 @@ public class BudgetDataAccess implements AutoCloseable {
                 while(data.next()) {
                     budget = new Budget();
                     budget.setId(data.getInt("id"));
-                    budget.setMonth(data.getString("month"));
+                    month = MonthEnum.valueOf(data.getString("month"));
+                    budget.setMonth(month);                    
                     budget.setYear(data.getString("year"));
                     budgets.add(budget);
                 }
