@@ -4,24 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <div class="budgetTableContainer">
-    <input type="submit" value="Add Budget"/>
-    <div id="NewBudgetModal" class="modal">
-        <div class="modal-content">
-            <form id="NewBudgetForm" action="#" method="post">
-                <h3>Create budget</h3>
-                Month:
-                <select name="monthDropdown" form="NewBudgetForm">
-                    <option value="month"><c:out value="${months[0]}"/></option>
-                    <option value="month"><c:out value="${months[1]}"/></option>
-                </select>
-                <br/>
-                Year:
-                <select name="yearDropdown" form="NewBudgetForm">
-                    <option value="month"></option>
-                </select>
-            </form>
-        </div>
-    </div>
+    <button onClick="openAddBudgetDialog()">Add Budget</button>
     <table>
         <c:if test="${fn:length(budgets) gt 0}">
             <thead>

@@ -11,10 +11,8 @@
         <title>Budget Application | Budget Details</title>
     </head>
     <body>
-        <div class="header">
-            <jsp:include page="/includes/menuBar.jsp"/>
-        </div>
         <div class="wrapper">
+            <jsp:include page="/includes/menuBar.jsp"/>
             <jsp:include page="/includes/itemTable.jsp"/>
         </div>        
     </body>

@@ -7,33 +7,26 @@
     display: inline-block;
 }
 
-.loginForm {
+.loginFormContainer form {
     margin: 0px;
     padding: 0px;
     border: 0px;
 }
 
-.loginFormTextInput {
+.loginFormContainer form input[type="text"], input[type="password"] {
     margin: 5px;
     padding: 5px;
     width: 250px;
     font-size: 1.1em;
 }
 
-.loginFormPasswordInput {
-    margin: 5px;
-    padding: 5px;
-    width: 250px;
-    font-size: 1.1em;
-}
-
-.loginFormButtonInput {
+.loginFormContainer form input[type="button"] {
     margin: 5px;
     padding: 5px;
     font-size: 1.1em;
 }
 
-.loginFormSubmitInput {
+.loginFormContainer form input[type="submit"] {
     margin: 5px;
     padding: 5px;
     font-size: 1.1em;
