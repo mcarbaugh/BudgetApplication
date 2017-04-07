@@ -69,7 +69,7 @@ public class AccountSummaryController extends HttpServlet {
             request.setAttribute(USER_FIELD, user);
             request.setAttribute(BUDGETS_FIELD, budgets);
             request.setAttribute(MONTHS_FIELD, MonthEnum.values());
-            request.getRequestDispatcher("pages/accountSummary.jsp").forward(request, response);
+            request.getRequestDispatcher("pages/accountSummaryPage.jsp").forward(request, response);
         }
         catch (Exception ex) {
             throw new ServletException(ex);

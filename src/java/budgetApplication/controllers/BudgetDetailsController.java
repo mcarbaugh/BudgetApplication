@@ -64,7 +64,7 @@ public class BudgetDetailsController extends HttpServlet {
             request.setAttribute(ITEMS_FIELD, items);
             
             // navigate to page
-            request.getRequestDispatcher("pages/budgetDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("pages/budgetDetailsPage.jsp").forward(request, response);
         }
         catch (Exception ex) {
             throw new ServletException(ex);

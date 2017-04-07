@@ -1,9 +1,14 @@
 
 <!DOCTYPE html>
 <div class="userAccountSummaryContainer">
-    <h1>Account Summary</h1>
-    <p>Username: ${user.userName}</p>
-    <p>Name: ${user.firstName} ${user.lastName}</p>
-    <p>Email: ${user.email}</p>
-    <p>Phone: ${user.phoneNumber}</p>
+    <h1>${user.firstName} ${user.lastName}</h1>
+    <div>
+        <label>email:</label>
+        <label>phone:</label>
+    </div>
+    
+    <div>
+        <label>${user.email}</label>
+        <label>${user.phoneNumber}</label>
+    </div>
 </div>

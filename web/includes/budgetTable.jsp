@@ -4,37 +4,42 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <div class="budgetTableContainer">
-    <button onClick="openAddBudgetDialog()">Add Budget</button>
     <table>
-        <c:if test="${fn:length(budgets) gt 0}">
-            <thead>
+        <thead>
+            <tr>
+                <th>Budget</th>
+                <th class="yearColumn">Year</th>
+                <th class="monthColumn">Month</th>
+                <th class="currencyColumn">Spent</th>
+                <th class="currencyColumn">Remaining</th>
+                <th class="currencyColumn">Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${budgets}" var="budget" varStatus="counter">
                 <tr>
-                    <th>View</th>
-                    <th>Year</th>
-                    <th>Month</th>
-                    <th>Spent</th>
-                    <th>Remaining</th>
-                    <th>Total</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${budgets}" var="budget" varStatus="counter">
-                    <tr>
-                        <td>
+                    <td>
+                        <span>
                             <a href="BudgetDetails?operation=read&budgetId=${budget.id}">
-                                <c:out value="Details"/>
+                                <c:out value="view"/>
                             </a>
-                        </td>
-                        <td><c:out value="${budget.year}"/></td>
-                        <td><c:out value="${budget.month.toString()}"/></td>
-                        <td><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
-                        <td><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
-                        <td><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
-                        <td><a href="AccountSummary?operation=delete&budgetId=${budget.id}">X</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </c:if>
+                        </span>
+                        &nbsp
+                        <span>
+                            <a href="#editBudget">
+                                <c:out value="edit"/>
+                            </a>
+                        </span>
+                    </td>
+                    <td class="yearColumn"><c:out value="${budget.year}"/></td>
+                    <td class="monthColumn"><c:out value="${budget.month.toString()}"/></td>
+                    <td class="currencyColumn"><fmt:formatNumber type="currency" value="${budget.totalSpent}"/></td>
+                    <td class="currencyColumn"><fmt:formatNumber type="currency" value="${budget.getRemainingBalance()}"/></td>
+                    <td class="currencyColumn"><fmt:formatNumber type="currency" value="${budget.totalAmount}"/></td>
+                    <td><a class="deleteButton" href="AccountSummary?operation=delete&budgetId=${budget.id}">X</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
 </div>
