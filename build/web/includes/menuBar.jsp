@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <div class="menuBarContainer">
         <ul class="menuBarList">
-            <li class="menuBarItem"><a href="AccountSummary?operation=read">Summary</a></li>
+            <li class="menuBarItem"><a href="AccountSummary?operation=read">Home</a></li>
             <li class="menuBarItem"><a href="/#Tools">Tools</a></li>
             <li class="menuBarItem"><a href="/#settings">Settings</a></li>
             <li class="menuBarItem" id="signOutButton">

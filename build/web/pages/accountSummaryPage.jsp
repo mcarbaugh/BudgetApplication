@@ -24,7 +24,7 @@
                     <div class="tableToolbar">
                         <button class="tableToolbarButton" onClick="openAddBudgetDialog()">New</button>
                         <div class="verticalRule"></div>
-                        <button class="tableToolbarButton">Sort</button>
+                        <button class="tableToolbarButton">Sort by:</button>
                     </div>
                     <jsp:include page="/includes/budgetTable.jsp"/>
                 </div>
