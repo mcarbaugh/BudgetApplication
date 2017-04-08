@@ -98,21 +98,8 @@ public class AccountSummaryController extends HttpServlet {
     private List<Budget> getBudgets(int userId) throws Exception {
         try {
             try (BudgetManager budgetManager = new BudgetManager()) {
-                int budgetId;
-                Double amount;
-                Double spent;
                 List<Budget> budgets;
                 budgets = budgetManager.getAllBudgetsByUserId(userId);
-                
-                // get totals for each budget
-                for (Budget budget : budgets) {
-                    budgetId = budget.getId();
-                    amount = budgetManager.getTotalAmountById(budgetId);
-                    spent = budgetManager.getTotalSpentById(budgetId);
-                    budget.setTotalSpent(spent);
-                    budget.setTotalAmount(amount);
-                }
-                
                 return budgets;
             }
         }

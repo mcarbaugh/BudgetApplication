@@ -45,7 +45,20 @@ public class BudgetDataAccess implements AutoCloseable {
     
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         try {
-            String query = "SELECT * FROM budget WHERE userId = ?";
+            String query;
+            query = "SELECT b.id, b.month, b.year, SUM(itemResult.planned) as planned, spent "
+                  + "FROM budget b "
+                  + "LEFT JOIN (SELECT i.id, i.budgetId, i.amount as planned "
+                             + "FROM item i "
+                             + "GROUP BY i.id) itemResult "
+                             + "ON b.id = itemResult.budgetId "
+                  + "LEFT JOIN (SELECT SUM(t.amount) as spent, b2.id as budgetID "
+                             + "FROM transaction t, item i2, budget b2 "
+                             + "WHERE t.itemId = i2.id AND i2.budgetId = b2.id "
+                             + "GROUP BY b2.id) tResult "
+                             + "ON tResult.budgetId = itemResult.budgetId "
+                  + "WHERE b.userId = ? "
+                  + "GROUP BY b.id";
             
             Budget budget;
             List<Budget> budgets;
@@ -64,6 +77,8 @@ public class BudgetDataAccess implements AutoCloseable {
                     month = MonthEnum.valueOf(data.getString("month"));
                     budget.setMonth(month);                    
                     budget.setYear(data.getInt("year"));
+                    budget.setTotalAmount(data.getDouble("planned"));
+                    budget.setTotalSpent(data.getDouble("spent"));
                     budgets.add(budget);
                 }
                 

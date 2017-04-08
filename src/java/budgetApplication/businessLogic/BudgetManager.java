@@ -5,7 +5,6 @@ import budgetApplication.baseClasses.MonthEnum;
 import budgetApplication.dataAccess.BudgetDataAccess;
 import budgetApplication.dataContracts.*;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class BudgetManager implements AutoCloseable {
@@ -23,9 +22,7 @@ public class BudgetManager implements AutoCloseable {
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         
         try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {            
-            List<Budget> budgets =budgetDataAccess.getAllBudgetsByUserId(userId);
-            //Collections.sort(budgets, (final Budget b1, final Budget b2) -> (b1.getYear() - b2.getYear()));
-            //Collections.sort(budgets, (final Budget b1, final Budget b2) -> (b1.getMonth().compareTo(b2.getMonth())));            
+            List<Budget> budgets =budgetDataAccess.getAllBudgetsByUserId(userId);         
             order(budgets);
             return budgets;
         }
