@@ -1,6 +1,7 @@
 
 package budgetApplication.controllers;
 
+import budgetApplication.baseClasses.CategoryEnum;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.businessLogic.*;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import budgetApplication.dataContracts.Item;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "BudgetDetailsController", urlPatterns = {"/BudgetDetails"})
 public class BudgetDetailsController extends HttpServlet {
@@ -25,8 +27,13 @@ public class BudgetDetailsController extends HttpServlet {
             int userId = 0;
             int budgetId = 0;
             String operation;
-            ItemManager manager;
             List<Item> items = null;
+            List<Item> givingItems = null;
+            List<Item> foodItems = null;
+            List<Item> housingItems = null;
+            List<Item> insuranceItems = null;
+            List<Item> lifestyleItems = null;
+            List<Item> transportationItems = null;
             
             // get userId parameter from HTTPSession
             currentSession = request.getSession();
@@ -46,8 +53,31 @@ public class BudgetDetailsController extends HttpServlet {
                     
                     break;
                 case OPERATION_READ:
-                    manager = new ItemManager();
-                    items = manager.getAllItemsByBudgetId(budgetId);
+                    items = processReadOperation(budgetId);
+                    
+                    givingItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.GIVING)
+                            .collect(Collectors.toList());
+                    
+                    foodItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.FOOD)
+                            .collect(Collectors.toList());
+                    
+                    housingItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.HOUSING)
+                            .collect(Collectors.toList());
+                    
+                    insuranceItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.INSURANCE_TAX)
+                            .collect(Collectors.toList());
+                    
+                    lifestyleItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.LIFESTYLE)
+                            .collect(Collectors.toList());
+                    
+                    transportationItems = items.stream()
+                            .filter(x -> x.getCategory() == CategoryEnum.TRANSPORTATION)
+                            .collect(Collectors.toList());
                     break;
                 case OPERATION_UPDATE:
                     
@@ -62,6 +92,7 @@ public class BudgetDetailsController extends HttpServlet {
             // get new data for page
             request.setAttribute(BUDGET_ID_FIELD, budgetId);
             request.setAttribute(ITEMS_FIELD, items);
+            request.setAttribute(HOUSING_ITEMS, housingItems);
             
             // navigate to page
             request.getRequestDispatcher("pages/budgetDetailsPage.jsp").forward(request, response);
@@ -77,14 +108,25 @@ public class BudgetDetailsController extends HttpServlet {
         
     }
     
-    private void processDeleteOperation(int itemId) {
+    private List<Item> processReadOperation(int budgetId) throws Exception {
+        try(ItemManager itemManager = new ItemManager()) {
+            List<Item> items;
+            items = itemManager.getAllItemsByBudgetId(budgetId);
+            return items;
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    private void processDeleteOperation(int itemId) throws Exception {
         try {
             try (ItemManager itemManager = new ItemManager()) {
                 itemManager.deletItemById(itemId);
             }    
         }
         catch (Exception ex) {
-            
+            throw ex;
         }
     }
 }

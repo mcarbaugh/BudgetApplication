@@ -10,11 +10,8 @@
         <title>Budget Application</title>
     </head>
     <body>
-        <div class="wrapper">
+        <div class="loginWrapper">
             <jsp:include page="/includes/loginForm.jsp"/>
-            <div class="errorNotification">
-                <label>${message}</label>                
-            </div>
         </div>
     </body>
 </html>

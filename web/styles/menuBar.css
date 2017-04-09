@@ -6,6 +6,10 @@
     padding: 0px;
     background-color: #4484CE;
     display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
 .menuBarContainer ul {

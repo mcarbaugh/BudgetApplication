@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/BudgetApplication/web/pages/accountSummaryPage.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/scripts/dropDownScript.js</file>
-            <file>file:/C:/Dev/BudgetApplication/web/styles/dropDown.css</file>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/categoryTable.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/web/pages/budgetDetailsPage.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/controllers/BudgetDetailsController.java</file>
         </group>
     </open-files>
 </project-private>

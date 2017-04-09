@@ -15,12 +15,14 @@ import java.io.Serializable;
 public class Item implements Serializable {
     private int id;
     private double amount;
+    private double spent;
     private String description;
     private CategoryEnum category;
     
     public Item() {
         id = 0;
         amount = 0;
+        spent = 0;
         description = "";
         category = CategoryEnum.FOOD;
     }
@@ -48,6 +50,14 @@ public class Item implements Serializable {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+    
+    public double getSpent() {
+        return spent;
+    }
+    
+    public void setSpent(double value) {
+        spent = value;
+    }
 
     public String getDescription() {
         return description;
@@ -57,5 +67,7 @@ public class Item implements Serializable {
         this.description = description;
     }
     
-    
+    public double getRemaining() {
+        return (amount - spent);
+    }
 }

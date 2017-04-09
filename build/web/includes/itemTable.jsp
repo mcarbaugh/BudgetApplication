@@ -2,10 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="itemTableContainer">
-    <table>
+<div class="tableContainer">
+    <div class="tableToolbar">
+        <button class="tableToolbarButton">New</button>
+        <div class="verticalRule"></div>
+        <button class="tableToolbarButton">Sort by:</button>
+    </div>
+    <div class="scrollEnabledTable">
+        <table>
         <c:if test="${fn:length(items) gt 0}">
             <thead>
                 <tr>
@@ -21,10 +26,11 @@
                         <td><c:out value="${item.description}"/></td>
                         <td><fmt:formatNumber type="currency" value="${item.amount}"/></td>
                         <td><c:out value="${item.category.toString()}"/></td>
-                        <td><a href="#">X</a></td>
+                        <td><a href="#" class="deleteButton">X</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </c:if>
     </table>
+    </div>
 </div>

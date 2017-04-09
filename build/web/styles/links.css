@@ -1,6 +1,7 @@
 
 a, a:visited {
     color: #4484CE;
+    text-decoration: none;
 }
 
 .deleteButton, .deleteButton:visited {

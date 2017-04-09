@@ -29,4 +29,8 @@ public class ConstantFields {
     public static final String OPERATION_SIGN_OUT = "signOut";
     
     public static final String MONTHS_FIELD = "months";
+    
+    
+    public static final String HOUSING_ITEMS = "housingItems";
+    public static final String INSURANCE_ITEMS = "insuranceItems";
 }
