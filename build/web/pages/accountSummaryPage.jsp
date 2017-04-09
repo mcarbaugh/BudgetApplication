@@ -2,7 +2,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>  
+    <head> 
+        <link rel="stylesheet" type="text/css" href="styles/dropDown.css">
         <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
         <link rel="stylesheet" type="text/css" href="styles/form.css">
         <link rel="stylesheet" type="text/css" href="styles/links.css">
@@ -17,12 +18,21 @@
     </head>
     <body>
         <script src="scripts/budgetTableScript.js"></script>
+        <script src="scripts/dropDownScript.js"></script>
         <jsp:include page="/includes/newBudgetModal.jsp"/>
         <div class="wrapper">
             <jsp:include page="/includes/menuBar.jsp"/>
             
             <div class="columnContainer">
                 <div class="leftColumn">
+                    <div class="dropdown">
+                      <button onclick="myFunction()" class="dropbtn">Budget Selector</button>
+                      <div id="myDropdown" class="dropdown-content">
+                        <a href="#">1999 January</a>
+                        <a href="#">1998 December</a>
+                        <a href="#">1998 November</a>
+                      </div>
+                    </div>
                     <jsp:include page="/includes/accountSummary.jsp"/>
                 </div>
                 <div class="rightColumn">
