@@ -7,7 +7,6 @@
     <table>
         <thead>
             <tr>
-                <th></th>
                 <th>Budget</th>
                 <th class="yearColumn">Year</th>
                 <th class="monthColumn">Month</th>
@@ -20,9 +19,6 @@
         <tbody>
             <c:forEach items="${budgets}" var="budget" varStatus="counter">
                 <tr>
-                    <td>
-                        <input type="checkbox"/>
-                    </td>
                     <td>
                         <span>
                             <a href="BudgetDetails?operation=read&budgetId=${budget.id}">

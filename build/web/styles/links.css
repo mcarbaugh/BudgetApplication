@@ -1,0 +1,9 @@
+
+a, a:visited {
+    color: #4484CE;
+}
+
+.deleteButton, .deleteButton:visited {
+    color: #ea614f;
+    text-decoration: none;
+}

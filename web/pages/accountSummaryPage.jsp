@@ -2,9 +2,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">  
+    <head>  
         <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
+        <link rel="stylesheet" type="text/css" href="styles/form.css">
+        <link rel="stylesheet" type="text/css" href="styles/links.css">
+        <link rel="stylesheet" type="text/css" href="styles/popupWindow.css">
+        <link rel="stylesheet" type="text/css" href="styles/table.css">
+        <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
+        <link rel="stylesheet" type="text/css" href="styles/index.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
