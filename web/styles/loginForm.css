@@ -35,17 +35,17 @@
     margin: 10px 5px;
     padding: 5px;
     width: 23em;
-    font-size: 1.1em;
+    font-size: 1.15em;
 }
 
 .loginFormContainer form input[type="button"] {
     margin: 10px 5px;
     padding: 5px;
-    font-size: 1.1em;
+    font-size: 1.15em;
 }
 
 .loginFormContainer form input[type="submit"] {
     margin: 10px 5px;
     padding: 5px;
-    font-size: 1.1em;
+    font-size: 1.15em;
 }

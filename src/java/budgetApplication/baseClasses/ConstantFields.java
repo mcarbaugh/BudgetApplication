@@ -11,26 +11,29 @@ package budgetApplication.baseClasses;
  */
 public class ConstantFields {
 
-    public static final String USERNAME_FIELD = "username";
-    public static final String PASSWORD_FIELD = "password";
-    public static final String USER_ID_FIELD = "userId";
-    public static final String BUDGET_ID_FIELD = "budgetId";
-    public static final String USER_FIELD = "user";
-    public static final String BUDGETS_FIELD = "budgets";
-    public static final String ITEMS_FIELD = "items";
-    public static final String MESSAGE_FIELD = "message";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String USER_ID = "userId";
+    public static final String BUDGET_ID = "budgetId";
+    public static final String USER = "user";
+    public static final String BUDGETS = "budgets";
+    public static final String ITEMS = "items";
+    public static final String MESSAGE = "message";
     public static final String LOGIN_ERROR_MESSAGE = "Username or password invalid.";
     
-    public static final String OPERATION_FIELD = "operation";
+    public static final String OPERATION = "operation";
     public static final String OPERATION_CREATE = "create";
     public static final String OPERATION_READ = "read";
     public static final String OPERATION_UPDATE = "update";
     public static final String OPERATION_DELETE = "delete";
     public static final String OPERATION_SIGN_OUT = "signOut";
     
-    public static final String MONTHS_FIELD = "months";
+    public static final String MONTHS = "months";
     
-    
+    public static final String GIVING_ITEMS = "givingItems";
+    public static final String FOOD_ITEMS = "foodItems";
     public static final String HOUSING_ITEMS = "housingItems";
     public static final String INSURANCE_ITEMS = "insuranceItems";
+    public static final String LIFESTYLE_ITEMS = "lifestyleItems";
+    public static final String TRANSPORTATION_ITEMS = "transportationItems";
 }

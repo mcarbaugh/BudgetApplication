@@ -31,16 +31,16 @@ public class AccountSummaryController extends HttpServlet {
             
             // get userId parameter from HTTPSession
             currentSession = request.getSession();
-            if(currentSession.getAttribute(USER_ID_FIELD) != null) {
-                userId = (int) currentSession.getAttribute(USER_ID_FIELD);
+            if(currentSession.getAttribute(USER_ID) != null) {
+                userId = (int) currentSession.getAttribute(USER_ID);
             }
             
             // get budgetOperation and budgetId parameters from URL
-            operation = request.getParameter(OPERATION_FIELD);
+            operation = request.getParameter(OPERATION);
             
             // check if budgetId parameter was passed in URL (false if operation is a read)
-            if(request.getParameterMap().containsKey(BUDGET_ID_FIELD)) {
-                budgetId = Integer.parseInt(request.getParameter(BUDGET_ID_FIELD));
+            if(request.getParameterMap().containsKey(BUDGET_ID)) {
+                budgetId = Integer.parseInt(request.getParameter(BUDGET_ID));
             }
             
             // process the query
@@ -66,9 +66,9 @@ public class AccountSummaryController extends HttpServlet {
             budgets = getBudgets(userId);
             
             // refresh the page
-            request.setAttribute(USER_FIELD, user);
-            request.setAttribute(BUDGETS_FIELD, budgets);
-            request.setAttribute(MONTHS_FIELD, MonthEnum.values());
+            request.setAttribute(USER, user);
+            request.setAttribute(BUDGETS, budgets);
+            request.setAttribute(MONTHS, MonthEnum.values());
             request.getRequestDispatcher("pages/accountSummaryPage.jsp").forward(request, response);
         }
         catch (Exception ex) {

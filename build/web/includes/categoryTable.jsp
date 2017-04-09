@@ -3,31 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="categoryTableContainer">
-    <div class="housingSection">
-        <table>
-            <thead>
-                <tr id="housingHeaderRow">
-                    <td colSpan="5" class="headerCell">Housing</td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th class="leftAlignColumn">Item</th>
-                    <th class="rightAlignColumn">Planned</th>
-                    <th class="rightAlignColumn">Spent</th>
-                    <th class="rightAlignColumn">Remaining</th>
-                </tr>  
-            </thead>
-            <tbody>
-                <c:forEach items="${housingItems}" var="item" varStatus="counter">
-                    <tr>
-                        <td><a href="#">+</a></td>
-                        <td class="leftAlignColumn"><c:out value="${item.description}"/></td>
-                        <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.amount}"/></td>
-                        <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.spent}"/></td>
-                        <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.getRemaining()}"/></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+    <jsp:include page="/includes/categories/housingSection.jsp"/>
+    <jsp:include page="/includes/categories/foodSection.jsp"/>
+    <jsp:include page="/includes/categories/insuranceSection.jsp"/>
+    <jsp:include page="/includes/categories/lifestyleSection.jsp"/>
+    <jsp:include page="/includes/categories/transportationSection.jsp"/>
+    <jsp:include page="/includes/categories/givingSection.jsp"/>
 </div>

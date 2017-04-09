@@ -1,35 +1,68 @@
 
+#foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
+    font-weight: bold;
+    font-size: 1.15em;
+    background: white;
+}
+
+#foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
+    background: white;
+}
+
+#givingHeader {
+    
+}
+
+#housingHeader {
+    
+}
+
+#insuranceHeader {
+    
+}
+
+#lifestyleHeader {
+    
+}
+
+#transportationHeader {
+    
+}
+
+.headerRow, .headerRow th {
+    background: #f2f2f2;
+    color: #222;
+    border-bottom: 1px solid #888;
+    border-top: 1px solid #888;
+}
+
 .categoryTableContainer {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100%;
+    background: #f2f2f2;
 }
 
-.housingSection {
-    margin: 10px auto;
+.categorySection {
+    margin: 50px auto;
+    margin-bottom: 30px;
     min-width: 25em;
-    max-width: 35em;
+    max-width: 45em;
     display: block;
-    border: 1px solid #c1c1c1;
+    border: 1px solid #222;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    box-shadow: 2px 2px 6px #c1c1c1;
+    box-shadow: 2px 3px 4px #888;
+    border: 1px solid #888;
+    background: white;
 }
 
-.housingSection table {
+.categorySection table {
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
-#housingHeaderRow {
-    padding-top: 20px;
-}
-
-#housingHeaderRow:hover {
-    background: white;
-}
-
 .headerCell {
-    padding-top: 10px;
+    padding-top: 25px;
 }

@@ -5,6 +5,9 @@
 // light: #F9CF00
 // tangerine: #F19F4D
 // green: #007849
+// gray_dark: #222
+// gray_medium: #888
+// gray_light: #f2f2f2
 /****************************************/
 
 * {
@@ -25,7 +28,7 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: 16px;
     color: #222;
-    letter-spacing: .065em;
+    letter-spacing: .06em;
     margin: 0;
     padding: 0;
     background-color: white;

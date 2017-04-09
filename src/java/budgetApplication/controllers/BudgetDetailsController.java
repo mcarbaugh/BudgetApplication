@@ -1,9 +1,9 @@
 
 package budgetApplication.controllers;
 
-import budgetApplication.baseClasses.CategoryEnum;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.businessLogic.*;
+import static budgetApplication.controllers.Utilities.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import budgetApplication.dataContracts.Item;
-import java.util.stream.Collectors;
 
 @WebServlet(name = "BudgetDetailsController", urlPatterns = {"/BudgetDetails"})
 public class BudgetDetailsController extends HttpServlet {
@@ -37,14 +36,14 @@ public class BudgetDetailsController extends HttpServlet {
             
             // get userId parameter from HTTPSession
             currentSession = request.getSession();
-            if(currentSession.getAttribute(USER_ID_FIELD) != null) {
-                userId = (int) currentSession.getAttribute(USER_ID_FIELD);
+            if(currentSession.getAttribute(USER_ID) != null) {
+                userId = (int) currentSession.getAttribute(USER_ID);
             }
             
             // get budgetOperation and budgetId parameters from URL
-            operation = request.getParameter(OPERATION_FIELD);
-            if(request.getParameterMap().containsKey(BUDGET_ID_FIELD)) {
-                budgetId = Integer.parseInt(request.getParameter(BUDGET_ID_FIELD));
+            operation = request.getParameter(OPERATION);
+            if(request.getParameterMap().containsKey(BUDGET_ID)) {
+                budgetId = Integer.parseInt(request.getParameter(BUDGET_ID));
             }
             
             // process query
@@ -54,30 +53,12 @@ public class BudgetDetailsController extends HttpServlet {
                     break;
                 case OPERATION_READ:
                     items = processReadOperation(budgetId);
-                    
-                    givingItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.GIVING)
-                            .collect(Collectors.toList());
-                    
-                    foodItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.FOOD)
-                            .collect(Collectors.toList());
-                    
-                    housingItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.HOUSING)
-                            .collect(Collectors.toList());
-                    
-                    insuranceItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.INSURANCE_TAX)
-                            .collect(Collectors.toList());
-                    
-                    lifestyleItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.LIFESTYLE)
-                            .collect(Collectors.toList());
-                    
-                    transportationItems = items.stream()
-                            .filter(x -> x.getCategory() == CategoryEnum.TRANSPORTATION)
-                            .collect(Collectors.toList());
+                    givingItems = selectGivingIems(items);
+                    foodItems = selectFoodItems(items);
+                    housingItems = selectHousingItems(items);
+                    insuranceItems = selectInsuranceItems(items);
+                    lifestyleItems = selectLifestyleItems(items);
+                    transportationItems = selectTransportationItems(items);
                     break;
                 case OPERATION_UPDATE:
                     
@@ -90,9 +71,14 @@ public class BudgetDetailsController extends HttpServlet {
             }
             
             // get new data for page
-            request.setAttribute(BUDGET_ID_FIELD, budgetId);
-            request.setAttribute(ITEMS_FIELD, items);
+            request.setAttribute(BUDGET_ID, budgetId);
+            request.setAttribute(ITEMS, items);
+            request.setAttribute(GIVING_ITEMS, givingItems);
+            request.setAttribute(FOOD_ITEMS, foodItems);
             request.setAttribute(HOUSING_ITEMS, housingItems);
+            request.setAttribute(INSURANCE_ITEMS, insuranceItems);
+            request.setAttribute(LIFESTYLE_ITEMS, lifestyleItems);
+            request.setAttribute(TRANSPORTATION_ITEMS, transportationItems);
             
             // navigate to page
             request.getRequestDispatcher("pages/budgetDetailsPage.jsp").forward(request, response);

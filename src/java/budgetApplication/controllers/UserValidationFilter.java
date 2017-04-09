@@ -1,7 +1,7 @@
 
 package budgetApplication.controllers;
 
-import static budgetApplication.baseClasses.ConstantFields.USER_ID_FIELD;
+import static budgetApplication.baseClasses.ConstantFields.USER_ID;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,7 +27,7 @@ public class UserValidationFilter implements Filter {
         res.setHeader("Pragma", "no-cache");
         res.setDateHeader("Expires", 0);
         
-        if (session == null || session.getAttribute(USER_ID_FIELD) == null) {
+        if (session == null || session.getAttribute(USER_ID) == null) {
             res.sendRedirect(req.getContextPath() + "/LoginForm"); // No logged-in user found, so redirect to login page.
         } else {
             chain.doFilter(request, response); // Logged-in user found, so just continue request.
