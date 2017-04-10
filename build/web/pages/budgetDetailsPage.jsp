@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="styles/form.css">
         <link rel="stylesheet" type="text/css" href="styles/links.css">
         <link rel="stylesheet" type="text/css" href="styles/table.css">
+        <link rel="stylesheet" type="text/css" href="styles/categorySummaryPanel.css">
         <link rel="stylesheet" type="text/css" href="styles/popupWindow.css">
         <link rel="stylesheet" type="text/css" href="styles/categoryTable.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
@@ -19,7 +20,7 @@
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
-                    
+                    <jsp:include page="/includes/categorySummaryPanel.jsp"/>    
                 </div>
                 <div class="rightColumn">
                     <jsp:include page="/includes/categoryTable.jsp"/>     

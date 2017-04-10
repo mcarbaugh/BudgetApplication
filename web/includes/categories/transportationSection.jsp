@@ -26,15 +26,9 @@
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.getRemaining()}"/></td>
                 </tr>
             </c:forEach>
-            <c:if test="${transportationItems.size() == 0}">
-                <tr>
-                    <td>&nbsp;</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </c:if>
         </tbody>
     </table>
+    <div class="addItemButton">
+        <label class="addItemLabel"><a href="#">Add Item</a></label>
+    </div>
 </div>

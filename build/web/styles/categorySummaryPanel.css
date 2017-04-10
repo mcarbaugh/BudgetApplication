@@ -1,0 +1,21 @@
+
+.categorySummaryPanel {
+    height: 100%;
+    width: 100%;
+    background: white;
+    padding-top: 10px;
+}
+
+.imageContainer {
+    width: 14em;
+    margin: 0 auto;
+    position: relative;
+}
+
+.piechart {
+    width: 14em;
+}
+
+.categoryListContainer {
+    margin: 20px;
+}
