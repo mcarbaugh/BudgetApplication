@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:url value="Login" var="logoutURL">
+    <c:param name="operation" value="signout"/>
+</c:url>
+
 <!DOCTYPE html>
 <div class="budgetBannerContainer">
     <div id="monthDropdown" class="dropdown">
@@ -11,7 +16,11 @@
         
         <div id="monthContainer" class="dropdown-content">
             <c:forEach items="${budgets}" var="budget" varStatus="counter">
-                <a href="BudgetSummary?operation=read&budgetId=${budget.id}">
+                <c:url value="BudgetSummary" var="readBudgetURL">
+                    <c:param name="operation" value="read"/>
+                    <c:param name="budgetId" value="${budget.id}"/>
+                </c:url>
+                <a href="${readBudgetURL}">
                     <c:out value="${budget.year} ${budget.month}"/>
                 </a>
             </c:forEach>
@@ -27,7 +36,7 @@
             <a href="/#">PROFILE</a>
             <a href="/#">SETTINGS</a>
             <hr/>
-            <a href="Login?operation=signout">SIGN OUT</a>
+            <a href="${logoutURL}">SIGN OUT</a>
         </div>
     </div>
 </div>

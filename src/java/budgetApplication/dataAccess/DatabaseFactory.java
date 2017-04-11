@@ -14,7 +14,7 @@ public class DatabaseFactory implements AutoCloseable {
     public static Connection getMySqlConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection(url_remote, dbUser, dbPassword);
+            return DriverManager.getConnection(url_local, dbUser, dbPassword);
         }
         catch(ClassNotFoundException | SQLException ex) {
             throw ex;
