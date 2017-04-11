@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<div class="modal" id="NewBudgetModal">
+<div class="modal" id="newBudgetDialog">
     <div class="modal-content">
-        <form id="NewBudgetForm" action="BudgetSummary" method="post">
+        <form id="newBudgetForm" action="BudgetSummary" method="post">
             <span class="close" onClick="closeAddBudgetDialog()">&times;</span>
-            <h1>Create Budget</h1>
+            <h1>New Budget</h1>
             <label>
                 <span>Month:</span>
-                <select name="monthDropdown" form="NewBudgetForm">
+                <select name="monthDropdown" form="newBudgetForm">
                     <c:forEach items="${months}" var="month" varStatus="counter">
                         <option><c:out value="${months[counter.index]}"/></option>
                     </c:forEach>
@@ -17,7 +17,7 @@
             </label>
             <label>
                 <span>Year:</span>
-                <select name="yearDropdown" form="NewBudgetForm">
+                <select name="yearDropdown" form="newBudgetForm">
                     <c:forEach items="${years}" var="year" varStatus="counter">
                         <option><c:out value="${year}"/></option>
                     </c:forEach>

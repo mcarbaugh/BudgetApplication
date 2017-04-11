@@ -17,13 +17,21 @@ window.onclick = function(event) {
     }
     
     /**************************************************************/
-    // Get NewBudgetModal
-    var modal = document.getElementById("NewBudgetModal");
-    
-    // Close NewBudgetModal and reset its form
+    // Close newBudgetDialog and reset its form
+    var modal = document.getElementById("newBudgetDialog");
+
     if (event.target === modal) {
         modal.style.display = "none";
-        document.getElementById("NewBudgetForm").reset();
+        document.getElementById("newBudgetForm").reset();
+    }
+    /**************************************************************/
+    
+    // Close newHousingItemDialog and reset its form
+    var modal = document.getElementById("newHousingItemDialog");
+
+    if (event.target === modal) {
+        modal.style.display = "none";
+        document.getElementById("newHousingItemForm").reset();
     }
     /**************************************************************/
 };

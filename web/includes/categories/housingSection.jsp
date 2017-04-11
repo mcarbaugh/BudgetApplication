@@ -28,7 +28,7 @@
             </c:forEach>
         </tbody>
     </table>
-    <div class="addItemButton">
-        <label class="addItemLabel"><a href="#">Add Item</a></label>
+    <div class="addItemButtonContainer">
+        <button onclick="openNewHousingItemDialog()">Add Item</button>
     </div>
 </div>

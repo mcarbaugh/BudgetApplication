@@ -2,8 +2,8 @@
 #foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
     font-weight: bold;
     font-size: 1.15em;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     overflow: hidden;
     margin: 2px;
 }
@@ -56,8 +56,8 @@
     max-width: 45em;
     display: block;
     border: 1px solid #222;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     box-shadow: 2px 3px 4px #888;
     border: 1px solid #888;
     background: white;
@@ -65,21 +65,22 @@
 
 .categorySection table {
     width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .headerCell {
     padding-top: 25px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     overflow: hidden;
 }
 
-.addItemButton {
+.addItemButtonContainer {
     height: 2.5em;
     width: 100%;
     margin: 0 auto;
+    padding: 0;
     border-top: 1px solid #888;
     background: white;
     display: block;
@@ -87,10 +88,21 @@
     text-align: center;
 }
 
-.addItemButton label a {
+.addItemButtonContainer button {
     height: 100%;
     width: 100%;
-    line-height: 2.5em;
+    line-height: 100%;
+    padding: 0;
+    margin: 0;
     vertical-align: middle;
     display: block;
+    background: white;
+    font-size: 1.15em;
+    border: 0;
+    color: #4484CE;
+}
+
+.addItemButtonContainer button:hover {
+    background: #f2f2f2;
+    cursor: pointer;
 }

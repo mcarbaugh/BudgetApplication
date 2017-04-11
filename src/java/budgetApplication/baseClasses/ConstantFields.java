@@ -30,9 +30,13 @@ public class ConstantFields {
     public static final String OPERATION_DELETE_ITEM = "deleteItem";
     public static final String OPERATION_DELETE_TRANSACTION = "deleteTransaction";
     
+    
     // Parameters for form input names
     public static final String MONTH_DROP_DOWN = "monthDropdown";
     public static final String YEAR_DROP_DOWN = "yearDropdown";
+    public static final String CATEGORY = "category";
+    public static final String AMOUNT = "amount";
+    public static final String DESCRIPTION = "description";
     
     // Parameters for dropdown data
     public static final String MONTHS = "months";

@@ -1,6 +1,7 @@
 
 package budgetApplication.controllers;
 
+import budgetApplication.baseClasses.CategoryEnum;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.baseClasses.MonthEnum;
 import static budgetApplication.baseClasses.Utilities.order;
@@ -23,6 +24,9 @@ public class BudgetSummaryController extends HttpServlet {
     HttpSession currentSession;
     private User user = null;
     private String operation;
+    private CategoryEnum categoryInput;
+    private Double amountInput;
+    private String descriptionInput;
     private int budgetId = 0;
     private Budget activeBudget = null;
     private List<Budget> budgets = null;
@@ -115,6 +119,10 @@ public class BudgetSummaryController extends HttpServlet {
                 operation = request.getParameter(OPERATION);
             }
             
+            if(request.getParameterMap().containsKey(CATEGORY)) {
+                categoryInput = CategoryEnum.valueOf(request.getParameter(CATEGORY).toUpperCase());
+            }
+            
             // get values from fields in the form
             if(request.getParameterMap().containsKey(MONTH_DROP_DOWN)) {
                 newMonth = MonthEnum.valueOf(request.getParameter(MONTH_DROP_DOWN));
@@ -124,10 +132,22 @@ public class BudgetSummaryController extends HttpServlet {
                 newYear = Integer.parseInt(request.getParameter(YEAR_DROP_DOWN));
             }
             
+            if(request.getParameterMap().containsKey(AMOUNT)) {
+                //TODO: THIS NEEDS MAJOR VALIDATION and ERROR CHECKING
+                amountInput = Double.parseDouble(request.getParameter(AMOUNT));
+            }
+            
+            if(request.getParameterMap().containsKey(DESCRIPTION)) {
+                descriptionInput = request.getParameter(DESCRIPTION);
+            }
+            
             // perform the operation as instructed
             switch (operation){
                 case OPERATION_CREATE_BUDGET:
                     processCreateBudgetOperation();
+                    break;
+                case OPERATION_CREATE_ITEM:
+                    processCreateItemOperation();
                     break;
             }
             
@@ -154,6 +174,16 @@ public class BudgetSummaryController extends HttpServlet {
         }
         catch(Exception ex) {
             throw new ServletException(ex);
+        }
+    }
+    
+    private void processCreateItemOperation() {
+        
+        try {
+            
+        }
+        catch(Exception ex) {
+            throw ex;
         }
     }
     
