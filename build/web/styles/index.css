@@ -7,7 +7,7 @@
 // green: #007849
 // gray_dark: #222
 // gray_medium: #888
-// gray_light: #f2f2f2
+// gray_light: #f9f9f9
 /****************************************/
 
 * {
@@ -20,6 +20,7 @@ html {
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 body {
@@ -32,6 +33,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
+    overflow: hidden;
 }
 
 h1 {
@@ -60,7 +62,7 @@ h4 {
     padding: 0;
     background-color: white;
     position: absolute;
-    top: 3.5em;
+    top: 6em;
     bottom: 0;
     right: 0;
     left: 0;

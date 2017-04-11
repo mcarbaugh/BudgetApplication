@@ -33,12 +33,11 @@ table {
     width: 100%;
     font-size: 1.15em;
     position: relative;
-    overflow: hidden;
-    
 }
 
 table, tr, th, td {
     border-collapse: collapse;
+    overflow: hidden;
 }
 
 th, td {

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <div class="loginFormContainer">
     <h1>Budget Application</h1>
-    <form method="post" action="LoginForm">
+    <form method="post" action="Login">
         <input type="text" placeholder="Username" name="username"/><br/>
         <input type="password" placeholder="Password" name="password"/><br/>
         

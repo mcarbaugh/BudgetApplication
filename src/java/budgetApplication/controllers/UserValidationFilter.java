@@ -1,7 +1,7 @@
 
 package budgetApplication.controllers;
 
-import static budgetApplication.baseClasses.ConstantFields.USER_ID;
+import static budgetApplication.baseClasses.ConstantFields.*;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter({"/AccountSummary", "/BudgetDetails"})
+@WebFilter({"/" + BUDGET_SUMMARY_PAGE})
 public class UserValidationFilter implements Filter {
     
     @Override
@@ -27,8 +27,8 @@ public class UserValidationFilter implements Filter {
         res.setHeader("Pragma", "no-cache");
         res.setDateHeader("Expires", 0);
         
-        if (session == null || session.getAttribute(USER_ID) == null) {
-            res.sendRedirect(req.getContextPath() + "/LoginForm"); // No logged-in user found, so redirect to login page.
+        if (session == null || session.getAttribute(USER) == null) {
+            res.sendRedirect(req.getContextPath() + "/" + LOGIN_PAGE); // No logged-in user found, so redirect to login page.
         } else {
             chain.doFilter(request, response); // Logged-in user found, so just continue request.
         }

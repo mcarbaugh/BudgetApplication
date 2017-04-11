@@ -188,14 +188,16 @@ public class BudgetDataAccess implements AutoCloseable {
     
     public void insertBudgetByUserId(int userId, Budget budget) throws Exception {
         try {
-            String query = "INSERT INTO Budget (userId, month, year) "
+            String query = "INSERT INTO budget (userId, month, year) "
                          + "VALUES (?, ?, ?)";
                        
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
-                statement.setString(2, budget.getMonth().toString());
+                
+                String blah = budget.getMonth().name();
+                statement.setString(2, budget.getMonth().name());
                 statement.setInt(3, budget.getYear());
                 statement.executeUpdate();
             }

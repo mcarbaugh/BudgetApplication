@@ -2,12 +2,16 @@
 #foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
     font-weight: bold;
     font-size: 1.15em;
-    background: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    margin: 2px;
 }
 
 #foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
     background: white;
     color: #222;
+    overflow: hidden;
 }
 
 #givingHeader {
@@ -35,13 +39,14 @@
     color: #222;
     border-bottom: 1px solid #888;
     border-top: 1px solid #888;
+    overflow: hidden;
 }
 
 .categoryTableContainer {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100%;
-    background: #f2f2f2;
+    background: #f9f9f9;
 }
 
 .categorySection {
@@ -66,6 +71,9 @@
 
 .headerCell {
     padding-top: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
 }
 
 .addItemButton {

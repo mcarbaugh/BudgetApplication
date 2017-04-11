@@ -19,3 +19,7 @@
 .categoryListContainer {
     margin: 20px;
 }
+
+.categoryListContainer label, categoryListContainer label h4, categoryListContainer label span {
+    margin: 0;
+}

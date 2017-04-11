@@ -1,13 +1,13 @@
 
 .menuBarContainer {
-    height: 3.5em;
+    height: 3em;
     width: 100%;
     margin: 0px;
     padding: 0px;
-    background-color: #4484CE;
+    background-color: #3d638e;
     display: block;
     position: absolute;
-    top: 0;
+    top: 3em;
     right: 0;
     left: 0;
 }
@@ -18,7 +18,7 @@
     padding: 0px;
     width: 100%;
     vertical-align: middle;
-    line-height: 3.5em;
+    line-height: 3em;
 }
 
 .menuBarContainer ul li {
@@ -34,7 +34,8 @@
 }
 
 .menuBarContainer ul li a {
-    font-size: 1.2em;
+    font-size: 1.03em;
+    letter-spacing: 0.02em;
     text-decoration: none;
     color: white;
     display: block;
@@ -44,5 +45,5 @@
 
 .menuBarContainer ul li a:hover {
     color: white;
-    background: #2f5d93;
+    background: #364c66;
 }

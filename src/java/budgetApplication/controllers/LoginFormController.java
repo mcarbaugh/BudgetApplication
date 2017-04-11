@@ -12,7 +12,7 @@ import budgetApplication.businessLogic.LoginFormManager;
 import budgetApplication.dataContracts.*;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "loginFormController", urlPatterns = {"/LoginForm"})
+@WebServlet(name = "LoginFormController", urlPatterns = {"/" + LOGIN_PAGE})
 public class LoginFormController extends HttpServlet {
     
     @Override
@@ -40,8 +40,7 @@ public class LoginFormController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        try {
-            int userId;           
+        try {          
             User user;
             String username = request.getParameter(USERNAME);
             String password = request.getParameter(PASSWORD);
@@ -50,18 +49,13 @@ public class LoginFormController extends HttpServlet {
             // check for username and password
             try (LoginFormManager manager = new LoginFormManager()) {
                 user = manager.getUserByUsernameAndPassword(username, password);
-                userId = user.getId();
             }
             
             // setup the session if username and password combination exists
-            if(userId != 0) {
+            if(user.getId() > 0) {
                 currentSession = request.getSession();
-                currentSession.setAttribute(USER_ID, user.getId());
-            }
-            
-            if(userId != 0) {
-                // if user is valid, tell client to load AccountSummaryController
-                response.sendRedirect("AccountSummary?" + OPERATION + "=" + OPERATION_READ);
+                currentSession.setAttribute(USER, user);
+                response.sendRedirect(BUDGET_SUMMARY_PAGE);
             }
             else {
                 //if user is not valid, respond with 

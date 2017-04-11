@@ -2,11 +2,15 @@
 <!DOCTYPE html>
 <div class="menuBarContainer">
         <ul class="menuBarList">
-            <li class="menuBarItem"><a href="AccountSummary?operation=read">Home</a></li>
-            <li class="menuBarItem"><a href="/#Tools">Tools</a></li>
-            <li class="menuBarItem"><a href="/#settings">Settings</a></li>
+            <li class="menuBarItem"><a>File</a></li>
+            <li class="menuBarItem"><a>Edit</a></li>
+            <li class="menuBarItem"><a>View</a></li>
+            <li class="menuBarItem"><a>Tools</a></li>
+            <li></li>
+            <!--
             <li class="menuBarItem" id="signOutButton">
-                <a href="LoginForm?operation=signOut">Sign Out</a>
+                <a href="Login?operation=signOut">Sign Out</a>
             </li>
+            -->
         </ul>
 </div>

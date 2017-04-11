@@ -13,7 +13,8 @@ public enum MonthEnum {
     SEPTEMBER ("September"),
     OCTOBER ("October"),
     NOVEMBER ("November"),
-    DECEMBER ("December");
+    DECEMBER ("December"),
+    NONE ("none");
     
     private final String monthValue;
     
