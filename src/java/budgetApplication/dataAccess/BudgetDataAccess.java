@@ -196,10 +196,34 @@ public class BudgetDataAccess implements AutoCloseable {
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
                 
-                String blah = budget.getMonth().name();
                 statement.setString(2, budget.getMonth().name());
                 statement.setInt(3, budget.getYear());
                 statement.executeUpdate();
+            }
+        }
+        catch (Exception ex) {
+            // do nothing
+        }
+    }
+    
+    public int getLastIdByUserId(int userId) throws Exception {
+        try {
+            String query = "SELECT MAX(id) as maxId FROM budget b WHERE b.userId = ?";
+            
+            int maxId = 0;
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, userId);
+                
+                data = statement.executeQuery();
+                
+                while(data.next()) {
+                    maxId = data.getInt("maxId");
+                }
+                
+                return maxId;
             }
         }
         catch (Exception ex) {

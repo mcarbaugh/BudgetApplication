@@ -19,6 +19,14 @@ public class Budget implements Serializable {
         totalAmount = 0.0;
     }
     
+    public Budget(MonthEnum month, int year) {
+        id = 0;
+        this.month = month;
+        this.year = year;
+        totalSpent = 0.0;
+        totalAmount = 0.0;
+    }
+    
     public int getId() {
         return id;
     }

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <div class="budgetBannerContainer">
-    <div class="dropdown">
+    <div id="monthDropdown" class="dropdown">
         <button onclick="getMonthContainer()" class="dropbtn">
             ${budget.year} ${budget.month}
         </button>
@@ -15,7 +15,7 @@
                     <c:out value="${budget.year} ${budget.month}"/>
                 </a>
             </c:forEach>
-                <a href="/#" id="newBudgetLink">CREATE BUDGET</a>
+            <button id="createBudgetButton" onclick="openAddBudgetDialog()">NEW BUDGET</button>
         </div>
     </div>
     
@@ -23,8 +23,8 @@
         <button onclick="getUserInfoContainer()" class="dropbtn">
             ${user.getUsername()}
         </button>
-    
         <div id="userInfoContainer" class="dropdown-content">
+            <a href="/#">PROFILE</a>
             <a href="/#">SETTINGS</a>
             <hr/>
             <a href="Login?operation=signout">SIGN OUT</a>

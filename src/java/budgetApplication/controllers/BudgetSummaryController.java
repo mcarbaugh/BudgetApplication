@@ -3,6 +3,7 @@ package budgetApplication.controllers;
 
 import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.baseClasses.MonthEnum;
+import static budgetApplication.baseClasses.Utilities.order;
 import budgetApplication.businessLogic.*;
 import static budgetApplication.controllers.Utilities.*;
 import budgetApplication.dataContracts.*;
@@ -32,6 +33,10 @@ public class BudgetSummaryController extends HttpServlet {
     private List<Item> insuranceItems = null;
     private List<Item> lifestyleItems = null;
     private List<Item> transportationItems = null;
+    private List<String> months;
+    private List<Integer> years;
+    MonthEnum newMonth;
+    int newYear;
             
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -56,25 +61,20 @@ public class BudgetSummaryController extends HttpServlet {
             if(request.getParameterMap().containsKey(BUDGET_ID)) {
                 budgetId = Integer.parseInt(request.getParameter(BUDGET_ID));
             }
-            
-            // process query
+
+            // perform the operation as intructed
             switch(operation) {
-                case OPERATION_CREATE:
-                    
-                    break;
                 case OPERATION_READ:
                     processReadOperation();
-                    break;
-                case OPERATION_UPDATE:
-                    
-                    break;
-                case OPERATION_DELETE:
-                
                     break;
                 default:
                     processDefaultOperation(user.getId());
                     break;
             }
+            
+            // setup outgoing data
+            populateMonthDropDowns();
+            populateYearDropDowns();
             
             // get new data for page
             request.setAttribute(USER, user);
@@ -87,6 +87,8 @@ public class BudgetSummaryController extends HttpServlet {
             request.setAttribute(INSURANCE_ITEMS, insuranceItems);
             request.setAttribute(LIFESTYLE_ITEMS, lifestyleItems);
             request.setAttribute(TRANSPORTATION_ITEMS, transportationItems);
+            request.setAttribute(MONTHS, months);
+            request.setAttribute(YEARS, years);
             
             // navigate to page
             request.getRequestDispatcher("pages/BudgetSummaryPage.jsp").forward(request, response);
@@ -100,6 +102,74 @@ public class BudgetSummaryController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        try {
+            // get user parameter from HTTPSession
+            currentSession = request.getSession();
+            if(currentSession.getAttribute(USER) != null) {
+                user = (User) currentSession.getAttribute(USER);
+            }
+            
+            // get operation from the hidden field in the form
+            if(request.getParameterMap().containsKey(OPERATION)) {
+                operation = request.getParameter(OPERATION);
+            }
+            
+            // get values from fields in the form
+            if(request.getParameterMap().containsKey(MONTH_DROP_DOWN)) {
+                newMonth = MonthEnum.valueOf(request.getParameter(MONTH_DROP_DOWN));
+            }
+
+            if(request.getParameterMap().containsKey(YEAR_DROP_DOWN)) {
+                newYear = Integer.parseInt(request.getParameter(YEAR_DROP_DOWN));
+            }
+            
+            // perform the operation as instructed
+            switch (operation){
+                case OPERATION_CREATE_BUDGET:
+                    processCreateBudgetOperation();
+                    break;
+            }
+            
+            // setup outgoing data
+            populateMonthDropDowns();
+            populateYearDropDowns();
+            populateItems();
+            
+            // get new data for page
+            request.setAttribute(USER, user);
+            request.setAttribute(BUDGET, activeBudget);
+            request.setAttribute(BUDGETS, budgets);
+            request.setAttribute(ITEMS, items);
+            request.setAttribute(GIVING_ITEMS, givingItems);
+            request.setAttribute(FOOD_ITEMS, foodItems);
+            request.setAttribute(HOUSING_ITEMS, housingItems);
+            request.setAttribute(INSURANCE_ITEMS, insuranceItems);
+            request.setAttribute(LIFESTYLE_ITEMS, lifestyleItems);
+            request.setAttribute(TRANSPORTATION_ITEMS, transportationItems);
+            request.setAttribute(MONTHS, months);
+            request.setAttribute(YEARS, years);
+            
+            request.getRequestDispatcher("pages/BudgetSummaryPage.jsp").forward(request, response);
+        }
+        catch(Exception ex) {
+            throw new ServletException(ex);
+        }
+    }
+    
+    private void processCreateBudgetOperation() throws Exception {
+        try {
+            try (BudgetManager budgetManager = new BudgetManager()) {
+                Budget newBudget = new Budget(newMonth, newYear);
+                budgetManager.saveBudgetByUserId(user.getId(), newBudget);
+                int newId = budgetManager.getLastIdByUserId(user.getId());
+                newBudget.setId(newId);
+                activeBudget = newBudget;
+                budgets = budgetManager.getAllBudgetsByUserId(user.getId());
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
     }
     
     private void processReadOperation() throws Exception {
@@ -112,7 +182,7 @@ public class BudgetSummaryController extends HttpServlet {
                         .filter(x -> x.getId() == budgetId)
                         .collect(Collectors.toList()).get(0);
                 }
-
+                
                 populateItems();
             }
         }
@@ -142,7 +212,11 @@ public class BudgetSummaryController extends HttpServlet {
                 Budget newBudget = new Budget();
                 newBudget.setMonth(currentMonth);
                 newBudget.setYear(currentYear);
-                budgetManager.insertBudgetByUserId(userId, newBudget);
+                budgetManager.saveBudgetByUserId(userId, newBudget);
+                newBudget.setId(budgetManager.getLastIdByUserId(userId));
+                activeBudget = newBudget;
+                budgets.add(newBudget);
+                order(budgets);
             }
         }
     }
@@ -158,7 +232,7 @@ public class BudgetSummaryController extends HttpServlet {
         }
     }
     
-    private void populateItems() {
+    private void populateItems() throws Exception {
         try {
             try(ItemManager itemManager = new ItemManager()) {
                 items = itemManager.getAllItemsByBudgetId(activeBudget.getId());
@@ -172,7 +246,33 @@ public class BudgetSummaryController extends HttpServlet {
             transportationItems = selectTransportationItems(items);
         }
         catch(Exception ex) {
-            
+            throw ex;
+        }
+    }
+    
+    private void populateMonthDropDowns() {
+        months = new ArrayList<>();
+        months.add(MonthEnum.JANUARY.name());
+        months.add(MonthEnum.FEBRUARY.name());
+        months.add(MonthEnum.MARCH.name());
+        months.add(MonthEnum.APRIL.name());
+        months.add(MonthEnum.MAY.name());
+        months.add(MonthEnum.JUNE.name());
+        months.add(MonthEnum.JULY.name());
+        months.add(MonthEnum.AUGUST.name());
+        months.add(MonthEnum.SEPTEMBER.name());
+        months.add(MonthEnum.OCTOBER.name());
+        months.add(MonthEnum.NOVEMBER.name());
+        months.add(MonthEnum.DECEMBER.name());
+    }
+    
+    private void populateYearDropDowns() {
+        int currentYear = getCurrentYear();
+        int upperBound = currentYear + 20;
+        
+        years = new ArrayList();
+        for(int i = currentYear; i < upperBound; i++) {
+            years.add(i);
         }
     }
 }

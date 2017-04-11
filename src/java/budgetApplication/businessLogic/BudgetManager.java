@@ -1,7 +1,7 @@
 
 package budgetApplication.businessLogic;
 
-import static budgetApplication.businessLogic.Utilities.order;
+import static budgetApplication.baseClasses.Utilities.order;
 import budgetApplication.dataAccess.BudgetDataAccess;
 import budgetApplication.dataContracts.*;
 import java.util.List;
@@ -60,9 +60,25 @@ public class BudgetManager implements AutoCloseable {
         }
     }
     
-    public void insertBudgetByUserId(int userId, Budget budget) throws Exception {
+    public void saveBudgetByUserId(int userId, Budget budget) throws Exception {
         try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
-            budgetDataAccess.insertBudgetByUserId(userId, budget);
+            int budgetId = budget.getId();
+            
+            if(budgetId == 0) {
+                budgetDataAccess.insertBudgetByUserId(userId, budget);
+            }
+            else {
+                // update the existing record
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public int getLastIdByUserId(int userId) throws Exception {
+        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+            return budgetDataAccess.getLastIdByUserId(userId);
         }
         catch(Exception ex) {
             throw ex;

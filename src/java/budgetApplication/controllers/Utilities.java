@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Utilities {
-    
+        
     public static List<Item> selectGivingIems(List<Item> items) {
         return items.stream()
                 .filter(x -> x.getCategory() == CategoryEnum.GIVING)

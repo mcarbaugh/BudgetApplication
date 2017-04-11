@@ -1,7 +1,6 @@
 
-package budgetApplication.businessLogic;
+package budgetApplication.baseClasses;
 
-import budgetApplication.baseClasses.MonthEnum;
 import budgetApplication.dataContracts.Budget;
 import java.util.Collections;
 import java.util.List;
