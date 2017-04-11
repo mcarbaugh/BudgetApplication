@@ -73,6 +73,7 @@ public class BudgetSummaryController extends HttpServlet {
             }
             
             // setup outgoing data
+            populateItems();
             populateMonthDropDowns();
             populateYearDropDowns();
             
@@ -131,9 +132,9 @@ public class BudgetSummaryController extends HttpServlet {
             }
             
             // setup outgoing data
+            populateItems();
             populateMonthDropDowns();
             populateYearDropDowns();
-            populateItems();
             
             // get new data for page
             request.setAttribute(USER, user);
@@ -182,8 +183,6 @@ public class BudgetSummaryController extends HttpServlet {
                         .filter(x -> x.getId() == budgetId)
                         .collect(Collectors.toList()).get(0);
                 }
-                
-                populateItems();
             }
         }
         catch(Exception ex) {
