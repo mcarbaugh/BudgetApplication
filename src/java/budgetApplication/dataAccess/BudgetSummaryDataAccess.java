@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BudgetDataAccess implements AutoCloseable {
+public class BudgetSummaryDataAccess implements AutoCloseable {
 
     public User getUserByUserId(int userId) throws Exception {
         try {

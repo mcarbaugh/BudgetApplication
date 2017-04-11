@@ -189,7 +189,7 @@ public class BudgetSummaryController extends HttpServlet {
     
     private void processCreateBudgetOperation() throws Exception {
         try {
-            try (BudgetManager budgetManager = new BudgetManager()) {
+            try (BudgetSummaryManager budgetManager = new BudgetSummaryManager()) {
                 Budget newBudget = new Budget(newMonth, newYear);
                 budgetManager.saveBudgetByUserId(user.getId(), newBudget);
                 int newId = budgetManager.getLastIdByUserId(user.getId());
@@ -205,7 +205,7 @@ public class BudgetSummaryController extends HttpServlet {
     
     private void processReadOperation() throws Exception {
         try {
-            try (BudgetManager budgetManager = new BudgetManager()) {
+            try (BudgetSummaryManager budgetManager = new BudgetSummaryManager()) {
                 budgets = budgetManager.getAllBudgetsByUserId(user.getId());
 
                 if(budgetId > 0) {
@@ -225,7 +225,7 @@ public class BudgetSummaryController extends HttpServlet {
         int currentYear = getCurrentYear();
         MonthEnum currentMonth = getCurrentMonth();
 
-        try (BudgetManager budgetManager = new BudgetManager()) {
+        try (BudgetSummaryManager budgetManager = new BudgetSummaryManager()) {
             budgets = budgetManager.getAllBudgetsByUserId(userId);
             
             List<Budget> possibleBudgets = budgets.stream()

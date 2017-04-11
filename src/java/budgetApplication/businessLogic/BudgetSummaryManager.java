@@ -2,15 +2,15 @@
 package budgetApplication.businessLogic;
 
 import static budgetApplication.baseClasses.Utilities.order;
-import budgetApplication.dataAccess.BudgetDataAccess;
+import budgetApplication.dataAccess.BudgetSummaryDataAccess;
 import budgetApplication.dataContracts.*;
 import java.util.List;
 
-public class BudgetManager implements AutoCloseable {
+public class BudgetSummaryManager implements AutoCloseable {
     
     public User getUserByUserId(int userId) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             return budgetDataAccess.getUserByUserId(userId);
         }
         catch (Exception ex) {
@@ -20,7 +20,7 @@ public class BudgetManager implements AutoCloseable {
     
     public List<Budget> getAllBudgetsByUserId(int userId) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {            
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {            
             List<Budget> budgets =budgetDataAccess.getAllBudgetsByUserId(userId);         
             order(budgets);
             return budgets;
@@ -32,7 +32,7 @@ public class BudgetManager implements AutoCloseable {
     
     public Double getTotalAmountById(int id) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             return budgetDataAccess.getTotalAmountById(id);
         }
         catch(Exception ex) {
@@ -42,7 +42,7 @@ public class BudgetManager implements AutoCloseable {
     
     public Double getTotalSpentById(int id) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             return budgetDataAccess.getTotalSpentById(id);
         }
         catch(Exception ex) {
@@ -52,7 +52,7 @@ public class BudgetManager implements AutoCloseable {
     
     public void deleteBudgetById(int id) throws Exception {
         
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             budgetDataAccess.deleteBudgetById(id);
         }
         catch(Exception ex) {
@@ -61,7 +61,7 @@ public class BudgetManager implements AutoCloseable {
     }
     
     public void saveBudgetByUserId(int userId, Budget budget) throws Exception {
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             int budgetId = budget.getId();
             
             if(budgetId == 0) {
@@ -77,7 +77,7 @@ public class BudgetManager implements AutoCloseable {
     }
     
     public int getLastIdByUserId(int userId) throws Exception {
-        try(BudgetDataAccess budgetDataAccess = new BudgetDataAccess()) {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
             return budgetDataAccess.getLastIdByUserId(userId);
         }
         catch(Exception ex) {
