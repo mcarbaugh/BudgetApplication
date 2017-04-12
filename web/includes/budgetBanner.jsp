@@ -3,10 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:url value="Login" var="logoutURL">
-    <c:param name="operation" value="signout"/>
-</c:url>
-
 <!DOCTYPE html>
 <div class="budgetBannerContainer">
     <div id="monthDropdown" class="dropdown">
@@ -36,6 +32,9 @@
             <a href="/#">PROFILE</a>
             <a href="/#">SETTINGS</a>
             <hr/>
+            <c:url value="Login" var="logoutURL">
+                <c:param name="operation" value="signout"/>
+            </c:url>
             <a href="${logoutURL}">SIGN OUT</a>
         </div>
     </div>

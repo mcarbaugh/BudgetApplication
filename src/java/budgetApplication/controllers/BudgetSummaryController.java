@@ -122,9 +122,9 @@ public class BudgetSummaryController extends HttpServlet {
             if(request.getParameterMap().containsKey(CATEGORY)) {
                 categoryInput = CategoryEnum.valueOf(request.getParameter(CATEGORY).toUpperCase());
             }
-            
+            // MONTH_DROP_DOWN = "monthDropDown";
             // get values from fields in the form
-            if(request.getParameterMap().containsKey(MONTH_DROP_DOWN)) {
+        if(request.getParameterMap().containsKey(MONTH_DROP_DOWN)) {
                 newMonth = MonthEnum.valueOf(request.getParameter(MONTH_DROP_DOWN));
             }
 
