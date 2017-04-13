@@ -117,4 +117,29 @@ public class Utilities {
         
         return currentMonth;
     }
+    
+    public static boolean isInteger(String value) {
+        int size = value.length();
+        
+        for(int i = 0; i < size; i++) {
+            if(!Character.isDigit(value.charAt(i))) {
+                return false;
+            }
+        }
+        
+        return size > 0;
+    }
+    
+    public static MonthEnum getMonthAsEnum(String monthInput) {
+        
+        MonthEnum month = MonthEnum.NONE;
+        for(MonthEnum monthEnum : MonthEnum.values()) {
+            if(monthInput.equals(monthEnum.name())) {
+                month = monthEnum;
+                break;
+            }
+        }
+        
+        return month;
+    }
 }

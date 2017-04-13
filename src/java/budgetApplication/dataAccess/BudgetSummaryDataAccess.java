@@ -1,6 +1,7 @@
 
 package budgetApplication.dataAccess;
 
+import budgetApplication.baseClasses.BudgetApplicationFault;
 import budgetApplication.baseClasses.MonthEnum;
 import budgetApplication.dataContracts.*;
 import java.sql.Connection;
@@ -185,15 +186,17 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
-                
                 statement.setString(2, budget.getMonth().name());
                 statement.setInt(3, budget.getYear());
                 statement.executeUpdate();
                 mySqlConnection.close();
             }
         }
+        catch (SQLException ex) {
+            throw new BudgetApplicationFault(ex, budget, "budget");
+        }
         catch (Exception ex) {
-            throw new SQLException(ex);
+            throw ex;
         }
     }
     
@@ -214,11 +217,49 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     maxId = data.getInt("maxId");
                 }
                 
-                
                 mySqlConnection.close();
             }
             
             return maxId;
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public int getIdByMonthYear(int userId, MonthEnum month, int year) throws Exception {
+        try {
+            String query = "SELECT id "
+                         + "FROM budget b "
+                         + "WHERE b.userId = ? AND b.month = ? AND b.year = ?";
+            
+            int id = 0;
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, userId);
+                statement.setString(2, month.name());
+                statement.setInt(3, year);
+                statement.executeQuery();
+                
+                
+                data = statement.executeQuery();
+                while(data.next()) {
+                    id = data.getInt("id");
+                }
+                
+                mySqlConnection.close();
+            }
+            
+            if(id == 0) {
+                throw new Exception("Could not locate the budget in the database.");
+            }
+            
+            return id;
+        }
+        catch (SQLException ex) {
+            throw ex;
         }
         catch (Exception ex) {
             throw ex;

@@ -1,6 +1,8 @@
 
 package budgetApplication.businessLogic;
 
+import budgetApplication.baseClasses.BudgetApplicationFault;
+import budgetApplication.baseClasses.MonthEnum;
 import static budgetApplication.baseClasses.Utilities.order;
 import budgetApplication.dataAccess.BudgetSummaryDataAccess;
 import budgetApplication.dataContracts.*;
@@ -72,8 +74,8 @@ public class BudgetSummaryManager implements AutoCloseable {
                 // update the existing record
             }
         }
-        catch(SQLException ex) {
-            
+        catch(BudgetApplicationFault ex) {
+            throw ex;
         }
         catch(Exception ex) {
             throw ex;
@@ -89,6 +91,15 @@ public class BudgetSummaryManager implements AutoCloseable {
         }
     }
     
+    public int getIdByMonthYear(int userId, MonthEnum month, int year) throws Exception {
+        try(BudgetSummaryDataAccess budgetDataAccess = new BudgetSummaryDataAccess()) {
+            return budgetDataAccess.getIdByMonthYear(userId, month, year);
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+            
     @Override
     public void close() throws Exception {
         try {

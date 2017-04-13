@@ -1,14 +1,13 @@
 
 package budgetApplication.BudgetSummary.Controllers;
 
+import budgetApplication.baseClasses.BudgetApplicationFault;
 import static budgetApplication.baseClasses.ConstantFields.*;
-import static budgetApplication.baseClasses.ConstantFields.USER;
+import static budgetApplication.baseClasses.Utilities.*;
 import budgetApplication.baseClasses.MonthEnum;
 import budgetApplication.businessLogic.BudgetSummaryManager;
 import budgetApplication.dataContracts.*;
 import java.io.IOException;
-import static java.lang.System.out;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,39 +73,33 @@ public class CreateBudgetController extends HttpServlet {
             }          
             
         }
-        catch (SQLException ex) {
-            // navigate to the selected budget, even though it was already created
+        catch (BudgetApplicationFault ex) {
+            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+                // If the insert failed, the budget probably already exists.
+                // Navigate to the existing budget for better user experience.
+                User user;
+                int userId;
+                Budget budget;
+                int budgetId;
+                
+                user = (User)(request.getSession().getAttribute(USER));
+                userId = user.getId();
+                budget = (Budget) ex.getData().getProperty();
+                budgetId = manager.getIdByMonthYear(userId, budget.getMonth(), budget.getYear());
+                
+                String url = String.format("/Budget?budgetId=%s", budgetId);
+                response.sendRedirect(request.getContextPath() + url);
+            }
+            catch(Exception exception) {
+                // If all else fails, go to default page
+                response.sendRedirect(request.getContextPath() + "/DefaultBudget");
+            }
         }
         catch(Exception ex) {
             
         }
     }
-    
-    private MonthEnum getMonthAsEnum(String monthInput) {
-        
-        MonthEnum month = MonthEnum.NONE;
-        for(MonthEnum monthEnum : MonthEnum.values()) {
-            if(monthInput.equals(monthEnum.name())) {
-                month = monthEnum;
-                break;
-            }
-        }
-        
-        return month;
-    }
-    
-    private boolean isInteger(String value) {
-        int size = value.length();
-        
-        for(int i = 0; i < size; i++) {
-            if(!Character.isDigit(value.charAt(i))) {
-                return false;
-            }
-        }
-        
-        return size > 0;
-    }
-    
+
     private void insertNewBudget(int userId, Budget newBudget) throws Exception {
         
         try{
