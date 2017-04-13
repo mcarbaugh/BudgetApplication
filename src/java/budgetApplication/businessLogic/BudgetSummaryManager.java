@@ -4,6 +4,7 @@ package budgetApplication.businessLogic;
 import static budgetApplication.baseClasses.Utilities.order;
 import budgetApplication.dataAccess.BudgetSummaryDataAccess;
 import budgetApplication.dataContracts.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class BudgetSummaryManager implements AutoCloseable {
@@ -70,6 +71,9 @@ public class BudgetSummaryManager implements AutoCloseable {
             else {
                 // update the existing record
             }
+        }
+        catch(SQLException ex) {
+            
         }
         catch(Exception ex) {
             throw ex;

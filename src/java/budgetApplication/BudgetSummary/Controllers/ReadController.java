@@ -136,8 +136,9 @@ public class ReadController extends HttpServlet {
         for(MonthEnum month : MonthEnum.values()) {
             months.add(month.name());
         }
-
-         return months;
+        
+        months.remove(MonthEnum.NONE.name());
+        return months;
     }
     
     private List<Integer> getYearDropDownItems() {
