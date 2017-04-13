@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "CreateItemController", urlPatterns = {"/CreateItemController"})
+@WebServlet(name = "CreateItemController", urlPatterns = {"/CreateItem"})
 public class CreateItemController extends HttpServlet {
 
     @Override
@@ -23,7 +23,6 @@ public class CreateItemController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-        
+       
     }
 }
