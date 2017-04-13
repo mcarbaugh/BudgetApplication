@@ -6,7 +6,6 @@ import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.baseClasses.MonthEnum;
 import static budgetApplication.baseClasses.Utilities.order;
 import budgetApplication.businessLogic.*;
-import static budgetApplication.controllers.Utilities.*;
 import budgetApplication.dataContracts.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/*
 @WebServlet(name = "BudgetDetailsController", urlPatterns = {"/" + BUDGET_SUMMARY_PAGE})
 public class BudgetSummaryController extends HttpServlet {
 
@@ -305,3 +304,4 @@ public class BudgetSummaryController extends HttpServlet {
         }
     }
 }
+*/

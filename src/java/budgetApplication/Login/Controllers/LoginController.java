@@ -1,25 +1,30 @@
 
-package budgetApplication.controllers;
+package budgetApplication.Login.Controllers;
 
-import static budgetApplication.baseClasses.ConstantFields.*;
+import static budgetApplication.baseClasses.ConstantFields.BUDGET_SUMMARY_PAGE;
+import static budgetApplication.baseClasses.ConstantFields.LOGIN_ERROR_MESSAGE;
+import static budgetApplication.baseClasses.ConstantFields.MESSAGE;
+import static budgetApplication.baseClasses.ConstantFields.PASSWORD;
+import static budgetApplication.baseClasses.ConstantFields.USER;
+import static budgetApplication.baseClasses.ConstantFields.USERNAME;
+import budgetApplication.businessLogic.LoginFormManager;
+import budgetApplication.dataContracts.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import budgetApplication.businessLogic.LoginFormManager;
-import budgetApplication.dataContracts.*;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "LoginFormController", urlPatterns = {"/blahblah" + LOGIN_PAGE})
-public class LoginFormController extends HttpServlet {
-    
+@WebServlet(name = "LoginController", urlPatterns = {"/Login"})
+public class LoginController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        request.getRequestDispatcher("index.jsp").include(request, response);
     }
 
     @Override
@@ -41,12 +46,12 @@ public class LoginFormController extends HttpServlet {
             if(user.getId() > 0) {
                 currentSession = request.getSession();
                 currentSession.setAttribute(USER, user);
-                response.sendRedirect(BUDGET_SUMMARY_PAGE);
+                response.sendRedirect("DefaultBudget");
             }
             else {
                 //if user is not valid, respond with 
                 request.setAttribute(MESSAGE, LOGIN_ERROR_MESSAGE);
-                request.getRequestDispatcher("index.jsp").include(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
         catch(Exception ex) {

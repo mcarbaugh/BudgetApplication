@@ -1,25 +1,29 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Budget Details</title>
-        <link rel="stylesheet" type="text/css" href="styles/index.css">
-        <link rel="stylesheet" type="text/css" href="styles/budgetBanner.css">
-        <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
-        <link rel="stylesheet" type="text/css" href="styles/form.css">
-        <link rel="stylesheet" type="text/css" href="styles/links.css">
-        <link rel="stylesheet" type="text/css" href="styles/table.css">
-        <link rel="stylesheet" type="text/css" href="styles/categorySummaryPanel.css">
-        <link rel="stylesheet" type="text/css" href="styles/dialogWindow.css">
-        <link rel="stylesheet" type="text/css" href="styles/categoryTable.css">
+        <link rel="stylesheet" href="<c:url value='/styles/index.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/budgetBanner.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/form.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/dialogWindow.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/categoryTable.css'/>" type="text/css">
+        <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
+        <script src="<c:url value='/scripts/newBudgetDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/newItemDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
-        <script src="scripts/budgetBannerScript.js"></script>
-        <script src="scripts/newBudgetDialogScript.js"></script>
-        <script src="scripts/newItemDialogScript.js"></script>
-        <script src="scripts/windowScript.js"></script>
-        <script src="scripts/signoutScript.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <jsp:include page="/includes/budgetBanner.jsp"/>

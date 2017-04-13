@@ -34,6 +34,8 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     user.setEmail(userData.getString("email"));
                     user.setPhoneNumber(userData.getString("phoneNumber"));
                 }
+                
+                mySqlConnection.close();
             }
             
             return user;
@@ -82,8 +84,10 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     budgets.add(budget);
                 }
                 
-                return budgets;
+                mySqlConnection.close();
             }
+            
+            return budgets;
         }
         catch (Exception ex) {
             throw ex;
@@ -106,8 +110,10 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     total = data.getDouble("total");
                 }
                 
-                return total;
+                 mySqlConnection.close();
             }
+            
+            return total;
         }
         catch (Exception ex) {
             throw ex;
@@ -134,8 +140,11 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     total = data.getDouble("total");
                 }
                 
-                return total;
+                
+                 mySqlConnection.close();
             }
+            
+            return total;
         }
         catch (Exception ex) {
             throw ex;
@@ -155,30 +164,10 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 PreparedStatement statement;
-                statement = mySqlConnection.prepareStatement(deleteFromTransactionQuery);
-                statement.setInt(1, id);
-                statement.executeUpdate();
-            }
-            
-            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                PreparedStatement statement;
-                statement = mySqlConnection.prepareStatement(deleteFromItemQuery);
-                statement.setInt(1, id);
-                statement.executeUpdate();
-            }
-            
-            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                PreparedStatement statement;
-                statement = mySqlConnection.prepareStatement(deleteFromIncomeQuery);
-                statement.setInt(1, id);
-                statement.executeUpdate();
-            }
-            
-            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(deleteFromBudgetQuery);
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                mySqlConnection.close();
             }
         }
         catch (Exception ex) {
@@ -199,6 +188,7 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                 statement.setString(2, budget.getMonth().name());
                 statement.setInt(3, budget.getYear());
                 statement.executeUpdate();
+                mySqlConnection.close();
             }
         }
         catch (Exception ex) {
@@ -223,8 +213,11 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                     maxId = data.getInt("maxId");
                 }
                 
-                return maxId;
+                
+                mySqlConnection.close();
             }
+            
+            return maxId;
         }
         catch (Exception ex) {
             throw ex;

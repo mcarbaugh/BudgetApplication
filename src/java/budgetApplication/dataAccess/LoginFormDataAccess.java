@@ -35,6 +35,8 @@ public class LoginFormDataAccess implements AutoCloseable {
                     user.setEmail(userData.getString("email"));
                     user.setPhoneNumber(userData.getString("phoneNumber"));
                 }
+                
+                mySqlConnection.close();
             }
             
             return user;

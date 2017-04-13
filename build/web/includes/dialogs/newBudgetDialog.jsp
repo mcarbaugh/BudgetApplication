@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <div class="modal" id="newBudgetDialog">
     <div class="modal-content">
-        <form id="newBudgetForm" action="BudgetSummary" method="post">
+        <form id="newBudgetForm" action="CreateBudget" method="post">
             <span class="close" onClick="closeAddBudgetDialog()">&times;</span>
             <h1>New Budget</h1>
             <label>

@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/baseClasses/ConstantFields.java</file>
-            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/controllers/BudgetSummaryController.java</file>
-            <file>file:/C:/Dev/BudgetApplication/web/pages/BudgetSummaryPage.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/styles/index.css</file>
-            <file>file:/C:/Dev/BudgetApplication/web/includes/budgetBanner.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/BudgetSummary/Controllers/CreateBudgetController.java</file>
             <file>file:/C:/Dev/BudgetApplication/web/includes/dialogs/newBudgetDialog.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/BudgetSummary/Controllers/ReadController.java</file>
         </group>
     </open-files>
 </project-private>

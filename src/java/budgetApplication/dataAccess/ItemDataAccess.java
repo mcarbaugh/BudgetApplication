@@ -39,8 +39,10 @@ public class ItemDataAccess implements AutoCloseable {
                     items.add(item);
                 }
                 
-                return items;
+                mySqlConnection.close();
             }
+            
+            return items;
         }
         catch (Exception ex) {
             throw ex;
@@ -58,7 +60,8 @@ public class ItemDataAccess implements AutoCloseable {
                 statement = mySqlConnection.prepareStatement(deleteFromItemQuery);
                 statement.setInt(1, id);
                 statement.executeUpdate();
-            }  
+                mySqlConnection.close();
+            }
         }
         catch (Exception ex) {
             throw ex;
@@ -77,6 +80,7 @@ public class ItemDataAccess implements AutoCloseable {
                 statement.setString(2, i.getDescription());
                 statement.setInt(3, i.getId());
                 statement.executeUpdate();
+                mySqlConnection.close();
             }  
         }
         catch (Exception ex) {
@@ -96,6 +100,7 @@ public class ItemDataAccess implements AutoCloseable {
                 statement.setDouble(2, i.getAmount());
                 statement.setString(3, i.getDescription());
                 statement.executeUpdate();
+                mySqlConnection.close();
             }  
         }
         catch (Exception ex) {
