@@ -16,13 +16,12 @@ public class CreateItemController extends HttpServlet {
             throws ServletException, IOException {
         
         
-        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       
+        
     }
 }
