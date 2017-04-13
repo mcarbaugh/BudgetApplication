@@ -1,7 +1,6 @@
 
 package budgetApplication.Login.Controllers;
 
-import static budgetApplication.baseClasses.ConstantFields.BUDGET_SUMMARY_PAGE;
 import static budgetApplication.baseClasses.ConstantFields.LOGIN_ERROR_MESSAGE;
 import static budgetApplication.baseClasses.ConstantFields.MESSAGE;
 import static budgetApplication.baseClasses.ConstantFields.PASSWORD;
@@ -48,7 +47,7 @@ public class LoginController extends HttpServlet {
             if(user.getId() > 0) {
                 currentSession = request.getSession();
                 currentSession.setAttribute(USER, user);
-                response.sendRedirect("DefaultBudget");
+                response.sendRedirect(request.getContextPath() + "/DefaultBudget");
             }
             else {
                 //if user is not valid, respond with 

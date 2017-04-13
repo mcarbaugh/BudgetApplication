@@ -1,6 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <div class="modal" id="newBudgetDialog">
     <div class="modal-content">
@@ -23,7 +24,6 @@
                     </c:forEach>
                 </select>
             </label>
-            <input type="text" name="operation" value="create" class="hiddenField"/>
             <input type="submit" value="Submit"/>
             <input type="button" value="Cancel" onclick="closeAddBudgetDialog()"/>
         </form>

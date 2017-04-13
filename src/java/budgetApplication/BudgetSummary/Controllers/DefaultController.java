@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/DefaultBudget"})
 public class DefaultController extends HttpServlet {
@@ -69,14 +70,19 @@ public class DefaultController extends HttpServlet {
     }
     
     private Budget getActiveBudgetFromBudgets(List<Budget> budgets) {
- 
-        Budget activeBudget;
-        activeBudget = budgets
+
+        Budget activeBudget = null;
+        List<Budget> activeBudgets;    
+        
+        activeBudgets = budgets
                 .stream()
                 .filter(x -> x.getYear() == getCurrentYear())
                 .filter(x -> x.getMonth() == getCurrentMonth())
-                .findFirst()
-                .get();
+                .collect(Collectors.toList());
+        
+        if(activeBudgets.size() > 0) {
+            activeBudget = activeBudgets.get(0);
+        }
         
         return activeBudget;
     }
