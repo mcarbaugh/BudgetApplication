@@ -9,3 +9,4 @@ function closeNewHousingItemDialog() {
     document.getElementById("newHousingItemDialog").style.display = "none";
     document.getElementById("newHousingItemForm").reset();
 }
+
