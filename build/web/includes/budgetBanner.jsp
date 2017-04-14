@@ -12,8 +12,7 @@
         
         <div id="monthContainer" class="dropdown-content">
             <c:forEach items="${budgets}" var="budget" varStatus="counter">
-                <c:url value="BudgetSummary" var="readBudgetURL">
-                    <c:param name="operation" value="read"/>
+                <c:url value="/Budget" var="readBudgetURL">
                     <c:param name="budgetId" value="${budget.id}"/>
                 </c:url>
                 <a href="${readBudgetURL}">
@@ -31,11 +30,10 @@
         <div id="userInfoContainer" class="dropdown-content">
             <a href="/#">PROFILE</a>
             <a href="/#">SETTINGS</a>
-            <hr/>
-            <c:url value="Login" var="logoutURL">
-                <c:param name="operation" value="signout"/>
-            </c:url>
-            <a href="${logoutURL}">SIGN OUT</a>
+            
+            <form method="post" action="Logout">
+                <input type="submit" value="sign out" id="signoutButton"/>
+            </form>
         </div>
     </div>
 </div>

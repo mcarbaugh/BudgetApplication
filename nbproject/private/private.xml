@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/baseClasses/ConstantFields.java</file>
-            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/controllers/BudgetSummaryController.java</file>
-            <file>file:/C:/Dev/BudgetApplication/web/pages/BudgetSummaryPage.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/styles/index.css</file>
-            <file>file:/C:/Dev/BudgetApplication/web/includes/budgetBanner.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/includes/dialogs/newBudgetDialog.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/src/java/budgetApplication/BudgetSummary/Controllers/CreateItemController.java</file>
+            <file>file:/C:/Dev/BudgetApplication/web/scripts/newItemDialogScript.js</file>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/categories/housingSection.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/dialogs/newHousingItemDialog.jsp</file>
         </group>
     </open-files>
 </project-private>

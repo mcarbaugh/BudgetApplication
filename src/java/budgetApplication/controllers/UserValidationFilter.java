@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter({"/" + BUDGET_SUMMARY_PAGE})
+@WebFilter({"/Budget", "/DefaultBudget"})
 public class UserValidationFilter implements Filter {
     
     @Override

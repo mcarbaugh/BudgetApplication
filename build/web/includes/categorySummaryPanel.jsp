@@ -1,8 +1,10 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="categorySummaryPanel">
     <h3>Budget Categories</h3>
     <div class="imageContainer">
-        <img src="images/piechart.png" class="piechart"/>
+        <img src="<c:url value='/images/piechart.png'/>" class="piechart"/>
     </div>
     
     <h3>Transaction Summary</h3>
