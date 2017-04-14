@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="categorySection">
-    <table>
+    <table id="housingCategoryTable">
         <thead>
             <tr id="housingHeader">
                 <td colSpan="5" class="headerCell">Housing</td>
@@ -16,7 +16,7 @@
                 <th class="rightAlignColumn">Remaining</th>
             </tr>  
         </thead>
-        <tbody>
+        <tbody id="housingCategoryTableBody">
             <c:forEach items="${housingItems}" var="item" varStatus="counter">
                 <tr>
                     <td><a href="#">+</a></td>

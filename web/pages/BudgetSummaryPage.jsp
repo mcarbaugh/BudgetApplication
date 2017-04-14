@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="<c:url value='/styles/index.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/budgetBanner.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
-        <link rel="stylesheet" href="<c:url value='/styles/form.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
@@ -25,7 +24,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body onload="init()">
         <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/menuBar.jsp"/>
         <jsp:include page="/includes/dialogs/newBudgetDialog.jsp"/>
