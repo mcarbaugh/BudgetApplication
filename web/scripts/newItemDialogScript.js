@@ -11,6 +11,17 @@
         document.getElementById("newHousingItemDialog").style.display = "none";
         document.getElementById("newHousingItemForm").reset();
     }
+    
+    function isNumberKey(e) {
+        
+        var characterCode = (e.which) ? e.which : event.keyCode;
+        
+        if(characterCode > 31 && (characterCode < 48 || characterCode > 57)) {
+            return false;
+        }
+        
+        return true;
+    }
 
     function init() {
         document.getElementById("AddHousingItemButton").addEventListener('click', createNewHousingItem);

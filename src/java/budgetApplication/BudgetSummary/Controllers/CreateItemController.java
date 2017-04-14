@@ -22,7 +22,7 @@ public class CreateItemController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 
-        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+        response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("blah");
         response.getWriter().close();
