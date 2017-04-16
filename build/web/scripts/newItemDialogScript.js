@@ -16,6 +16,12 @@
         
         var characterCode = (e.which) ? e.which : event.keyCode;
         
+        // check for a decimal
+        if(characterCode === 46 && e.srcElement.value.split('.').length <= 1) {
+            return true;
+        }
+        
+        // check for non-numeric characters
         if(characterCode > 31 && (characterCode < 48 || characterCode > 57)) {
             return false;
         }
@@ -32,11 +38,24 @@
         var method = "POST";
         var isAsync = true;
         
+        var budgetId = document.getElementById("housingBudgetId").value;
+        var itemAmount = document.getElementById("housingItemAmount").value;
+        var itemDescription = document.getElementById("housingItemDescription").value;
+        var itemCategory = document.getElementById("housingItemCategory").value;
+        
         httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = updateHousingItemTable;
         httpRequest.open(method, url, isAsync);
         httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        httpRequest.send();
+        
+        var arguments = "budgetId=" + encodeURIComponent(budgetId)
+               + "&itemAmount=" + encodeURIComponent(itemAmount) 
+               + "&itemDescription=" + encodeURIComponent(itemDescription)
+               + "&itemCategory=" + encodeURIComponent(itemCategory);
+               
+               
+               
+        httpRequest.send(arguments);
     }
 
     function updateHousingItemTable() {

@@ -9,16 +9,15 @@
             <h1>New Housing Item</h1>
             <label>
                 <span>Amount: </span>
-                <input type="text" name="amount" onpaste="return false" onkeypress="return isNumberKey(event)"/>
+                <input type="text" name="amount" onpaste="return false" onkeypress="return isNumberKey(event)" id="housingItemAmount"/>
             </label>
             <label>
                 <span>Description: </span>
-                <input type="text" name="description" />
+                <input type="text" name="description" id="housingItemDescription"/>
             </label>
-            <input type="text" on name="budgetId" value="${budget.id}" class="hiddenField"/>
-            <input type="text" name="category" value="HOUSING" class="hiddenField"/>
+            <input type="text" name="budgetId" class="hiddenField" value="${budget.getId()}"  id="housingBudgetId"/>
+            <input type="text" name="category" class="hiddenField" value="HOUSING"  id="housingItemCategory"/>
         </form>
-            
         <input type=button id ="AddHousingItemButton" value="Submit"/>
         <input type="button" value="Cancel" onclick="closeNewHousingItemDialog()"/>
     </div>

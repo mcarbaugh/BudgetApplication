@@ -130,6 +130,33 @@ public class Utilities {
         return size > 0;
     }
     
+    public static boolean isDouble(String value) {
+        
+        value = value.indexOf(".") < 0 ? value : value.replaceAll("0*$", "").replaceAll("\\.$", "");
+        
+        int size = value.length();
+        boolean hasDecimal = false;
+        
+        char character;
+        for(int i = 0; i < size; i++) {
+            character = value.charAt(i);
+            
+            if(character == '.') {
+                if(hasDecimal || size == 1) {
+                    return false;
+                }
+                else {
+                    hasDecimal = true;
+                }
+            }
+            else if(!Character.isDigit(character)) {
+                return false;
+            } 
+        }
+        
+        return size > 0;
+    }
+    
     public static MonthEnum getMonthAsEnum(String monthInput) {
         
         MonthEnum month = MonthEnum.NONE;
@@ -141,5 +168,18 @@ public class Utilities {
         }
         
         return month;
+    }
+    
+    public static CategoryEnum getCategoryAsEnum(String categoryInput) {
+        
+        CategoryEnum category = CategoryEnum.NONE;
+        for(CategoryEnum categoryEnum : CategoryEnum.values()) {
+            if(categoryInput.equals(categoryEnum.name())) {
+                category = categoryEnum;
+                break;
+            }
+        }
+        
+        return category;
     }
 }
