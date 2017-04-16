@@ -81,7 +81,6 @@
                 cell3.className = "rightAlignColumn";
                 cell4.className = "rightAlignColumn";
                 cell5.className = "rightAlignColumn";
-                
             }
             else {
                 

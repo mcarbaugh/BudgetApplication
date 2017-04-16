@@ -22,10 +22,10 @@ public class ItemManager implements AutoCloseable {
             try (ItemDataAccess dataAccess = new ItemDataAccess()) {
                 
                 if(item.getId() == 0) {
-                    
+                    dataAccess.insertItemByBudgetId(item, budgetId);
                 }
                 else {
-                    
+                    // update existing
                 }
             }
         }
