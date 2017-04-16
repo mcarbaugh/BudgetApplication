@@ -40,7 +40,7 @@
         
         var budgetId = document.getElementById("housingBudgetId").value;
         var itemAmount = document.getElementById("housingItemAmount").value;
-        var itemDescription = document.getElementById("housingItemDescription").value;
+        var itemName = document.getElementById("housingItemName").value;
         var itemCategory = document.getElementById("housingItemCategory").value;
         
         httpRequest = new XMLHttpRequest();
@@ -50,7 +50,7 @@
         
         var arguments = "budgetId=" + encodeURIComponent(budgetId)
                + "&itemAmount=" + encodeURIComponent(itemAmount) 
-               + "&itemDescription=" + encodeURIComponent(itemDescription)
+               + "&itemName=" + encodeURIComponent(itemName)
                + "&itemCategory=" + encodeURIComponent(itemCategory);
                
                

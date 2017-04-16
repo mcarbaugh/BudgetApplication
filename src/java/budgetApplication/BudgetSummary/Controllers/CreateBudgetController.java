@@ -5,7 +5,7 @@ import budgetApplication.baseClasses.BudgetApplicationFault;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import static budgetApplication.baseClasses.Utilities.*;
 import budgetApplication.baseClasses.MonthEnum;
-import budgetApplication.businessLogic.BudgetSummaryManager;
+import budgetApplication.BudgetSummary.BusinessLogic.BudgetManager;
 import budgetApplication.dataContracts.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -74,7 +74,7 @@ public class CreateBudgetController extends HttpServlet {
             
         }
         catch (BudgetApplicationFault ex) {
-            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+            try (BudgetManager manager = new BudgetManager()) {
                 // If the insert failed, the budget probably already exists.
                 // Navigate to the existing budget for better user experience.
                 User user;
@@ -104,7 +104,7 @@ public class CreateBudgetController extends HttpServlet {
         
         try{
             
-            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+            try (BudgetManager manager = new BudgetManager()) {
                 manager.saveBudgetByUserId(userId, newBudget);
             }
         }
@@ -116,7 +116,7 @@ public class CreateBudgetController extends HttpServlet {
     private int getMaxId(int userId) throws Exception {
         try{
             
-            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+            try (BudgetManager manager = new BudgetManager()) {
                 return manager.getLastIdByUserId(userId);
             }
         }

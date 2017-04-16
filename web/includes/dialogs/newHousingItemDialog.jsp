@@ -13,7 +13,7 @@
             </label>
             <label>
                 <span>Description: </span>
-                <input type="text" name="description" id="housingItemDescription"/>
+                <input type="text" name="description" id="housingItemName"/>
             </label>
             <input type="text" name="budgetId" class="hiddenField" value="${budget.getId()}"  id="housingBudgetId"/>
             <input type="text" name="category" class="hiddenField" value="HOUSING"  id="housingItemCategory"/>

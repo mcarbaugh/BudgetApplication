@@ -1,6 +1,7 @@
 
 package budgetApplication.BudgetSummary.Controllers;
 
+import budgetApplication.BudgetSummary.BusinessLogic.ItemManager;
 import budgetApplication.baseClasses.CategoryEnum;
 import static budgetApplication.baseClasses.ConstantFields.USER;
 import static budgetApplication.baseClasses.Utilities.*;
@@ -37,8 +38,8 @@ public class CreateItemController extends HttpServlet {
             
             HttpSession currentSession;
             User user;
-            double amount = 0;
-            String description = null;
+            double itemAmount = 0;
+            String itemName = null;
             CategoryEnum category = CategoryEnum.NONE;
             int budgetId = 0;
             
@@ -57,12 +58,12 @@ public class CreateItemController extends HttpServlet {
                     String itemInput = request.getParameter("itemAmount");
                     
                     if(isDouble(itemInput)) {
-                        amount = Double.parseDouble(itemInput);
+                        itemAmount = Double.parseDouble(itemInput);
                     }
                 }
                 
-                if(request.getParameterMap().containsKey("itemDescription")) {
-                    description = request.getParameter("itemDescription");
+                if(request.getParameterMap().containsKey("itemName")) {
+                    itemName = request.getParameter("itemName");
                 }
                 
                 if(request.getParameterMap().containsKey("itemCategory")) {
@@ -71,10 +72,11 @@ public class CreateItemController extends HttpServlet {
                 }
                 
                 Item newItem = new Item();
-                newItem.setAmount(amount);
-                newItem.setDescription(description);
+                newItem.setAmount(itemAmount);
+                newItem.setName(itemName);
                 newItem.setCategory(CategoryEnum.NONE);
-                
+                saveItem(newItem, budgetId);
+                                
             }
             else {
                 currentSession.invalidate();
@@ -82,6 +84,18 @@ public class CreateItemController extends HttpServlet {
         }
         catch (Exception ex) {
             throw new ServletException(ex);
+        }
+    }
+    
+    private void saveItem(Item newItem, int budgetId) throws Exception {
+        
+        try {
+            try(ItemManager manager = new ItemManager()) {
+                
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
         }
     }
 }
