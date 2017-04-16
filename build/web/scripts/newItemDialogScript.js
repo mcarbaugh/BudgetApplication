@@ -52,9 +52,7 @@
                + "&itemAmount=" + encodeURIComponent(itemAmount) 
                + "&itemName=" + encodeURIComponent(itemName)
                + "&itemCategory=" + encodeURIComponent(itemCategory);
-               
-               
-               
+   
         httpRequest.send(arguments);
     }
 
@@ -64,6 +62,15 @@
                 
                 document.getElementById("newHousingItemDialog").style.display = "none";
                 
+                var xml = httpRequest.responseXML;
+                var items = xml.getElementsByTagName("items")[0];
+                var item = items.childNodes[0];
+                var id = item.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                var name = item.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                var amount = item.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+                var spent = item.getElementsByTagName("spent")[0].childNodes[0].nodeValue;
+                var remaining = amount - spent;
+                
                 var table = document.getElementById("housingCategoryTableBody");
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
@@ -72,10 +79,10 @@
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
                 cell1.innerHTML = "+";
-                cell2.innerHTML = "NEW CELL2";
-                cell3.innerHTML = "NEW CELL3";
-                cell4.innerHTML = "NEW CELL4";
-                cell5.innerHTML = "NEW CELL5";
+                cell2.innerHTML = name;
+                cell3.innerHTML = amount;
+                cell4.innerHTML = spent;
+                cell5.innerHTML = remaining;
                 
                 cell2.className = "leftAlignColumn";
                 cell3.className = "rightAlignColumn";

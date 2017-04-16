@@ -67,11 +67,24 @@ public class CreateItemController extends HttpServlet {
                 newItem.setAmount(itemAmount);
                 
                 saveItem(newItem, budgetId);
+                newItem.setId(getLastIdByBudgetId(budgetId));
                 
-                //response.setContentType("text/plain");
-                //response.setCharacterEncoding("UTF-8");
-                //response.getWriter().write("blah");
-                //response.getWriter().close();
+                StringBuilder buffer = new StringBuilder();
+                buffer.append("<item>");
+                buffer.append("<id>" + newItem.getId() + "</id>");
+                buffer.append("<name>" + newItem.getName()+ "</name>");
+                buffer.append("<category>" + newItem.getCategory()+ "</category>");
+                buffer.append("<amount>" + newItem.getAmount()+ "</amount>");
+                buffer.append("<spent>" + newItem.getSpent()+ "</spent>");
+                buffer.append("</item>");
+
+                String xmlDocument = String.format("%s%s%s", "<items>", buffer.toString(), "</items>");
+                
+                
+                response.setContentType("text/xml");
+                response.setHeader("Cache-Control", "no-cache");
+                response.getWriter().write(xmlDocument);
+                response.getWriter().close();
             }
             else {
                 currentSession.invalidate();
@@ -87,6 +100,18 @@ public class CreateItemController extends HttpServlet {
         try {
             try(ItemManager manager = new ItemManager()) {
                 manager.saveItem(newItem, budgetId);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    private int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try {
+            try(ItemManager manager = new ItemManager()) {
+                return manager.getLastIdByBudgetId(budgetId);
             }
         }
         catch(Exception ex) {
