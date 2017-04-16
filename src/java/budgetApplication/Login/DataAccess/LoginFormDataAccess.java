@@ -1,6 +1,7 @@
 
-package budgetApplication.dataAccess;
+package budgetApplication.Login.DataAccess;
 
+import budgetApplication.dataAccess.DatabaseFactory;
 import budgetApplication.dataContracts.*;
 import java.sql.*;
 

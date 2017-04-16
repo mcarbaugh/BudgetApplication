@@ -1,15 +1,14 @@
 
-package budgetApplication.businessLogic;
+package budgetApplication.BudgetSummary.BusinessLogic;
 
 import budgetApplication.baseClasses.BudgetApplicationFault;
 import budgetApplication.baseClasses.MonthEnum;
 import static budgetApplication.baseClasses.Utilities.order;
-import budgetApplication.dataAccess.BudgetSummaryDataAccess;
+import budgetApplication.BudgetSummary.DataAccess.BudgetSummaryDataAccess;
 import budgetApplication.dataContracts.*;
-import java.sql.SQLException;
 import java.util.List;
 
-public class BudgetSummaryManager implements AutoCloseable {
+public class BudgetManager implements AutoCloseable {
     
     public User getUserByUserId(int userId) throws Exception {
         

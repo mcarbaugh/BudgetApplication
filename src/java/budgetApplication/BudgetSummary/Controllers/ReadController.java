@@ -4,8 +4,8 @@ package budgetApplication.BudgetSummary.Controllers;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.baseClasses.MonthEnum;
 import static budgetApplication.baseClasses.Utilities.*;
-import budgetApplication.businessLogic.BudgetSummaryManager;
-import budgetApplication.businessLogic.ItemManager;
+import budgetApplication.BudgetSummary.BusinessLogic.BudgetManager;
+import budgetApplication.BudgetSummary.BusinessLogic.ItemManager;
 import budgetApplication.dataContracts.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class ReadController extends HttpServlet {
     }
     
     private List<Budget> getBudgetsByUserId(int userId) throws Exception {
-        try (BudgetSummaryManager budgetManager = new BudgetSummaryManager()) {
+        try (BudgetManager budgetManager = new BudgetManager()) {
  
             return budgetManager.getAllBudgetsByUserId(userId);
         }

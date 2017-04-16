@@ -20,7 +20,7 @@
             <c:forEach items="${lifestyleItems}" var="item" varStatus="counter">
                 <tr>
                     <td><a href="#">+</a></td>
-                    <td class="leftAlignColumn"><c:out value="${item.description}"/></td>
+                    <td class="leftAlignColumn"><c:out value="${item.name}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.amount}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.spent}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.getRemaining()}"/></td>

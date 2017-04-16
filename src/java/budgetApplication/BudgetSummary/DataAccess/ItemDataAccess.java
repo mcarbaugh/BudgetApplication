@@ -1,8 +1,9 @@
 
-package budgetApplication.dataAccess;
+package budgetApplication.BudgetSummary.DataAccess;
 
 import budgetApplication.dataContracts.*;
-import budgetApplication.baseClasses.*;
+import static budgetApplication.baseClasses.Utilities.getCategoryAsEnum;
+import budgetApplication.dataAccess.DatabaseFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,9 +14,10 @@ public class ItemDataAccess implements AutoCloseable {
     
     public List<Item> getAllItemsByBudgetId(int budgetId) throws Exception {
         try {
-            String query = "SELECT i.id, c.name, i.amount, i.description "
-                         + "FROM item i, category c "
-                         + "WHERE budgetId = ? AND i.categoryId = c.id";
+            String query = "SELECT i.id, i.name, i.category, i.amount, SUM(t.amount) as spent "
+                         + "FROM item i, transaction t "
+                         + "WHERE budgetId = ? "
+                         + "GROUP BY i.id";
             
             Item item;
             List<Item> items;
@@ -31,11 +33,10 @@ public class ItemDataAccess implements AutoCloseable {
                 while(data.next()) {
                     item = new Item();
                     item.setId(data.getInt("id"));
-                    String cName = data.getString("name");
-                    CategoryEnum category = CategoryEnum.valueOf(cName);
-                    item.setCategory(category);
+                    item.setName(data.getString("name"));
+                    item.setCategory(getCategoryAsEnum(data.getString("category")));
                     item.setAmount(data.getDouble("amount"));
-                    item.setDescription(data.getString("description"));
+                    item.setSpent(data.getDouble("spent"));
                     items.add(item);
                 }
                 
@@ -43,6 +44,24 @@ public class ItemDataAccess implements AutoCloseable {
             }
             
             return items;
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public void insertItemByBudgetId(Item item, int budgetId) throws Exception {
+        try {
+            String query = "INSERT INTO item (budgetId, category, name, amount) VALUES (?, ?, ?, ?)";
+            
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query);
+                //statement.setDouble(1, i.getAmount());
+                statement.executeUpdate();
+                mySqlConnection.close();
+            }  
         }
         catch (Exception ex) {
             throw ex;
@@ -62,46 +81,6 @@ public class ItemDataAccess implements AutoCloseable {
                 statement.executeUpdate();
                 mySqlConnection.close();
             }
-        }
-        catch (Exception ex) {
-            throw ex;
-        }
-    }
-    
-    public void updateItemById(Item i) throws Exception {
-        try {
-            String updateFromItemQuery = "UPDATE FROM item SET amount = ?, description = ? WHERE id = ?";
-            
-            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
-                PreparedStatement statement;
-                statement = mySqlConnection.prepareStatement(updateFromItemQuery);
-                statement.setDouble(1, i.getAmount());
-                statement.setString(2, i.getDescription());
-                statement.setInt(3, i.getId());
-                statement.executeUpdate();
-                mySqlConnection.close();
-            }  
-        }
-        catch (Exception ex) {
-            throw ex;
-        }
-    }
-    
-    public void addItem(Item i) throws Exception {
-        try {
-            String updateFromItemQuery = "INSERT INTO item values (?,?,?)";
-            
-            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
-                
-                PreparedStatement statement;
-                statement = mySqlConnection.prepareStatement(updateFromItemQuery);
-                statement.setInt(1, i.getId());
-                statement.setDouble(2, i.getAmount());
-                statement.setString(3, i.getDescription());
-                statement.executeUpdate();
-                mySqlConnection.close();
-            }  
         }
         catch (Exception ex) {
             throw ex;

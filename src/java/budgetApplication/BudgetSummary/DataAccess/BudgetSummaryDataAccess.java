@@ -1,8 +1,9 @@
 
-package budgetApplication.dataAccess;
+package budgetApplication.BudgetSummary.DataAccess;
 
 import budgetApplication.baseClasses.BudgetApplicationFault;
 import budgetApplication.baseClasses.MonthEnum;
+import budgetApplication.dataAccess.DatabaseFactory;
 import budgetApplication.dataContracts.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -155,13 +156,7 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
     
     public void deleteBudgetById(int id) throws Exception {
         try {
-            String deleteFromTransactionQuery = "DELETE FROM `transaction` "
-                                              + "WHERE itemId IN (SELECT i.id "
-                                                               + "FROM item i "
-                                                               + "WHERE i.budgetId = ?)";
-            
-            String deleteFromItemQuery = "DELETE FROM item WHERE budgetId = ?";
-            String deleteFromIncomeQuery = "DELETE FROM income WHERE budgetId = ?";
+
             String deleteFromBudgetQuery = "DELETE FROM budget WHERE id = ?";
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="categorySection">
-    <table>
+    <table id="housingCategoryTable">
         <thead>
             <tr id="housingHeader">
                 <td colSpan="5" class="headerCell">Housing</td>
@@ -16,11 +16,11 @@
                 <th class="rightAlignColumn">Remaining</th>
             </tr>  
         </thead>
-        <tbody>
+        <tbody id="housingCategoryTableBody">
             <c:forEach items="${housingItems}" var="item" varStatus="counter">
                 <tr>
                     <td><a href="#">+</a></td>
-                    <td class="leftAlignColumn"><c:out value="${item.description}"/></td>
+                    <td class="leftAlignColumn"><c:out value="${item.name}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.amount}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.spent}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.getRemaining()}"/></td>

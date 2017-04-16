@@ -1,6 +1,7 @@
 
 package budgetApplication.BudgetSummary.Controllers;
 
+import budgetApplication.BudgetSummary.BusinessLogic.BudgetManager;
 import static budgetApplication.baseClasses.ConstantFields.*;
 import static budgetApplication.baseClasses.Utilities.*;
 import budgetApplication.businessLogic.*;
@@ -63,7 +64,7 @@ public class DefaultController extends HttpServlet {
     }
     
     private List<Budget> getBudgetsByUserId(int userId) throws Exception {
-        try (BudgetSummaryManager budgetManager = new BudgetSummaryManager()) {
+        try (BudgetManager budgetManager = new BudgetManager()) {
  
             return budgetManager.getAllBudgetsByUserId(userId);
         }
@@ -92,7 +93,7 @@ public class DefaultController extends HttpServlet {
         try {
             Budget newBudget = new Budget();
             
-            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+            try (BudgetManager manager = new BudgetManager()) {
                 newBudget.setYear(getCurrentYear());
                 newBudget.setMonth(getCurrentMonth());
                 manager.saveBudgetByUserId(userId, newBudget);
@@ -108,7 +109,7 @@ public class DefaultController extends HttpServlet {
     private int getActiveBudgetId(int userId) throws Exception {
         
         try {
-            try (BudgetSummaryManager manager = new BudgetSummaryManager()) {
+            try (BudgetManager manager = new BudgetManager()) {
                 Budget newBudget = new Budget();
                 newBudget.setYear(getCurrentYear());
                 newBudget.setMonth(getCurrentMonth());
