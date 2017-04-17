@@ -6,7 +6,6 @@ import budgetApplication.baseClasses.CategoryEnum;
 import static budgetApplication.baseClasses.ConstantFields.USER;
 import static budgetApplication.baseClasses.Utilities.*;
 import budgetApplication.dataContracts.*;
-import budgetApplication.dataContracts.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,38 +27,21 @@ public class CreateItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
-        //response.setContentType("text/plain");
-        //response.setCharacterEncoding("UTF-8");
-        //response.getWriter().write("blah");
-        //response.getWriter().close();
         
         try {
             
             HttpSession currentSession;
-            User user;
             double itemAmount = 0;
             String itemName = null;
             CategoryEnum category = CategoryEnum.NONE;
             int budgetId = 0;
             
-            int userId;
             currentSession = request.getSession();
             if(currentSession.getAttribute(USER) != null) {
-                user = (User) currentSession.getAttribute(USER);
-                userId = user.getId();
                 
                 if(request.getParameterMap().containsKey("budgetId")) {
                     String input = request.getParameter("budgetId");
                     budgetId = isInteger(input) ? Integer.parseInt(input) : 0;
-                }
-                
-                if(request.getParameterMap().containsKey("itemAmount")) {
-                    String itemInput = request.getParameter("itemAmount");
-                    
-                    if(isDouble(itemInput)) {
-                        itemAmount = Double.parseDouble(itemInput);
-                    }
                 }
                 
                 if(request.getParameterMap().containsKey("itemName")) {
@@ -71,12 +53,37 @@ public class CreateItemController extends HttpServlet {
                     category = getCategoryAsEnum(categoryInput);
                 }
                 
+                if(request.getParameterMap().containsKey("itemAmount")) {
+                    String itemInput = request.getParameter("itemAmount");
+                    
+                    if(isDouble(itemInput)) {
+                        itemAmount = Double.parseDouble(itemInput);
+                    }
+                }
+                
                 Item newItem = new Item();
-                newItem.setAmount(itemAmount);
                 newItem.setName(itemName);
-                newItem.setCategory(CategoryEnum.NONE);
+                newItem.setCategory(category);
+                newItem.setAmount(itemAmount);
+                
                 saveItem(newItem, budgetId);
-                                
+                newItem.setId(getLastIdByBudgetId(budgetId));
+                
+                StringBuilder buffer = new StringBuilder();
+                buffer.append("<item>");
+                buffer.append("<id>" + newItem.getId() + "</id>");
+                buffer.append("<name>" + newItem.getName()+ "</name>");
+                buffer.append("<category>" + newItem.getCategory().name()+ "</category>");
+                buffer.append("<amount>" + newItem.getAmount()+ "</amount>");
+                buffer.append("<spent>" + newItem.getSpent()+ "</spent>");
+                buffer.append("</item>");
+
+                String xmlDocument = String.format("%s%s%s", "<items>", buffer.toString(), "</items>");
+                
+                response.setContentType("text/xml");
+                response.setHeader("Cache-Control", "no-cache");
+                response.getWriter().write(xmlDocument);
+                response.getWriter().close();
             }
             else {
                 currentSession.invalidate();
@@ -91,7 +98,19 @@ public class CreateItemController extends HttpServlet {
         
         try {
             try(ItemManager manager = new ItemManager()) {
-                
+                manager.saveItem(newItem, budgetId);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    private int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try {
+            try(ItemManager manager = new ItemManager()) {
+                return manager.getLastIdByBudgetId(budgetId);
             }
         }
         catch(Exception ex) {

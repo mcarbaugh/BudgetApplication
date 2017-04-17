@@ -15,7 +15,8 @@ public class ItemDataAccess implements AutoCloseable {
     public List<Item> getAllItemsByBudgetId(int budgetId) throws Exception {
         try {
             String query = "SELECT i.id, i.name, i.category, i.amount, SUM(t.amount) as spent "
-                         + "FROM item i, transaction t "
+                         + "FROM item i "
+                         + "LEFT JOIN transaction t ON i.id = t.itemId "
                          + "WHERE budgetId = ? "
                          + "GROUP BY i.id";
             
@@ -52,13 +53,16 @@ public class ItemDataAccess implements AutoCloseable {
     
     public void insertItemByBudgetId(Item item, int budgetId) throws Exception {
         try {
-            String query = "INSERT INTO item (budgetId, category, name, amount) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO item (budgetId, name, category, amount) VALUES (?, ?, ?, ?)";
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query);
-                //statement.setDouble(1, i.getAmount());
+                statement.setInt(1, budgetId);
+                statement.setString(2, item.getName());
+                statement.setString(3, item.getCategory().name());
+                statement.setDouble(4, item.getAmount());
                 statement.executeUpdate();
                 mySqlConnection.close();
             }  
@@ -81,6 +85,36 @@ public class ItemDataAccess implements AutoCloseable {
                 statement.executeUpdate();
                 mySqlConnection.close();
             }
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try {
+            String query = "SELECT MAX(i.id) as maxId "
+                         + "FROM item i "
+                         + "WHERE i.budgetId = ?";
+            
+            int maxId = 0;
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, budgetId);
+                data = statement.executeQuery();
+                
+                while(data.next()) {
+                    maxId = data.getInt("maxId");
+                }
+                
+                mySqlConnection.close();
+            }
+            
+            return maxId;
         }
         catch (Exception ex) {
             throw ex;

@@ -16,7 +16,7 @@
                 <th class="rightAlignColumn">Remaining</th>
             </tr>  
         </thead>
-        <tbody>
+        <tbody id="transportationCategoryTableBody">
             <c:forEach items="${transportationItems}" var="item" varStatus="counter">
                 <tr>
                     <td><a href="#">+</a></td>
@@ -29,6 +29,6 @@
         </tbody>
     </table>
     <div class="addItemButtonContainer">
-        <button onclick="">Add Item</button>
+        <button onclick="openNewTransportationItemDialog()">Add Item</button>
     </div>
 </div>

@@ -22,10 +22,10 @@ public class ItemManager implements AutoCloseable {
             try (ItemDataAccess dataAccess = new ItemDataAccess()) {
                 
                 if(item.getId() == 0) {
-                    
+                    dataAccess.insertItemByBudgetId(item, budgetId);
                 }
                 else {
-                    
+                    // update existing
                 }
             }
         }
@@ -38,6 +38,16 @@ public class ItemManager implements AutoCloseable {
         
         try(ItemDataAccess itemDataAccess = new ItemDataAccess()) {
             itemDataAccess.deletItemById(id);
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try(ItemDataAccess itemDataAccess = new ItemDataAccess()) {
+            return itemDataAccess.getLastIdByBudgetId(budgetId);
         }
         catch(Exception ex) {
             throw ex;

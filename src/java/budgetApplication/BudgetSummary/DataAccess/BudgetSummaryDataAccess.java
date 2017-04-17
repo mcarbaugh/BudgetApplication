@@ -205,7 +205,6 @@ public class BudgetSummaryDataAccess implements AutoCloseable {
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query); 
                 statement.setInt(1, userId);
-                
                 data = statement.executeQuery();
                 
                 while(data.next()) {

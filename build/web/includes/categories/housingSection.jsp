@@ -19,7 +19,9 @@
         <tbody id="housingCategoryTableBody">
             <c:forEach items="${housingItems}" var="item" varStatus="counter">
                 <tr>
-                    <td><a href="#">+</a></td>
+                    <td>
+                        <a href="#">+</a>
+                    </td>
                     <td class="leftAlignColumn"><c:out value="${item.name}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.amount}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.spent}"/></td>

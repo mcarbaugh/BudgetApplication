@@ -18,20 +18,20 @@ window.onclick = function(event) {
     
     /**************************************************************/
     // Close newBudgetDialog and reset its form
-    var modal = document.getElementById("newBudgetDialog");
+    var budgetModal = document.getElementById("newBudgetDialog");
 
-    if (event.target === modal) {
-        modal.style.display = "none";
+    if (event.target === budgetModal) {
+        budgetModal.style.display = "none";
         document.getElementById("newBudgetForm").reset();
     }
     /**************************************************************/
     
-    // Close newHousingItemDialog and reset its form
-    var modal = document.getElementById("newHousingItemDialog");
+    // Close newItemDialog and reset its form
+    var itemModal = document.getElementById("newItemDialog");
 
-    if (event.target === modal) {
-        modal.style.display = "none";
-        document.getElementById("newHousingItemForm").reset();
+    if (event.target === itemModal) {
+        itemModal.style.display = "none";
+        document.getElementById("newItemForm").reset();
     }
     /**************************************************************/
 };
