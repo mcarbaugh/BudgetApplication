@@ -28,7 +28,7 @@
         <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/menuBar.jsp"/>
         <jsp:include page="/includes/dialogs/newBudgetDialog.jsp"/>
-        <jsp:include page="/includes/dialogs/newHousingItemDialog.jsp"/>
+        <jsp:include page="/includes/dialogs/newItemDialog.jsp"/>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">

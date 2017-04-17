@@ -73,13 +73,12 @@ public class CreateItemController extends HttpServlet {
                 buffer.append("<item>");
                 buffer.append("<id>" + newItem.getId() + "</id>");
                 buffer.append("<name>" + newItem.getName()+ "</name>");
-                buffer.append("<category>" + newItem.getCategory()+ "</category>");
+                buffer.append("<category>" + newItem.getCategory().name()+ "</category>");
                 buffer.append("<amount>" + newItem.getAmount()+ "</amount>");
                 buffer.append("<spent>" + newItem.getSpent()+ "</spent>");
                 buffer.append("</item>");
 
                 String xmlDocument = String.format("%s%s%s", "<items>", buffer.toString(), "</items>");
-                
                 
                 response.setContentType("text/xml");
                 response.setHeader("Cache-Control", "no-cache");
