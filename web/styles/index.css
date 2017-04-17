@@ -143,3 +143,7 @@ h4 {
 .hiddenField {
     display: none;
 }
+
+.redBorder {
+    border: 1px solid red;
+}

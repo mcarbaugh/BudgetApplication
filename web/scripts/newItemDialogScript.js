@@ -64,28 +64,39 @@
         var isAsync = true;
         
         var budgetId = document.getElementById("budgetIdInput").value;
-        var itemAmount = document.getElementById("itemAmountInput").value;
         var itemName = document.getElementById("itemNameInput").value;
+        var itemAmount = document.getElementById("itemAmountInput").value;
         var itemCategory = document.getElementById("itemCategoryInput").value;
         
-        httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = updateHousingItemTable;
-        httpRequest.open(method, url, isAsync);
-        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        
-        var arguments = "budgetId=" + encodeURIComponent(budgetId)
-               + "&itemAmount=" + encodeURIComponent(itemAmount) 
-               + "&itemName=" + encodeURIComponent(itemName)
-               + "&itemCategory=" + encodeURIComponent(itemCategory);
-   
-        httpRequest.send(arguments);
-        
+        if(itemName === "") {
+            document.getElementById("itemNameInput").className += "redBorder";
+        }
+        else if (itemAmount === "") {
+            document.getElementById("itemNameInput").className -= "redBorder";
+            document.getElementById("itemAmountInput").className += "redBorder";
+        }
+        else {
+            document.getElementById("itemNameInput").className -= "redBorder";
+            document.getElementById("itemAmountInput").className -= "redBorder";
+            
+            httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = updateHousingItemTable;
+            httpRequest.open(method, url, isAsync);
+            httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            var arguments = "budgetId=" + encodeURIComponent(budgetId)
+                   + "&itemAmount=" + encodeURIComponent(itemAmount) 
+                   + "&itemName=" + encodeURIComponent(itemName)
+                   + "&itemCategory=" + encodeURIComponent(itemCategory);
+
+            httpRequest.send(arguments);
+        }
     }
 
     function updateHousingItemTable() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
-                parseItemData();
+                parseItemDataAndUpdateTable();
             }
             else {
                 
@@ -97,12 +108,19 @@
         document.getElementById("newItemDialog").style.display = "none";
     }
     
-    function parseItemData() {
+    function parseItemDataAndUpdateTable() {
         var xml = httpRequest.responseXML;
         var items = xml.getElementsByTagName("items")[0];
         var item = items.childNodes[0];
         var id = item.getElementsByTagName("id")[0].childNodes[0].nodeValue;
-        var name = item.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+        
+        var name;
+        if(item.getElementsByTagName("name")[0].childNodes.length > 0) {
+            name = item.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+        } else {
+            name = "";    
+        }
+        
         var category = item.getElementsByTagName("category")[0].childNodes[0].nodeValue;
         var amount = item.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
         var spent = item.getElementsByTagName("spent")[0].childNodes[0].nodeValue;
