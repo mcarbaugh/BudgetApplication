@@ -50,7 +50,8 @@
 }
 
 .categorySection {
-    margin: 50px auto;
+    margin: 0 auto;
+    margin-top: 15px;
     margin-bottom: 30px;
     min-width: 25em;
     max-width: 45em;

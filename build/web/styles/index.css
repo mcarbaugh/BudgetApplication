@@ -147,3 +147,28 @@ h4 {
 .redBorder {
     border: 1px solid red;
 }
+
+#CategorySection {
+    
+}
+
+#TransactionsButtonContainer {
+    display: block;
+    margin: 0 auto;
+    width: 20em;
+}
+
+#TransactionsButton {
+    border: 0px;
+    background: none;
+    color: #222;
+    font-size: 1.4em;
+    
+    white-space: normal;
+    
+}
+
+#TransactionsButton:hover{
+    color: #F19F4D;
+    cursor: pointer;
+}
