@@ -25,9 +25,9 @@
                         <input type="button" value="+" class="addButton"/>
                     </td>
                     <td class="leftAlignColumn"><c:out value="${item.name}"/></td>
-                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.amount}"/></td>
-                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.spent}"/></td>
-                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${item.getRemaining()}"/></td>
+                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" maxIntegerDigits="6" value="${item.amount}"/></td>
+                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" maxIntegerDigits="6" value="${item.spent}"/></td>
+                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" maxIntegerDigits="6" value="${item.getRemaining()}"/></td>
                     <td>
                         <input type="button" value="Edit" class="editButton" 
                                onclick="openDialogWithCurrentValues(

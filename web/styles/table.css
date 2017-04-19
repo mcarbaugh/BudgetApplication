@@ -53,10 +53,6 @@ tr {
     border-bottom: 0;
 }
 
-tr:last-child {
-    border-bottom: 0;
-}
-
 td {
     text-align: center;
     overflow: hidden;

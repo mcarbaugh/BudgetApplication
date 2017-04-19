@@ -6,6 +6,7 @@
     border-top-right-radius: 8px;
     overflow: hidden;
     margin: 2px;
+    border: 0px;
 }
 
 #foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
@@ -37,7 +38,7 @@
 .headerRow, .headerRow th {
     background: #f2f2f2;
     color: #222;
-    border-bottom: 1px solid #888;
+    //border-bottom: 1px solid #888;
     border-top: 1px solid #888;
     overflow: hidden;
 }

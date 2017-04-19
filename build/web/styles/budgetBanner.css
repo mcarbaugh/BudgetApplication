@@ -28,7 +28,7 @@
 }
 
 #userInfoContainer {
-    transform: translateX(-65%);
+    //transform: translateX(-65%);
     overflow: hidden;
 }
 
