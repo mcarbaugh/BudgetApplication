@@ -17,7 +17,7 @@ a, a:visited, .editButton {
     vertical-align: middle;
     font-size: 1.16em;
     text-align: center;
-    border-radius: 50%;
+    
 }
 
 .editButton, .editButton:visited {
