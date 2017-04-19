@@ -20,7 +20,8 @@
             <input type="text" name="category" class="hiddenField" value="NONE"  id="editItemCategoryInput"/>
             <input type="text" name="spent" class="hiddenField"  value="0" id="editItemSpentInput"/>
         </form>
-        <input type=button value="Save" id ="EditItemButton"/>
+            
+        <input type="submit" value="Save" id ="EditItemButton"/>
         <input type="button" value="Cancel" onclick="closeEditItemDialog()"/>
     </div>
 </div>
