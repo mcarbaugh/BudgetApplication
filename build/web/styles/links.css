@@ -1,10 +1,71 @@
 
-a, a:visited {
+a, a:visited, .editButton {
     color: #4484CE;
     text-decoration: none;
 }
 
+.addButton, .addButton:visited {
+    color: #4484CE;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0 5px;
+    text-decoration: none;
+    line-height: 100%;
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+    font-size: 1.16em;
+    text-align: center;
+}
+
+.editButton, .editButton:visited {
+    color: #4484CE;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0 5px;
+    text-decoration: none;
+    line-height: 100%;
+    vertical-align: middle;
+    font-size: 0.9em;
+}
+
 .deleteButton, .deleteButton:visited {
     color: #ea614f;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0 5px;
     text-decoration: none;
+    line-height: 100%;
+    vertical-align: middle;
+    font-size: 0.9em;
+}
+
+.deleteButton:hover, .editButton:hover, .addButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#TransactionsButtonContainer {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 17em;
+}
+
+#TransactionsButton {
+    border: 0px;
+    background: none;
+    color: #222;
+    font-size: 1.4em;
+    white-space: normal;
+    
+}
+
+#TransactionsButton:hover{
+    color: #F19F4D;
+    cursor: pointer;
+    text-decoration: underline;
 }

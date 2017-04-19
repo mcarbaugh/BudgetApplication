@@ -54,10 +54,11 @@
         return true;
     }
 
-    function init() {
+
+    function initializeNewItemDialog() {
         document.getElementById("NewItemButton").addEventListener('click', createNewItemCallback);
     }
-
+    
     function createNewItemCallback() {
         var url = "CreateItem";
         var method = "POST";
@@ -67,33 +68,21 @@
         var itemName = document.getElementById("itemNameInput").value;
         var itemAmount = document.getElementById("itemAmountInput").value;
         var itemCategory = document.getElementById("itemCategoryInput").value;
-        
-        if(itemName === "") {
-            document.getElementById("itemNameInput").className += "redBorder";
-        }
-        else if (itemAmount === "") {
-            document.getElementById("itemNameInput").className -= "redBorder";
-            document.getElementById("itemAmountInput").className += "redBorder";
-        }
-        else {
-            document.getElementById("itemNameInput").className -= "redBorder";
-            document.getElementById("itemAmountInput").className -= "redBorder";
-            
-            httpRequest = new XMLHttpRequest();
-            httpRequest.onreadystatechange = updateHousingItemTable;
-            httpRequest.open(method, url, isAsync);
-            httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            var arguments = "budgetId=" + encodeURIComponent(budgetId)
-                   + "&itemAmount=" + encodeURIComponent(itemAmount) 
-                   + "&itemName=" + encodeURIComponent(itemName)
-                   + "&itemCategory=" + encodeURIComponent(itemCategory);
+        httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = updateItemTable;
+        httpRequest.open(method, url, isAsync);
+        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            httpRequest.send(arguments);
-        }
+        var arguments = "budgetId=" + encodeURIComponent(budgetId)
+               + "&itemAmount=" + encodeURIComponent(itemAmount) 
+               + "&itemName=" + encodeURIComponent(itemName)
+               + "&itemCategory=" + encodeURIComponent(itemCategory);
+
+        httpRequest.send(arguments);
     }
 
-    function updateHousingItemTable() {
+    function updateItemTable() {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
                 parseItemDataAndUpdateTable();
@@ -157,11 +146,34 @@
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
-        cell1.innerHTML = "+";
+        var cell6 = row.insertCell(5);
+        
+        var addButton = document.createElement("input");
+        addButton.type = "button";
+        addButton.value = "+";
+        addButton.classList.add("addButton");
+        cell1.appendChild(addButton);
+        
         cell2.innerHTML = name;
         cell3.innerHTML = "$" + parseFloat(amount).toFixed(2);
         cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
         cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
+        
+        var editButton = document.createElement("input");
+        editButton.type = "button";
+        editButton.value = "Edit";
+        editButton.classList.add("editButton");
+        
+        var deleteButton = document.createElement("input");
+        deleteButton.type = "button";
+        deleteButton.value = "Delete";
+        deleteButton.classList.add("deleteButton");
+        deleteButton.onclick = function() {
+            deleteItemCallback(id, deleteButton);
+        };
+        
+        cell6.appendChild(editButton);
+        cell6.appendChild(deleteButton);
 
         cell2.className = "leftAlignColumn";
         cell3.className = "rightAlignColumn";

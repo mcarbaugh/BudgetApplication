@@ -52,12 +52,12 @@ public class Item implements Serializable {
         this.name = value;
     }
     
-    public void setCategory(CategoryEnum name) {
-        this.category = name;
+    public void setCategory(CategoryEnum value) {
+        this.category = value;
     }
 
-    public void setAmount(double name) {
-        this.amount = name;
+    public void setAmount(double value) {
+        this.amount = value;
     }
 
     public void setSpent(double value) {

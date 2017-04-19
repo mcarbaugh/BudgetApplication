@@ -8,7 +8,7 @@
         <c:url value="/TransactionHistory" var="transactionURL"/>
         <form method="GET" Action="${transactionURL}">
             <input type="text" value="${user.getId()}" name="userId" class="hiddenField"/>
-            <input type="submit" value="Switch to Transaction History" id="TransactionsButton"/>
+            <input type="submit" value="Show Transaction History" id="TransactionsButton"/>
         </form>
     </div>
             

@@ -25,7 +25,7 @@ public class ItemManager implements AutoCloseable {
                     dataAccess.insertItemByBudgetId(item, budgetId);
                 }
                 else {
-                    // update existing
+                    dataAccess.updateItem(item);
                 }
             }
         }
