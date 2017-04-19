@@ -76,7 +76,6 @@ public class CreateItemController extends HttpServlet {
                 response.setContentType("text/xml");
                 response.setHeader("Cache-Control", "no-cache");
                 response.getWriter().write(xmlDocument);
-                response.getWriter().close();
             }
             else {
                 currentSession.invalidate();

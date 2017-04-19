@@ -58,7 +58,6 @@
                 }
             }
             else {
-                
                 alert("Unable to create new item. Try again after refreshing the page.");
             }
         }
@@ -68,6 +67,8 @@
     }
     
     function updateExistingItemInTable() {
+        
+        // get data from XML file
         var xml = editItemRequest.responseXML;
         var items = xml.getElementsByTagName("items")[0];
         var item = items.childNodes[0];
@@ -80,22 +81,46 @@
             name = "";    
         }
         
+        var category = item.getElementsByTagName("category")[0].childNodes[0].nodeValue;
         var amount = item.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
         var spent = item.getElementsByTagName("spent")[0].childNodes[0].nodeValue;
         var remaining = amount - spent;
         
-        alert(amount);
-        
-        /*
+        // get cells for the row
         var row = document.getElementById(rowId);
         var cell2 = row.cells[1];
         var cell3 = row.cells[2];
         var cell4 = row.cells[3];
         var cell5 = row.cells[4];
-            
+        var cell6 = row.cells[5];
+        
+        // update new information
         cell2.innerHTML = name;
         cell3.innerHTML = "$" + parseFloat(amount).toFixed(2);
         cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
         cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
-        */
+        
+        // reconstruct edit button
+        var editButton = document.createElement("input");
+        editButton.type = "button";
+        editButton.value = "Edit";
+        editButton.classList.add("editButton");
+        editButton.onclick = function() {
+            openDialogWithCurrentValues(id, name, amount, spent, category, rowId);
+        };
+        
+        // reconstruct delete button
+        var deleteButton = document.createElement("input");
+        deleteButton.type = "button";
+        deleteButton.value = "Delete";
+        deleteButton.classList.add("deleteButton");
+        deleteButton.onclick = function() {
+            deleteItemCallback(id, deleteButton);
+        };
+        
+        // add buttons back to row
+        var row = document.getElementById("rowId");
+        cell6.innerHTML = "";
+        cell6.append(editButton);
+        cell6.append(deleteButton);
     }

@@ -16,7 +16,7 @@ public class Item implements Serializable {
         amount = 0;
         spent = 0;
         name = "";
-        category = CategoryEnum.FOOD;
+        category = CategoryEnum.NONE;
     }
     
     public int getId() {

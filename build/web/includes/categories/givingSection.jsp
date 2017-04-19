@@ -19,7 +19,8 @@
         </thead>
         <tbody id="givingCategoryTableBody">
             <c:forEach items="${givingItems}" var="item" varStatus="counter">
-                <tr>
+                <c:url value="giving${item.id}" var="rowId"/>
+                <tr id="${rowId}">
                     <td>                        
                         <input type="button" value="+" class="addButton"/>
                     </td>
@@ -34,7 +35,7 @@
                                            '${item.name}', 
                                            '${item.amount}', 
                                            '${item.spent}',
-                                           '${item.category.name()}')"/>
+                                           '${item.category.name()}', '${rowId}')"/>
                         <input type="button" onclick="deleteItemCallback('${item.getId()}', this)" value="Delete" class="deleteButton"/>
                     </td>
                 </tr>

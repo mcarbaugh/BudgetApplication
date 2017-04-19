@@ -116,24 +116,30 @@
         var remaining = amount - spent;
 
         var table;
-        
+        var idPrefix;
         switch (category) {
             case "FOOD":
+                idPrefix = "food";
                 table = document.getElementById("foodCategoryTableBody");
                 break;
             case "GIVING":
+                idPrefix = "giving";
                 table = document.getElementById("givingCategoryTableBody");
                 break;
             case "HOUSING":
+                idPrefix = "housing";
                 table = document.getElementById("housingCategoryTableBody");
                 break;
             case "INSURANCE_TAX":
+                idPrefix = "insurance";
                 table = document.getElementById("insuranceCategoryTableBody");
                 break;
             case "LIFESTYLE":
+                idPrefix = "lifestyle";
                 table = document.getElementById("lifestyleCategoryTableBody");
                 break;
             case "TRANSPORTATION":
+                idPrefix = "transportation";
                 table = document.getElementById("transportationCategoryTableBody");
                 break
             default:
@@ -148,6 +154,9 @@
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
         
+        var rowId = idPrefix + id;
+        row.setAttribute("id", rowId);
+        
         var addButton = document.createElement("input");
         addButton.type = "button";
         addButton.value = "+";
@@ -159,11 +168,16 @@
         cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
         cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
         
+        // reconstruct edit button
         var editButton = document.createElement("input");
         editButton.type = "button";
         editButton.value = "Edit";
         editButton.classList.add("editButton");
+        editButton.onclick = function() {
+            openDialogWithCurrentValues(id, name, amount, spent, category, rowId);
+        };
         
+        // reconstruct delete button
         var deleteButton = document.createElement("input");
         deleteButton.type = "button";
         deleteButton.value = "Delete";

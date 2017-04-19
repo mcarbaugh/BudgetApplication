@@ -13,10 +13,10 @@
     </div>
             
     <div id="CategorySection">
-        <jsp:include page="/includes/categories/housingSection.jsp"/>
         <jsp:include page="/includes/categories/foodSection.jsp"/>
         <jsp:include page="/includes/categories/transportationSection.jsp"/>
         <jsp:include page="/includes/categories/lifestyleSection.jsp"/>
+        <jsp:include page="/includes/categories/housingSection.jsp"/>
         <jsp:include page="/includes/categories/insuranceSection.jsp"/>
         <jsp:include page="/includes/categories/givingSection.jsp"/>
     </div>

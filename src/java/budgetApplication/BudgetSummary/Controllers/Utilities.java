@@ -18,7 +18,7 @@ public class Utilities {
             buffer.append("<spent>" + item.getSpent()+ "</spent>");
             buffer.append("</item>");
 
-        return String.format("%s%s%s", "<items>", buffer.toString(), "</items>");
+            return String.format("%s%s%s", "<items>", buffer.toString(), "</items>");
         }
         catch(Exception ex) {
             throw ex;
