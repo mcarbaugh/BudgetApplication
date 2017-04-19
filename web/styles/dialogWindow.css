@@ -41,16 +41,16 @@
 }
 
 /*************** FORM ***************/
-form {
+.modalForm {
     overflow: hidden;
     white-space: nowrap;
 }
 
-form h1 {
+.modalForm h1 {
     margin-bottom: 10px;
 }
 
-form label {
+.modalForm label {
     margin: 20px 2px;
     display: block;
     height: 2em;
@@ -58,7 +58,7 @@ form label {
     vertical-align: bottom;
 }
 
-form label span {
+.modalForm label span {
     float: left;
     width: 15%;
     text-align: left;
@@ -71,7 +71,7 @@ form label span {
     vertical-align: bottom;
 }
 
-form label input {
+.modalForm label input {
     height: 1.5em;
     line-height: 100%;
     outline: 0 none;
@@ -83,7 +83,7 @@ form label input {
     overflow: hidden;
 }
 
-form label select {
+.modalForm label select {
     height: 2em;
     line-height: 100%;
     outline: 0 none;
@@ -92,8 +92,8 @@ form label select {
     font-size: 1.15em;
 }
 
-form input[type="button"], input[type="submit"], input[type="button"] {
-    font-size: 16px;
+.modalForm input[type="button"], .modal-content input[type="submit"], .modal-content input[type="button"] {
+    font-size: 1.2em;
     margin: 10px 5px;
     margin-left: 0px;
     margin-bottom: 0px;

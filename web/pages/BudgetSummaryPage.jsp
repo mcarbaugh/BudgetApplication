@@ -20,15 +20,17 @@
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
         <script src="<c:url value='/scripts/newBudgetDialogScript.js'/>"></script>
         <script src="<c:url value='/scripts/newItemDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/editItemDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/deleteItemScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body onload="init()">
+    <body onload="initializeNewItemDialog(); initializeEditItemDialog();">
         <jsp:include page="/includes/budgetBanner.jsp"/>
-        <jsp:include page="/includes/menuBar.jsp"/>
         <jsp:include page="/includes/dialogs/newBudgetDialog.jsp"/>
         <jsp:include page="/includes/dialogs/newItemDialog.jsp"/>
+        <jsp:include page="/includes/dialogs/editItemDialog.jsp"/>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">

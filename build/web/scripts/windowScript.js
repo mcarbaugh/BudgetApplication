@@ -34,4 +34,13 @@ window.onclick = function(event) {
         document.getElementById("newItemForm").reset();
     }
     /**************************************************************/
+    
+    // Close editItemDialog and reset its form
+    var itemModal = document.getElementById("editItemDialog");
+
+    if (event.target === itemModal) {
+        itemModal.style.display = "none";
+        document.getElementById("editItemForm").reset();
+    }
+    /**************************************************************/
 };

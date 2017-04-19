@@ -72,6 +72,26 @@ public class ItemDataAccess implements AutoCloseable {
         }
     }
     
+    public void updateItem(Item item) throws Exception {
+        try {
+            String query = "UPDATE item SET name = ?, amount = ? WHERE id = ?";
+            
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query);
+                statement.setString(1, item.getName());
+                statement.setDouble(2, item.getAmount());
+                statement.setInt(3, item.getId());
+                statement.executeUpdate();
+                mySqlConnection.close();
+            }  
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
     public void deletItemById(int id) throws Exception {
         try {
             

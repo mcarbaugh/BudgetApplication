@@ -16,7 +16,7 @@
                     <c:param name="budgetId" value="${budget.id}"/>
                 </c:url>
                 <a href="${readBudgetURL}">
-                    <c:out value="${budget.year} ${budget.month}"/>
+                    <c:out value="${budget.year} ${budget.month.name()}"/>
                 </a>
             </c:forEach>
             <button id="createBudgetButton" onclick="openAddBudgetDialog()">NEW BUDGET</button>
@@ -30,9 +30,8 @@
         <div id="userInfoContainer" class="dropdown-content">
             <a href="/#">PROFILE</a>
             <a href="/#">SETTINGS</a>
-            
             <form method="post" action="Logout">
-                <input type="submit" value="sign out" id="signoutButton"/>
+                <input type="submit" value="SIGN OUT" id="signoutButton"/>
             </form>
         </div>
     </div>

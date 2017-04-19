@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <div class="modal" id="newItemDialog">
     <div class="modal-content">
-        <form id="newItemForm">
+        <form id="newItemForm" class="modalForm">
             <span class="close" onClick="closeItemDialog()">&times;</span>
             <h1>New Item</h1>
             <label>
