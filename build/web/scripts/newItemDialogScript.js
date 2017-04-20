@@ -37,24 +37,6 @@
         document.getElementById("newItemForm").reset();
     }
     
-    function isNumberKey(e) {
-        
-        var characterCode = (e.which) ? e.which : event.keyCode;
-        
-        // check for a decimal
-        if(characterCode === 46 && e.srcElement.value.split('.').length <= 1) {
-            return true;
-        }
-        
-        // check for non-numeric characters
-        if(characterCode > 31 && (characterCode < 48 || characterCode > 57)) {
-            return false;
-        }
-        
-        return true;
-    }
-
-
     function initializeNewItemDialog() {
         document.getElementById("NewItemButton").addEventListener('click', createNewItemCallback);
     }
@@ -157,10 +139,7 @@
         var rowId = idPrefix + id;
         row.setAttribute("id", rowId);
         
-        var addButton = document.createElement("input");
-        addButton.type = "button";
-        addButton.value = "+";
-        addButton.classList.add("addButton");
+        var addButton = constructAddTransactionButton(id, rowId);
         cell1.appendChild(addButton);
         
         cell2.innerHTML = name;
@@ -168,23 +147,8 @@
         cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
         cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
         
-        // reconstruct edit button
-        var editButton = document.createElement("input");
-        editButton.type = "button";
-        editButton.value = "Edit";
-        editButton.classList.add("editButton");
-        editButton.onclick = function() {
-            openDialogWithCurrentValues(id, name, amount, spent, category, rowId);
-        };
-        
-        // reconstruct delete button
-        var deleteButton = document.createElement("input");
-        deleteButton.type = "button";
-        deleteButton.value = "Delete";
-        deleteButton.classList.add("deleteButton");
-        deleteButton.onclick = function() {
-            deleteItemCallback(id, deleteButton);
-        };
+        var editButton = constructEditItemButton(id, category, rowId);
+        var deleteButton = constructDeleteItemButton(id);
         
         cell6.appendChild(editButton);
         cell6.appendChild(deleteButton);

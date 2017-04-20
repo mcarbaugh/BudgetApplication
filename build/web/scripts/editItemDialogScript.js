@@ -2,17 +2,28 @@
     var editItemRequest;
     var rowId;
     
-    function openDialogWithCurrentValues(id, name, amount, spent, category, editRowId) {
+    function openDialogWithCurrentValues(id, category, editRowId) {
         document.getElementById("editItemCategoryInput").value = "FOOD";
         document.getElementById("editItemDialog").style.display = "block";
+        
+        rowId = editRowId;
+        var row = document.getElementById(editRowId);
+        var cell1 = row.cells[1];
+        var cell2 = row.cells[2];
+        var cell3 = row.cells[3];
+        
+        var name = cell1.innerHTML.toString();
+        var amount = cell2.innerHTML.toString();
+        var spent = cell3.innerHTML.toString();
+        
+        amount = amount.replace(/[^0-9\.]+/g, '');
+        spent = spent.replace(/[^0-9\.]+/g, '');
         
         document.getElementById("editItemIdInput").value = id;
         document.getElementById("editItemNameInput").value = name;
         document.getElementById("editItemAmountInput").value = amount;
-        document.getElementById("editItemCategoryInput").value = category;
         document.getElementById("editItemSpentInput").value = spent;
-        
-        rowId = editRowId;
+        document.getElementById("editItemCategoryInput").value = category;
     }
 
     function closeEditItemDialog() {
@@ -97,26 +108,17 @@
         // update new information
         cell2.innerHTML = name;
         cell3.innerHTML = "$" + parseFloat(amount).toFixed(2);
-        cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
-        cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
+        cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);        
         
-        // reconstruct edit button
-        var editButton = document.createElement("input");
-        editButton.type = "button";
-        editButton.value = "Edit";
-        editButton.classList.add("editButton");
-        editButton.onclick = function() {
-            openDialogWithCurrentValues(id, name, amount, spent, category, rowId);
-        };
+        if(remaining < 0) {
+            cell5.innerHTML = "($" + Math.abs(parseFloat(remaining).toFixed(2)) + ")";
+        } 
+        else {
+            cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);
+        }
         
-        // reconstruct delete button
-        var deleteButton = document.createElement("input");
-        deleteButton.type = "button";
-        deleteButton.value = "Delete";
-        deleteButton.classList.add("deleteButton");
-        deleteButton.onclick = function() {
-            deleteItemCallback(id, deleteButton);
-        };
+        var editButton = constructEditItemButton(id, category, rowId);
+        var deleteButton = constructDeleteItemButton(id);
         
         // add buttons back to row
         var row = document.getElementById("rowId");
