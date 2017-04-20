@@ -85,7 +85,7 @@ a, a:visited, .editButton {
 }
 
 #TransactionsButton:hover{
-    color: #F19F4D;
+    color: #4484CE;
     cursor: pointer;
     text-decoration: underline;
 }
