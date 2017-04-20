@@ -22,7 +22,7 @@
                 <c:url value="food${item.id}" var="rowId"/>
                 <tr id="${rowId}">
                     <td>                      
-                        <input type="button" value="+" class="addButton"/>
+                        <input type="button" value="+" class="addButton" onclick="openTransactionDialog('${item.id}', '${rowId}')"/>
                     </td>
                     <td class="leftAlignColumn"><c:out value="${item.name}"/></td>
                     <td class="rightAlignColumn"><fmt:formatNumber type="currency" maxIntegerDigits="6" value="${item.amount}"/></td>
@@ -31,18 +31,14 @@
                     <td>
                         <input type="button" value="Edit" class="editButton" 
                                onclick="openDialogWithCurrentValues(
-                                           '${item.id}', 
-                                           '${item.name}', 
-                                           '${item.amount}', 
-                                           '${item.spent}',
-                                           '${item.category.name()}', '${rowId}')"/>
+                                           '${item.id}',
+                                           '${item.category.name()}', 
+                                           '${rowId}')"/>
                         <input type="button" onclick="deleteItemCallback('${item.getId()}', this)" value="Delete" class="deleteButton"/>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    
     <button onclick="openNewFoodItemDialog()" class="AddItemButton">Add Item</button>
-    
 </div>

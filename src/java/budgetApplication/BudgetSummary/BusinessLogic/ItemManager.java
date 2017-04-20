@@ -16,6 +16,16 @@ public class ItemManager implements AutoCloseable {
             throw ex;
         }
     }
+    
+    public Item getItemById(int id) throws Exception {
+        
+        try(ItemDataAccess itemDataAccess = new ItemDataAccess()) {            
+            return itemDataAccess.getItemById(id);
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
 
     public void saveItem(Item item, int budgetId) throws Exception {
         try {

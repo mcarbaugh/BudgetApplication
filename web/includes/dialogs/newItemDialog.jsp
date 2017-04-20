@@ -9,14 +9,14 @@
             <h1>New Item</h1>
             <label>
                 <span>Name: </span>
-                <input type="text" name="description" id="itemNameInput"/>
+                <input type="text" id="itemNameInput"/>
             </label>
             <label>
                 <span>Amount: </span>
-                <input type="text" name="amount" onpaste="return false" onkeypress="return isNumberKey(event)" id="itemAmountInput"/>
+                <input type="text" onpaste="return false" onkeypress="return isNumberKey(event)" id="itemAmountInput"/>
             </label>
-            <input type="text" name="budgetId" class="hiddenField" value="${budget.getId()}"  id="budgetIdInput"/>
-            <input type="text" name="category" class="hiddenField" value="NONE"  id="itemCategoryInput"/>
+            <input type="text" class="hiddenField" value="${budget.getId()}"  id="budgetIdInput"/>
+            <input type="text" class="hiddenField" value="NONE"  id="itemCategoryInput"/>
         </form>
         <input type=button value="Submit" id ="NewItemButton"/>
         <input type="button" value="Cancel" onclick="closeItemDialog()"/>

@@ -6,16 +6,17 @@ import java.io.Serializable;
 public class Transaction implements Serializable {
     private int id;
     private int itemId;
+    private String name;
+    private String vendor;
     private double amount;
-    private String description;
-    private String dateTime;
+    private String date;
     
     public Transaction() {
         id = 0;
         itemId = 0;
         amount = 0;
-        description = "";
-        dateTime = "";
+        name = "";
+        date = "";
     }
     
     public int getId() {
@@ -30,12 +31,16 @@ public class Transaction implements Serializable {
         return amount;
     }
     
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
     
-    public String getDateTime() {
-        return dateTime;
+    public String getVendor() {
+        return vendor;
+    }
+    
+    public String getDate() {
+        return date;
     }
     
     public void setId(int value) {
@@ -46,15 +51,19 @@ public class Transaction implements Serializable {
         itemId = value;
     }
     
+    public void setName(String value) {
+        name = value;
+    }
+    
+    public void setVendor(String value) {
+        this.vendor = value;
+    }
+    
     public void setAmount(Double value) {
         amount = value;
     }
     
-    public void setDescription(String value) {
-        description = value;
-    }
-    
-    public void setDateTime(String value) {
-        dateTime = value;
+    public void setDate(String value) {
+        date = value;
     }
 }
