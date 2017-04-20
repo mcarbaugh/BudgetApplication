@@ -20,6 +20,7 @@
         <tbody id="transactionTableBody">
             <c:forEach items="${weekTransactions}" var="transaction" varStatus="counter">
                 <tr>
+                    <td></td>
                     <td class="leftAlignColumn"><c:out value="${transaction.date}"/></td>
                     <td class="rightAlignColumn"><c:out value="${transaction.name}"/></td>
                     <td class="rightAlignColumn"><c:out value="${transaction.vendor}"/></td>
