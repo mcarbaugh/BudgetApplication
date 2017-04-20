@@ -16,6 +16,7 @@ a, a:visited, .editButton {
     font-size: 1.15em;
     width: 1.5em;
     vertical-align: middle;
+    border-radius: 2px;
 }
 
 .addButton:hover {
@@ -71,7 +72,7 @@ a, a:visited, .editButton {
 #TransactionsButtonContainer {
     display: block;
     margin: 0 auto;
-    margin-top: 15px;
+    margin-top: 20px;
     width: 17em;
 }
 
@@ -85,7 +86,7 @@ a, a:visited, .editButton {
 }
 
 #TransactionsButton:hover{
-    color: #4484CE;
+    color: #3d638e;
     cursor: pointer;
     text-decoration: underline;
 }
