@@ -91,6 +91,8 @@ h4 {
     padding: 0;
     float: left;
     overflow: hidden;
+    box-shadow: 3px 0px 6px #999;
+    z-index: 1;
 }
 
 .rightColumn {
