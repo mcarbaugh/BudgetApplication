@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Budget Details</title>
+        <title>Budget Summary</title>
         <link rel="stylesheet" href="<c:url value='/styles/index.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/budgetBanner.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
@@ -18,10 +18,10 @@
         <link rel="stylesheet" href="<c:url value='/styles/dialogWindow.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categoryTable.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
-        <script src="<c:url value='/scripts/newBudgetDialogScript.js'/>"></script>
-        <script src="<c:url value='/scripts/newItemDialogScript.js'/>"></script>
-        <script src="<c:url value='/scripts/editItemDialogScript.js'/>"></script>
-        <script src="<c:url value='/scripts/newTransactionDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/dialogs/newBudgetDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/dialogs/newItemDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/dialogs/editItemDialogScript.js'/>"></script>
+        <script src="<c:url value='/scripts/dialogs/newTransactionDialogScript.js'/>"></script>
         <script src="<c:url value='/scripts/deleteItemScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <script src="<c:url value='/scripts/isNumberKeyScript.js'/>"></script>

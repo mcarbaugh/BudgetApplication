@@ -79,7 +79,7 @@ function updateExistingItemWithTransactionInfo() {
     cell4.innerHTML = "$" + parseFloat(spent).toFixed(2);
     
     if(remaining < 0) {
-        cell5.innerHTML = "($" + Math.abs(parseFloat(remaining).toFixed(2)) + ")";
+        cell5.innerHTML = "($" + Math.abs(parseFloat(remaining)).toFixed(2) + ")";
     } 
     else {
         cell5.innerHTML = "$" + parseFloat(remaining).toFixed(2);

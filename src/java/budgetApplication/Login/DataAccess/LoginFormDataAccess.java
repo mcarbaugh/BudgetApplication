@@ -15,7 +15,7 @@ public class LoginFormDataAccess implements AutoCloseable {
         try {
             String query = "SELECT id, username, firstName, lastName, email, phoneNumber "
                          + "FROM user "
-                         + "WHERE username = ? AND password = ?";
+                         + "WHERE username = ? AND BINARY password = ?";
             
             User user;
             ResultSet userData;

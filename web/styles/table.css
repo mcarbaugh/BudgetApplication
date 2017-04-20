@@ -36,7 +36,10 @@ tr th:last-child, tr td:last-child {
 
 th {
     padding: 5px 8px;
-    background: #f2f2f2;
+    background: #3d638e;
+    border: 0;
+    color: white;
+    font-weight: 400;
 }
 
 .rightAlignColumn {
