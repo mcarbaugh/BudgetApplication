@@ -76,13 +76,19 @@ a, a:visited, .editButton {
     width: 17em;
 }
 
+#BudgetItemsButtonContainer {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 13em;
+}
+
 #TransactionsButton {
     border: 0px;
     background: none;
     color: #222;
     font-size: 1.4em;
     white-space: normal;
-    
 }
 
 #TransactionsButton:hover{
