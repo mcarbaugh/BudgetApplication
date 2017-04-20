@@ -8,8 +8,8 @@
             <tr id="foodHeader">
                 <td colSpan="6" class="headerCell">Food</td>
             </tr>
-            <tr class="headerRow">
-                <th></th>
+            <tr>
+                <th>&nbsp;</th>
                 <th class="leftAlignColumn">Item</th>
                 <th class="rightAlignColumn">Planned</th>
                 <th class="rightAlignColumn">Spent</th>
@@ -42,7 +42,7 @@
             </c:forEach>
         </tbody>
     </table>
-    <div class="addItemButtonContainer">
-        <button onclick="openNewFoodItemDialog()">Add Item</button>
-    </div>
+    
+    <button onclick="openNewFoodItemDialog()" class="AddItemButton">Add Item</button>
+    
 </div>

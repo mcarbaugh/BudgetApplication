@@ -9,7 +9,7 @@
                 <td colSpan="6" class="headerCell">Transportation</td>
             </tr>
             <tr class="headerRow">
-                <th></th>
+                <th>&nbsp;</th>
                 <th class="leftAlignColumn">Item</th>
                 <th class="rightAlignColumn">Planned</th>
                 <th class="rightAlignColumn">Spent</th>
@@ -42,7 +42,5 @@
             </c:forEach>
         </tbody>
     </table>
-    <div class="addItemButtonContainer">
-        <button onclick="openNewTransportationItemDialog()">Add Item</button>
-    </div>
+    <button onclick="openNewTransportationItemDialog()" class="AddItemButton">Add Item</button>
 </div>
