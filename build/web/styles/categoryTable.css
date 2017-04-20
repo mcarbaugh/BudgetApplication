@@ -4,22 +4,32 @@
     font-size: 1.15em;
     overflow: hidden;
     margin: 2px;
-    border: 0px;
+    border: 1px solid #4484CE;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     padding: 0;
-    background: white;
+    background: #4484CE;
+    color: white;
 }
 
 #foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
-    background: white;
-    color: #222;
+    background: #4484CE;
+    color: white;
     overflow: hidden;
 }
+
+
+#foodHeader {
+    background: #4484CE;
+    color: white;
+}
+
 
 .categoryTableContainer {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100%;
-    background: #e8e8e8;
+    background: #e5e5e5;
 }
 
 .categorySection {
@@ -28,15 +38,15 @@
     margin: 15px auto;
     margin-bottom: 50px;
     padding: 0;
-    border: 1px solid #888;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border: 4px solid #4484CE;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     overflow: hidden;
-    box-shadow: 3px 3px 4px #888;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.55);
 }
 
 .headerCell {
-    padding-top: 25px;
+    padding-top: 15px;
     padding-bottom: 5px;
     border: 0;
 }
