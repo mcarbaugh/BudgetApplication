@@ -31,16 +31,6 @@ public class ReadController extends HttpServlet {
             int budgetId;
             List<Budget> budgets;
             Budget activeBudget;
-            List<Item> items;
-            List<Item> housingItems;
-            List<Item> insuranceItems;
-            List<Item> lifestyleItems;
-            List<Item> foodItems;
-            List<Item> transportationItems;
-            List<Item> givingItems;
-            
-            List<String> monthDropDownItems;
-            List<Integer> yearDropDownItems;
             
             int userId;
             currentSession = request.getSession();
@@ -58,29 +48,9 @@ public class ReadController extends HttpServlet {
                 budgets = getBudgetsByUserId(userId);
                 activeBudget = getActiveBudgetFromBudgetsById(budgets, budgetId);
                 
-                items = getItemsByBudgetId(activeBudget.getId());
-                housingItems = selectHousingItems(items);
-                insuranceItems = selectInsuranceItems(items);
-                lifestyleItems = selectLifestyleItems(items);
-                foodItems = selectFoodItems(items);
-                transportationItems = selectTransportationItems(items);
-                givingItems = selectGivingItems(items);
-                monthDropDownItems = getMonthDropDownItems();
-                yearDropDownItems = getYearDropDownItems();
-                
                 request.setAttribute(USER, user);
                 request.setAttribute(BUDGET, activeBudget);
                 request.setAttribute(BUDGETS, budgets);
-                request.setAttribute(ITEMS, items);
-                request.setAttribute(GIVING_ITEMS, givingItems);
-                request.setAttribute(FOOD_ITEMS, foodItems);
-                request.setAttribute(HOUSING_ITEMS, housingItems);
-                request.setAttribute(INSURANCE_ITEMS, insuranceItems);
-                request.setAttribute(LIFESTYLE_ITEMS, lifestyleItems);
-                request.setAttribute(TRANSPORTATION_ITEMS, transportationItems);
-                request.setAttribute(MONTHS, monthDropDownItems);
-                request.setAttribute(YEARS, yearDropDownItems);
-                
                 request.getRequestDispatcher("/pages/BudgetSummaryPage.jsp").forward(request, response);
             }
             else {

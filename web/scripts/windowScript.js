@@ -15,41 +15,4 @@ window.onclick = function(event) {
             }
         }
     }
-    
-    /**************************************************************/
-    // Close newBudgetDialog and reset its form
-    var budgetModal = document.getElementById("newBudgetDialog");
-
-    if (event.target === budgetModal) {
-        budgetModal.style.display = "none";
-        document.getElementById("newBudgetForm").reset();
-    }
-    /**************************************************************/
-    
-    // Close newItemDialog and reset its form
-    var itemModal = document.getElementById("newItemDialog");
-
-    if (event.target === itemModal) {
-        itemModal.style.display = "none";
-        document.getElementById("newItemForm").reset();
-    }
-    /**************************************************************/
-    
-    // Close editItemDialog and reset its form
-    var itemModal = document.getElementById("editItemDialog");
-
-    if (event.target === itemModal) {
-        itemModal.style.display = "none";
-        document.getElementById("editItemForm").reset();
-    }
-    /**************************************************************/
-    
-    // Close editItemDialog and reset its form
-    var itemModal = document.getElementById("newTransactionDialog");
-
-    if (event.target === itemModal) {
-        itemModal.style.display = "none";
-        document.getElementById("newTransactionForm").reset();
-    }
-    /**************************************************************/
 };

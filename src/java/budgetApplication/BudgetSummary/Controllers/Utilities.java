@@ -2,9 +2,34 @@
 package budgetApplication.BudgetSummary.Controllers;
 
 import budgetApplication.dataContracts.Item;
+import java.util.List;
 
 public class Utilities {
     
+    public static String convertItemsToXML(List<Item> items) {
+        
+        try {
+            
+            String xmlDocument = "";
+            StringBuilder buffer;
+            for(int i = 0; i < items.size(); i++) {
+                buffer = new StringBuilder();
+                buffer.append("<item>");
+                buffer.append("<id>" + items.get(i).getId() + "</id>");
+                buffer.append("<name>" + items.get(i).getName()+ "</name>");
+                buffer.append("<category>" + items.get(i).getCategory().name()+ "</category>");
+                buffer.append("<amount>" + items.get(i).getAmount()+ "</amount>");
+                buffer.append("<spent>" + items.get(i).getSpent()+ "</spent>");
+                buffer.append("</item>");
+                xmlDocument = String.format("%s%s", xmlDocument, buffer.toString());
+            }
+            
+            return String.format("%s%s%s", "<items>", xmlDocument, "</items>");
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
     
     public static String convertItemToXML(Item item) {
         

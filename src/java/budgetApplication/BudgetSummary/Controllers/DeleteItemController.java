@@ -46,6 +46,7 @@ public class DeleteItemController extends HttpServlet {
                 response.setContentType("text/xml");
                 response.setHeader("Cache-Control", "no-cache");
                 response.getWriter().write("<items></items>");
+                
             }
             else {
                 currentSession.invalidate();

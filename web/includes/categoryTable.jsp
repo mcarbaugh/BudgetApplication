@@ -6,7 +6,7 @@
     <div id="TransactionsButtonContainer">
         <c:url value="/TransactionHistory" var="transactionURL"/>
         <form method="GET" Action="${transactionURL}">
-            <input type="text" value="${user.getId()}" name="userId" class="hiddenField"/>
+            <input type="text" value="${user.getId()}" name="userId" class="HiddenField"/>
             <input type="submit" value="Show Transaction History" id="TransactionsButton"/>
         </form>
     </div>
