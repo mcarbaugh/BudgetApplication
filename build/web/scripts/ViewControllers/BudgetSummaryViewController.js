@@ -5,6 +5,7 @@ function BudgetSummaryViewController() {
     var Model = new BudgetSummaryModel();
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
+    Model.ItemChanged.subscribe(refreshItemInView);
     Model.SendGetAllItemsRequest(BudgetId);
     
     function loadItem(item) {
@@ -62,7 +63,22 @@ function BudgetSummaryViewController() {
     }
     
     function refreshItemInView(item) {
+        var row;
         
+        row = document.getElementById(item.id);
+        if(row) {
+            
+            nameCell = row.cells[1];
+            plannedCell = row.cells[2];
+            spentCell = row.cells[3];
+            remainingCell = row.cells[4];
+                        
+            // fill cell content with data
+            nameCell.innerHTML = item.name;
+            plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
+            spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
+            remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+        }
     }
     
     function removeItemFromView(itemId) {
@@ -83,12 +99,13 @@ function BudgetSummaryViewController() {
     }
     
     function saveExistingItem() {
-        var name, category, amount, item;
+        var id, name, category, amount, item;
         
+        id = document.getElementById("EditItemIdField").value;
         name = document.getElementById("EditItemNameField").value;
         category = document.getElementById("EditItemCategoryField").value;
         amount = document.getElementById("EditItemAmountField").value;
-        item = new BudgetItem(0, BudgetId, name, category, amount, 0);
+        item = new BudgetItem(id, BudgetId, name, category, amount, 0);
         Model.SendUpdateItemRequest(item);
         document.getElementById("EditItemDialog").style.display = "none";
         document.getElementById("EditItemForm").reset();

@@ -62,14 +62,6 @@ public class EditItemController extends HttpServlet {
                     }
                 }
                 
-                if(request.getParameterMap().containsKey("itemSpent")) {
-                    String itemSpentInput = request.getParameter("itemSpent");
-                    
-                    if(isDouble(itemSpentInput)) {
-                        itemSpent = Double.parseDouble(itemSpentInput);
-                    }
-                }
-                
                 if(request.getParameterMap().containsKey("itemCategory")) {
                     String categoryInput = request.getParameter("itemCategory");
                     category = getCategoryAsEnum(categoryInput);
