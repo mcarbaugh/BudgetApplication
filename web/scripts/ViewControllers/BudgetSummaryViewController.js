@@ -10,7 +10,7 @@ function BudgetSummaryViewController() {
     
     function loadItem(item) {
         var row, addTransactionCell, nameCell, plannedCell, spentCell, 
-                remainingCell, actionCell, addButton, editButton, deleteButton;
+                remainingCell, actionCell, addButton;
         
         row = {};
         if(item) {
@@ -49,7 +49,7 @@ function BudgetSummaryViewController() {
             row.id = item.id;
             
             // fill cell content with data
-            addTransactionCell.append(new ButtonFactory().AddTransaction());
+            addTransactionCell.append(new ButtonFactory().AddTransaction(openNewTransactionDialog));
             nameCell.innerHTML = item.name;
             plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
             spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
@@ -145,6 +145,18 @@ function BudgetSummaryViewController() {
         }
     }
     
+    function saveTransaction(sender) {
+        var itemId, name, vendor, amount, date;
+        
+        itemId = document.getElementById("ItemIdField").value;
+        name = document.getElementById("TransactionNameField").value;
+        vendor = document.getElementById("TransactionVendorField").value;
+        amount = document.getElementById("TransactionAmountField").value;
+        date = document.getElementById("TransactionDateField").value;
+        // make a new transaction and pass it to model
+        closeTransactionDialog();
+    }
+    
     function openNewItemDialog(event) {
         var id, categoryField;
         
@@ -215,6 +227,14 @@ function BudgetSummaryViewController() {
         }
     }
     
+    function openNewTransactionDialog(event) {
+        var itemId, itemIdField;
+        
+        itemId = event.target.parentNode.parentNode.id;
+        itemIdField = document.getElementById("ItemIdField");
+        document.getElementById("NewTransactionDialog").style.display = "block";
+    }
+    
     function closeItemDialog(event) {
         document.getElementById("NewItemDialog").style.display = "none";
         document.getElementById("NewItemForm").reset();
@@ -223,8 +243,13 @@ function BudgetSummaryViewController() {
         document.getElementById("EditItemForm").reset();
     }
     
+    function closeTransactionDialog(event) {
+        document.getElementById("NewTransactionDialog").style.display = "none";
+        document.getElementById("NewTransactionForm").reset();
+    }
+    
     function handleWindowClick(event) {
-        var newItemDialog, editItemDialog;
+        var newItemDialog, editItemDialog, newTransactionDialog;
         
         newItemDialog = document.getElementById("NewItemDialog");
         if(event.target === newItemDialog) {
@@ -236,6 +261,12 @@ function BudgetSummaryViewController() {
         if(event.target === editItemDialog) {
             editItemDialog.style.display = "none";
             document.getElementById("EditItemForm").reset();
+        }
+        
+        newTransactionDialog = document.getElementById("NewTransactionDialog");
+        if(event.target === newTransactionDialog) {
+            newTransactionDialog.style.display = "none";
+            document.getElementById("NewTransactionForm").reset();
         }
     }
     
@@ -260,11 +291,7 @@ function BudgetSummaryViewController() {
     
     // initialize listeners
     (function() {
-        var i;
-        var button;
-        var numericField;
-        var numericFields;
-        var addItemButtons;
+        var i, button, numericField, numericFields, addItemButtons;
     
         // new item form save and close events
         document.getElementById("SaveNewItemButton").addEventListener('click', saveNewItem);
@@ -273,6 +300,10 @@ function BudgetSummaryViewController() {
         // edit item form save and close events
         document.getElementById("SaveEditItemButton").addEventListener('click', saveExistingItem);
         document.getElementById("CancelEditItemButton").addEventListener('click', closeItemDialog);
+        
+        // tranaction save and close events
+        document.getElementById("SaveNewTransactionButton").addEventListener('click', saveTransaction);
+        document.getElementById("CancelNewTransactionButton").addEventListener('click', closeTransactionDialog);
         
         // window events
         window.addEventListener("click", handleWindowClick);

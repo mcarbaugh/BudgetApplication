@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="<c:url value='/styles/categoryTable.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
+        <script src="<c:url value='/scripts/Models/Transaction.js'/>"></script>
         <script src="<c:url value='/scripts/Models/BudgetItem.js'/>"></script>
         <script src="<c:url value='/scripts/Models/BudgetSummaryModel.js'/>"></script>
         <script src="<c:url value='/scripts/ViewControllers/ButtonFactory.js'/>"></script>
@@ -30,6 +31,7 @@
         <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/dialogs/NewItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/EditItemDialog.jsp"/>
+        <jsp:include page="/includes/dialogs/NewTransactionDialog.jsp"/>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">

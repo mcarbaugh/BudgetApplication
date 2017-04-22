@@ -25,7 +25,6 @@
     <body>
         <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/menuBar.jsp"/>
-        <jsp:include page="/includes/dialogs/newBudgetDialog.jsp"/>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
@@ -36,7 +35,7 @@
                         <div id="BudgetItemsButtonContainer">
                             <c:url value="/TransactionHistory" var="transactionURL"/>
                             <form method="GET" Action="${transactionURL}">
-                                <input type="text" value="${user.getId()}" name="userId" class="hiddenField"/>
+                                <input type="text" value="${user.getId()}" name="userId" class="HiddenField"/>
                                 <input type="submit" value="Show Budget Items" id="TransactionsButton"/>
                             </form>
                         </div>
