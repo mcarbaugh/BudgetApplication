@@ -261,7 +261,7 @@ function BudgetSummaryModel() {
             if (updateItemRequest.readyState === XMLHttpRequest.DONE) {
                 if (updateItemRequest.status === 200) {
                    
-                   var item, id, name, category, amount, spent, newItem, i, xml, items;
+                   var item, id, name, category, amount, spent, newItem, i, xml, items, oldItem;
                    
                     xml = updateItemRequest.responseXML;
                     items = xml.getElementsByTagName("items")[0];
@@ -283,22 +283,32 @@ function BudgetSummaryModel() {
                         
                         switch(category) {
                             case "FOOD":
-                                self.FoodItemList.push(newItem);
+                                oldItem = self.GetFoodItemById(newItem.id);
+                                oldItem.id = newItem.id;
+                                oldItem.budgetId = newItem.budgetId;
+                                oldItem.name = newItem.name;
+                                oldItem.amount = newItem.amount;
+                                oldItem.spent = newItem.spent;
                                 break;
                             case "GIVING":
-                                self.GivingItemList.push(newItem);
+                                
+                                
                                 break;
                             case "HOUSING":
-                                self.HousingItemList.push(newItem);
+                                
+                                
                                 break;
                             case "INSURANCE_TAX":
-                                self.InsuranceItemList.push(newItem);
+                                
+                                
                                 break;
                             case "LIFESTYLE":
-                                self.LifestyleItemList.push(newItem);
+                                
+                                
                                 break;
                             case "TRANSPORTATION":
-                                self.TransportationItemList.push(newItem);
+                                
+                                
                                 break;
                             default:
                                 break;

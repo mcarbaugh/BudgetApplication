@@ -20,7 +20,6 @@
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <script src="<c:url value='/scripts/Models/BudgetItem.js'/>"></script>
-        <script src="<c:url value='/scripts/Models/BudgetItemList.js'/>"></script>
         <script src="<c:url value='/scripts/Models/BudgetSummaryModel.js'/>"></script>
         <script src="<c:url value='/scripts/ViewControllers/ButtonFactory.js'/>"></script>
         <script src="<c:url value='/scripts/ViewControllers/BudgetSummaryViewController.js'/>"></script>

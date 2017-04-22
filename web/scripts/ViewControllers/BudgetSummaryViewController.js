@@ -42,6 +42,7 @@ function BudgetSummaryViewController() {
             nameCell = row.insertCell(1);
             plannedCell = row.insertCell(2);
             spentCell = row.insertCell(3);
+            
             remainingCell = row.insertCell(4);
             actionCell = row.insertCell(5);
             
@@ -52,7 +53,16 @@ function BudgetSummaryViewController() {
             nameCell.innerHTML = item.name;
             plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
             spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
-            remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+            
+            if(item.getRemaining() > 0) {
+                remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+                remainingCell.classList.remove("negativeNumber");
+            }
+            else {
+                remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
+                remainingCell.classList.add("negativeNumber");
+            }
+            
             actionCell.append(new ButtonFactory().EditItem(openEditItemDialog));
             actionCell.append(new ButtonFactory().DeleteItem(deleteItem));
             nameCell.classList.add("leftAlignColumn");
@@ -77,7 +87,16 @@ function BudgetSummaryViewController() {
             nameCell.innerHTML = item.name;
             plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
             spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
-            remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+            
+            if(item.getRemaining() > 0) {
+                remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+                remainingCell.classList.remove("negativeNumber");
+            }
+            else {
+                remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
+                remainingCell.classList.add("negativeNumber");
+            }
+            
         }
     }
     

@@ -150,3 +150,7 @@ h4 {
 .No-Border {
     border: 0px;
 }
+
+.negativeNumber {
+    color: red;
+}

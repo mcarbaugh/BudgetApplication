@@ -74,7 +74,7 @@ public class EditItemController extends HttpServlet {
                 item.setAmount(itemAmount);
                 item.setSpent(itemSpent);
                 saveItem(item, 0);
-                
+                item = getItemById(item.getId());
                 String xmlDocument = convertItemToXML(item);
                 
                 response.setContentType("text/xml");
@@ -95,6 +95,18 @@ public class EditItemController extends HttpServlet {
         try {
             try(ItemManager manager = new ItemManager()) {
                 manager.saveItem(newItem, budgetId);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    private Item getItemById(int id) throws Exception {
+        
+        try {
+            try(ItemManager manager = new ItemManager()) {
+                return manager.getItemById(id);
             }
         }
         catch(Exception ex) {
