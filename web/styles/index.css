@@ -152,5 +152,9 @@ h4 {
 }
 
 .negativeNumber {
-    color: red;
+    color: #ea614f;
+}
+
+.positiveNumber {
+    color: #007849;
 }

@@ -56,11 +56,13 @@ function BudgetSummaryViewController() {
             
             if(item.getRemaining() > 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+                remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");
             }
             else {
                 remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
                 remainingCell.classList.add("negativeNumber");
+                remainingCell.classList.remove("positiveNumber");
             }
             
             actionCell.append(new ButtonFactory().EditItem(openEditItemDialog));
@@ -90,11 +92,13 @@ function BudgetSummaryViewController() {
             
             if(item.getRemaining() > 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
+                remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");
             }
             else {
                 remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
                 remainingCell.classList.add("negativeNumber");
+                remainingCell.classList.remove("positiveNumber");
             }
             
         }
