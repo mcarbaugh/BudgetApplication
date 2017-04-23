@@ -7,31 +7,71 @@
         <img src="<c:url value='/images/piechart.png'/>" class="piechart"/>
     </div>
     
-    <h3>Transaction Summary</h3>
     <div class="categoryListContainer">
-        <label>
-            <h4>Housing</h4>
-            <span>0 of 300</span>
-        </label>
-        <label>
-            <h4>Food</h4>
-            <span>0 of 300</span>
-        </label>
-        <label>
-            <h4>Insurance & Tax</h4>
-            <span>0 of 300</span>
-        </label>
-        <label>
-            <h4>Lifestyle</h4>
-            <span>0 of 300</span>
-        </label>
-        <label>
-            <h4>Transportation</h4>
-            <span>0 of 300</span>
-        </label>
-        <label>
-            <h4>Giving</h4>
-            <span>0 of 300</span>
-        </label>                        
+        
+        <h4>Food</h4>
+        <div class="ProgressBarContainer" id="ProgressBarBottom">
+            <div class="ProgressBarInnerElement ProgressBarTop" id="FoodProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="FoodTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="FoodTotalAmount">0</span>
+            </div>
+        </div>                   
+        
+        <h4>Transportation</h4>
+        <div class="ProgressBarContainer">
+            <div class="ProgressBarInnerElement"></div>
+            <div class="ProgressBarInnerElement ProgressBarTop" id="TransportationProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="TransportationTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="TransportationTotalAmount">0</span>
+            </div>
+        </div>
+        
+        <h4>Lifestyle</h4>
+        <div class="ProgressBarContainer">
+            <div class="ProgressBarInnerElement"></div>
+            <div class="ProgressBarInnerElement ProgressBarTop" id="LifestyleProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="LifestyleTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="LifestyleTotalAmount">0</span>
+            </div>
+        </div>
+        
+        <h4>Housing</h4>
+        <div class="ProgressBarContainer">
+            <div class="ProgressBarInnerElement"></div>
+            <div class="ProgressBarInnerElement ProgressBarTop" id="HousingProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="HousingTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="HousingTotalAmount">0</span>
+            </div>
+        </div>
+
+        <h4>Insurance & Tax</h4>
+        <div class="ProgressBarContainer">
+            <div class="ProgressBarInnerElement"></div>
+            <div class="ProgressBarInnerElement ProgressBarTop" id="InsuranceProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="InsuranceTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="InsuranceTotalAmount">0</span>
+            </div>
+        </div>
+        
+        <h4>Giving</h4>
+        <div class="ProgressBarContainer">
+            <div class="ProgressBarInnerElement"></div>
+            <div class="ProgressBarInnerElement ProgressBarTop" id="GivingProgressBar"></div>
+            <div class="ProgressBarInnerElement ProgressBarTextContainer">
+                <span id="GivingTotalSpent">0</span>
+                <span>&nbsp; of &nbsp;</span>
+                <span id="GivingTotalAmount">0</span>
+            </div>
+        </div>
     </div>
 </div>

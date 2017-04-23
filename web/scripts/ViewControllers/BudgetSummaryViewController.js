@@ -6,8 +6,13 @@ function BudgetSummaryViewController() {
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
+    
+    Model.ItemLoaded.subscribe(updateCategoryProgressBars);
+    Model.ItemDeleted.subscribe(updateCategoryProgressBars);
+    Model.ItemChanged.subscribe(updateCategoryProgressBars);
     Model.SendGetAllItemsRequest(BudgetId);
     
+    // event handlers
     function loadItem(item) {
         var row, addTransactionCell, nameCell, plannedCell, spentCell, 
                 remainingCell, actionCell, addButton;
@@ -110,6 +115,81 @@ function BudgetSummaryViewController() {
         row.parentNode.removeChild(row);
     }
     
+    function updateCategoryProgressBars() {
+        
+        var width, totalSpent, totalAmount, progressWidth;
+        width = document.getElementById("ProgressBarBottom").offsetWidth;
+        
+        updateFoodProgress();
+        updateTransportationProgress();
+        updateLifeStyleProgress();
+        updateHousingProgress();
+        updateInsuranceProgress();
+        updateGivingProgress();
+        
+        function updateFoodProgress() {
+            totalSpent = Model.FoodItemList.GetTotalSpent();
+            totalAmount = Model.FoodItemList.GetTotalAmount();
+            document.getElementById("FoodTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("FoodTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("FoodProgressBar").style.width = progressWidth + "px";
+        }
+        
+        function updateTransportationProgress() {
+            totalSpent = Model.TransportationItemList.GetTotalSpent();
+            totalAmount = Model.TransportationItemList.GetTotalAmount();
+            document.getElementById("TransportationTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("TransportationTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("TransportationProgressBar").style.width = progressWidth + "px";
+        }
+        
+        function updateLifeStyleProgress() {
+            totalSpent = Model.LifestyleItemList.GetTotalSpent();
+            totalAmount = Model.LifestyleItemList.GetTotalAmount();
+            document.getElementById("LifestyleTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("LifestyleTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("LifestyleProgressBar").style.width = progressWidth + "px";
+        }
+        
+        function updateHousingProgress() {
+            totalSpent = Model.HousingItemList.GetTotalSpent();
+            totalAmount = Model.HousingItemList.GetTotalAmount();
+            document.getElementById("HousingTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("HousingTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("HousingProgressBar").style.width = progressWidth + "px";
+        }
+        
+        function updateInsuranceProgress() {
+            totalSpent = Model.InsuranceItemList.GetTotalSpent();
+            totalAmount = Model.InsuranceItemList.GetTotalAmount();
+            document.getElementById("InsuranceTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("InsuranceTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("InsuranceProgressBar").style.width = progressWidth + "px";
+        }
+        
+        function updateGivingProgress() {
+            totalSpent = Model.GivingItemList.GetTotalSpent();
+            totalAmount = Model.GivingItemList.GetTotalAmount();
+            document.getElementById("GivingTotalSpent").innerHTML = "$" + totalSpent;
+            document.getElementById("GivingTotalAmount").innerHTML = "$" + totalAmount;
+
+            progressWidth = (totalSpent/totalAmount) * width;
+            document.getElementById("GivingProgressBar").style.width = progressWidth + "px";
+        }
+        
+    }
+    
+    // make changes to the model
     function saveNewItem() {
         var name, category, amount, item;
         
@@ -135,13 +215,35 @@ function BudgetSummaryViewController() {
     }
     
     function deleteItem(sender) {
-        var message, itemId;
+        var message, itemId, table;
         
         itemId = sender.target.parentNode.parentNode.id;
         
         message = "Deleting a budget item may also delete a few transactions. Continue?";
         if(confirm(message)) {
             Model.SendDeleteItemRequest(itemId);
+            table = sender.target.parentNode.parentNode.parentNode.id;
+            
+            switch(table) {
+                case "FoodCategoryTable":
+                    Model.FoodItemList.RemoveItem(itemId);
+                    break;
+                case "GivingCategoryTable":
+                    Model.GivingItemList.RemoveItem(itemId);
+                    break;
+                case "HousingCategoryTable":
+                    Model.HousingItemList.RemoveItem(itemId);
+                    break;
+                case "InsuranceCategoryTable":
+                    Model.InsuranceItemList.RemoveItem(itemId);
+                    break;
+                case "LifestyleCategoryTable":
+                    Model.LifestyleItemList.RemoveItem(itemId);
+                    break;
+                case "TransportationCategoryTable":
+                    Model.TransportationItemList.RemoveItem(itemId);
+                    break;
+            }
         }
     }
     
@@ -160,6 +262,8 @@ function BudgetSummaryViewController() {
         closeTransactionDialog();
     }
     
+    
+    // open and close dialogs
     function openNewItemDialog(event) {
         var id, categoryField;
         
@@ -200,22 +304,22 @@ function BudgetSummaryViewController() {
         
         switch(table) {
             case "FoodCategoryTable":
-                item = Model.GetFoodItemById(id);
+                item = Model.FoodItemList.GetItemById(id);
                 break;
             case "GivingCategoryTable":
-                item = Model.GetGivingItemById(id);
+                item = Model.GivingItemList.GetItemById(id);
                 break;
             case "HousingCategoryTable":
-                item = Model.GetHousingItemById(id);
+                item = Model.HousingItemList.GetItemById(id);
                 break;
             case "InsuranceCategoryTable":
-                item = Model.GetInsuranceItemById(id);
+                item = Model.InsuranceItemList.GetItemById(id);
                 break;
             case "LifestyleCategoryTable":
-                item = Model.GetLifestyleItemById(id);
+                item = Model.LifestyleItemList.GetItemById(id);
                 break;
             case "TransportationCategoryTable":
-                item = Model.GetTransportationItemById(id);
+                item = Model.TransportationItemList.GetItemById(id);
                 break;
             default:
                 break;
@@ -260,6 +364,8 @@ function BudgetSummaryViewController() {
         document.getElementById("NewBudgetForm").reset();
     }
     
+    
+    // Miscellaneous
     function handleWindowClick(event) {
         var newItemDialog, editItemDialog, newTransactionDialog;
         

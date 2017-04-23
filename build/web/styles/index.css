@@ -56,6 +56,7 @@ h4 {
     margin-top: 10px;
     margin-bottom: 5px;
     padding: 0;
+    font-size: 0.9em;
 }
 
 .wrapper {
@@ -157,4 +158,40 @@ h4 {
 
 .positiveNumber {
     color: #007849;
+}
+
+
+
+.ProgressBarContainer {
+    display: block;
+    position: relative;
+    background: #3d638e;
+    width: 24em;
+    height: 2em;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.ProgressBarTop {
+    background: rgba(68, 132, 206, 0.7);
+    transition: all .5s ease-in-out;
+    width: 0;
+}
+
+.ProgressBarInnerElement {
+    height: 2em;
+    vertical-align: middle;
+    position: relative;
+    max-width: 24em;
+    left: 0;
+    border-radius: 0;
+    position: absolute;
+}
+
+.ProgressBarTextContainer {
+    color: white;
+    background: none;
+    line-height: 2em;
+    text-align: center;
+    width: 24em;
 }

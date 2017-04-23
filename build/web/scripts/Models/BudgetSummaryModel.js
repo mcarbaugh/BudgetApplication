@@ -1,68 +1,14 @@
 
 function BudgetSummaryModel() {
-    this.FoodItemList = [];
-    this.GivingItemList = [];
-    this.HousingItemList = [];
-    this.InsuranceItemList = [];
-    this.LifestyleItemList = [];
-    this.TransportationItemList = [];
+    this.FoodItemList = new ItemList();
+    this.GivingItemList = new ItemList();
+    this.HousingItemList = new ItemList();
+    this.InsuranceItemList = new ItemList();
+    this.LifestyleItemList = new ItemList();
+    this.TransportationItemList = new ItemList();
     this.ItemLoaded = new Event();
     this.ItemDeleted = new Event();
     this.ItemChanged = new Event();
-    this.GetFoodItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.FoodItemList.length; i += 1) {
-            if(this.FoodItemList[i].id === itemId) {
-                return this.FoodItemList[i];
-            }
-        }
-    };
-    this.GetGivingItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.GivingItemList.length; i += 1) {
-            if(this.GivingItemList[i].id === itemId) {
-                return this.GivingItemList[i];
-            }
-        }
-    };
-    this.GetHousingItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.HousingItemList.length; i += 1) {
-            if(this.HousingItemList[i].id === itemId) {
-                return this.HousingItemList[i];
-            }
-        }
-    };
-    this.GetInsuranceItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.InsuranceItemList.length; i += 1) {
-            if(this.InsuranceItemList[i].id === itemId) {
-                return this.InsuranceItemList[i];
-            }
-        }
-    };
-    this.GetLifestyleItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.LifestyleItemList.length; i += 1) {
-            if(this.LifestyleItemList[i].id === itemId) {
-                return this.LifestyleItemList[i];
-            }
-        }
-    };
-    this.GetTransportationItemById = function(itemId) {
-        var i;
-        
-        for(i = 0; i < this.TransportationItemList.length; i += 1) {
-            if(this.TransportationItemList[i].id === itemId) {
-                return this.TransportationItemList[i];
-            }
-        }
-    };
     this.SendGetAllItemsRequest = function(budgetId) {
         var getAllItemsRequest, url, method, isAsync, self, arguments;
         
@@ -105,22 +51,22 @@ function BudgetSummaryModel() {
                         
                         switch(category) {
                             case "FOOD":
-                                self.FoodItemList.push(newItem);
+                                self.FoodItemList.AddItem(newItem);
                                 break;
                             case "GIVING":
-                                self.GivingItemList.push(newItem);
+                                self.GivingItemList.AddItem(newItem);
                                 break;
                             case "HOUSING":
-                                self.HousingItemList.push(newItem);
+                                self.HousingItemList.AddItem(newItem);
                                 break;
                             case "INSURANCE_TAX":
-                                self.InsuranceItemList.push(newItem);
+                                self.InsuranceItemList.AddItem(newItem);
                                 break;
                             case "LIFESTYLE":
-                                self.LifestyleItemList.push(newItem);
+                                self.LifestyleItemList.AddItem(newItem);
                                 break;
                             case "TRANSPORTATION":
-                                self.TransportationItemList.push(newItem);
+                                self.TransportationItemList.AddItem(newItem);
                                 break;
                             default:
                                 break;
@@ -180,22 +126,22 @@ function BudgetSummaryModel() {
                         
                         switch(category) {
                             case "FOOD":
-                                self.FoodItemList.push(newItem);
+                                self.FoodItemList.AddItem(newItem);
                                 break;
                             case "GIVING":
-                                self.GivingItemList.push(newItem);
+                                self.GivingItemList.AddItem(newItem);
                                 break;
                             case "HOUSING":
-                                self.HousingItemList.push(newItem);
+                                self.HousingItemList.AddItem(newItem);
                                 break;
                             case "INSURANCE_TAX":
-                                self.InsuranceItemList.push(newItem);
+                                self.InsuranceItemList.AddItem(newItem);
                                 break;
                             case "LIFESTYLE":
-                                self.LifestyleItemList.push(newItem);
+                                self.LifestyleItemList.AddItem(newItem);
                                 break;
                             case "TRANSPORTATION":
-                                self.TransportationItemList.push(newItem);
+                                self.TransportationItemList.AddItem(newItem);
                                 break;
                             default:
                                 break;
@@ -283,38 +229,32 @@ function BudgetSummaryModel() {
                         
                         switch(category) {
                             case "FOOD":
-                                oldItem = self.GetFoodItemById(newItem.id);
-                                oldItem.id = newItem.id;
-                                oldItem.budgetId = newItem.budgetId;
-                                oldItem.name = newItem.name;
-                                oldItem.amount = newItem.amount;
-                                oldItem.spent = newItem.spent;
+                                self.FoodItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             case "GIVING":
-                                
-                                
+                                self.GivingItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             case "HOUSING":
-                                
-                                
+                                self.HousingItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             case "INSURANCE_TAX":
-                                
-                                
+                                self.InsuranceItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             case "LIFESTYLE":
-                                
-                                
+                                self.LifestyleItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             case "TRANSPORTATION":
-                                
-                                
+                                self.TransportationItemList.UpdateItem(newItem);
+                                self.ItemChanged.fire(newItem);
                                 break;
                             default:
                                 break;
                         }
-                        
-                        self.ItemChanged.fire(newItem);
                     }
                 }
                 else {
@@ -368,22 +308,22 @@ function BudgetSummaryModel() {
                         
                         switch(category) {
                             case "FOOD":
-                                self.FoodItemList.push(newItem);
+                                self.FoodItemList.UpdateItem(newItem);
                                 break;
                             case "GIVING":
-                                self.GivingItemList.push(newItem);
+                                self.GivingItemList.UpdateItem(newItem);
                                 break;
                             case "HOUSING":
-                                self.HousingItemList.push(newItem);
+                                self.HousingItemList.UpdateItem(newItem);
                                 break;
                             case "INSURANCE_TAX":
-                                self.InsuranceItemList.push(newItem);
+                                self.InsuranceItemList.UpdateItem(newItem);
                                 break;
                             case "LIFESTYLE":
-                                self.LifestyleItemList.push(newItem);
+                                self.LifestyleItemList.UpdateItem(newItem);
                                 break;
                             case "TRANSPORTATION":
-                                self.TransportationItemList.push(newItem);
+                                self.TransportationItemList.UpdateItem(newItem);
                                 break;
                             default:
                                 break;
