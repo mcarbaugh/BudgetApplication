@@ -13,9 +13,9 @@
         <div class="ProgressBarContainer" id="ProgressBarBottom">
             <div class="ProgressBarInnerElement ProgressBarTop" id="FoodProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
-                <span id="FoodTotalSpent">0</span>
-                <span>&nbsp; of &nbsp;</span>
-                <span id="FoodTotalAmount">0</span>
+                <span col="0" id="FoodTotalSpent">0</span>
+                <span col="1">&nbsp; of &nbsp;</span>
+                <span col="2" id="FoodTotalAmount">0</span>
             </div>
         </div>                   
         

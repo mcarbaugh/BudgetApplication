@@ -59,7 +59,7 @@ function BudgetSummaryViewController() {
             plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
             spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
             
-            if(item.getRemaining() > 0) {
+            if(item.getRemaining() >= 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
                 remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");
@@ -95,7 +95,7 @@ function BudgetSummaryViewController() {
             plannedCell.innerHTML = "$" + parseFloat(item.amount).toFixed(2);
             spentCell.innerHTML = "$" + parseFloat(item.spent).toFixed(2);
             
-            if(item.getRemaining() > 0) {
+            if(item.getRemaining() >= 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
                 remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");

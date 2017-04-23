@@ -166,7 +166,7 @@ h4 {
     display: block;
     position: relative;
     background: #3d638e;
-    width: 24em;
+    width: 22em;
     height: 2em;
     border-radius: 6px;
     overflow: hidden;
@@ -182,16 +182,35 @@ h4 {
     height: 2em;
     vertical-align: middle;
     position: relative;
-    max-width: 24em;
-    left: 0;
-    border-radius: 0;
+    max-width: 22em;
     position: absolute;
 }
 
 .ProgressBarTextContainer {
     color: white;
     background: none;
-    line-height: 2em;
     text-align: center;
-    width: 24em;
+    width: 100%;
+    margin: 0 auto;       
+}
+
+.ProgressBarTextContainer span {
+    font-size: 1em;
+    height: 100%;
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+.ProgressColumnMiddle {
+    width: 20%;
+    float: left;
+    display: block;
+    position: relative;
+}
+
+.ProgressColumn {
+    width: 40%;
+    float: left;
+    display: block;
+    position: relative;
 }
