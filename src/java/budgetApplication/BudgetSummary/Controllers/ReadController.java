@@ -32,6 +32,9 @@ public class ReadController extends HttpServlet {
             List<Budget> budgets;
             Budget activeBudget;
             
+            List<String> monthDropDownItems;
+            List<Integer> yearDropDownItems;
+            
             int userId;
             currentSession = request.getSession();
             if(currentSession.getAttribute(USER) != null) {
@@ -48,9 +51,14 @@ public class ReadController extends HttpServlet {
                 budgets = getBudgetsByUserId(userId);
                 activeBudget = getActiveBudgetFromBudgetsById(budgets, budgetId);
                 
+                monthDropDownItems = getMonthDropDownItems();
+                yearDropDownItems = getYearDropDownItems();
+                
                 request.setAttribute(USER, user);
                 request.setAttribute(BUDGET, activeBudget);
                 request.setAttribute(BUDGETS, budgets);
+                request.setAttribute(MONTHS, monthDropDownItems);
+                request.setAttribute(YEARS, yearDropDownItems);
                 request.getRequestDispatcher("/pages/BudgetSummaryPage.jsp").forward(request, response);
             }
             else {

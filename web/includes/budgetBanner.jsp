@@ -19,7 +19,7 @@
                     <c:out value="${budget.year} ${budget.month.name()}"/>
                 </a>
             </c:forEach>
-            <button id="createBudgetButton" onclick="openAddBudgetDialog()">NEW BUDGET</button>
+            <button id="NewBudgetButton">NEW BUDGET</button>
         </div>
     </div>
     

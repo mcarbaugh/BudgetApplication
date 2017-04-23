@@ -29,6 +29,7 @@
     </head>
     <body>
         <jsp:include page="/includes/budgetBanner.jsp"/>
+        <jsp:include page="/includes/dialogs/NewBudgetDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/EditItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewTransactionDialog.jsp"/>

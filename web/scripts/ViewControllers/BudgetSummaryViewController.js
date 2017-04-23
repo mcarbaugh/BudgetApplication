@@ -238,6 +238,10 @@ function BudgetSummaryViewController() {
         document.getElementById("NewTransactionDialog").style.display = "block";
     }
     
+    function openNewBudgetDialog(event) {
+        document.getElementById("NewBudgetDialog").style.display = "block";
+    }
+    
     function closeItemDialog(event) {
         document.getElementById("NewItemDialog").style.display = "none";
         document.getElementById("NewItemForm").reset();
@@ -249,6 +253,11 @@ function BudgetSummaryViewController() {
     function closeTransactionDialog(event) {
         document.getElementById("NewTransactionDialog").style.display = "none";
         document.getElementById("NewTransactionForm").reset();
+    }
+    
+    function closeBudgetDialog(event) {
+        document.getElementById("NewBudgetDialog").style.display = "none";
+        document.getElementById("NewBudgetForm").reset();
     }
     
     function handleWindowClick(event) {
@@ -307,6 +316,10 @@ function BudgetSummaryViewController() {
         // tranaction save and close events
         document.getElementById("SaveNewTransactionButton").addEventListener('click', saveTransaction);
         document.getElementById("CancelNewTransactionButton").addEventListener('click', closeTransactionDialog);
+        
+        // budget close events
+        document.getElementById("NewBudgetButton").addEventListener('click', openNewBudgetDialog);
+        document.getElementById("CancelNewBudgetButton").addEventListener('click', closeBudgetDialog);
         
         // window events
         window.addEventListener("click", handleWindowClick);

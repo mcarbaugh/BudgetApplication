@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <div class="modal" id="NewTransactionDialog">
     <div class="modal-content">

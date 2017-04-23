@@ -35,7 +35,7 @@
     overflow: hidden;
 }
 
-#createBudgetButton, #signoutButton {
+#NewBudgetButton, #signoutButton {
     margin: 0;
     width: 100%;
     padding: 12px 16px;
@@ -50,7 +50,7 @@
     letter-spacing: 0.06em;
 }
 
-#createBudgetButton:hover, #createBudgetButton:focus, #signoutButton:hover, #signoutButton:focus {
+#NewBudgetButton:hover, #NewBudgetButton:focus, #signoutButton:hover, #signoutButton:focus {
     cursor: pointer;
     background: #f1f1f1;
     
