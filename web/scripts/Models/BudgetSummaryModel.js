@@ -323,6 +323,81 @@ function BudgetSummaryModel() {
             }
         }
     };
+    this.SendSaveTransactionRequest = function(transaction) {
+        var saveTransactionRequest, url, method, isAsync, self, arguments;
+        url = "CreateTransaction";
+        method = "POST";
+        isAsync = true;
+        self = this;
+        
+        saveTransactionRequest = new XMLHttpRequest();
+        saveTransactionRequest.onreadystatechange = handleSaveItemResponse;
+        saveTransactionRequest.open(method, url, isAsync);
+        saveTransactionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        arguments = "itemId=" + encodeURIComponent(transaction.itemId)
+               + "&transactionName=" + encodeURIComponent(transaction.name)
+               + "&transactionVendor=" + encodeURIComponent(transaction.vendor)
+               + "&transactionAmount=" + encodeURIComponent(transaction.amount)
+               + "&transactionDate=" + encodeURIComponent(transaction.date);
+       
+        saveTransactionRequest.send(arguments);
+        
+        function handleSaveItemResponse() {
+            if (saveTransactionRequest.readyState === XMLHttpRequest.DONE) {
+                if (saveTransactionRequest.status === 200) {
+                   
+                   var item, id, name, category, amount, spent, newItem, i, xml, items;
+                   
+                    xml = saveTransactionRequest.responseXML;
+                    items = xml.getElementsByTagName("items")[0];
+                    
+                    for(i = 0; i < items.childNodes.length; i += 1) {
+                        item = items.childNodes[i];
+                        id = item.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                        
+                        if(item.getElementsByTagName("name")[0].childNodes.length > 0) {
+                            name = item.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                        } else {
+                            name = "";    
+                        }
+
+                        category = item.getElementsByTagName("category")[0].childNodes[0].nodeValue;
+                        amount = item.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+                        spent = item.getElementsByTagName("spent")[0].childNodes[0].nodeValue;
+                        newItem = new BudgetItem(id, self.BudgetId, name, category, amount, spent);
+                        
+                        switch(category) {
+                            case "FOOD":
+                                self.FoodItemList.push(newItem);
+                                break;
+                            case "GIVING":
+                                self.GivingItemList.push(newItem);
+                                break;
+                            case "HOUSING":
+                                self.HousingItemList.push(newItem);
+                                break;
+                            case "INSURANCE_TAX":
+                                self.InsuranceItemList.push(newItem);
+                                break;
+                            case "LIFESTYLE":
+                                self.LifestyleItemList.push(newItem);
+                                break;
+                            case "TRANSPORTATION":
+                                self.TransportationItemList.push(newItem);
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        self.ItemChanged.fire(newItem);
+                    }
+                }
+                else {
+                    alert("Unable to create new item. Try again after refreshing the page.");
+                }
+            }
+        }
+    };
 }
 
 function Event() {

@@ -145,15 +145,18 @@ function BudgetSummaryViewController() {
         }
     }
     
-    function saveTransaction(sender) {
-        var itemId, name, vendor, amount, date;
+    function saveTransaction() {
+        var itemId, name, vendor, amount, date, transaction;
         
         itemId = document.getElementById("ItemIdField").value;
         name = document.getElementById("TransactionNameField").value;
         vendor = document.getElementById("TransactionVendorField").value;
         amount = document.getElementById("TransactionAmountField").value;
         date = document.getElementById("TransactionDateField").value;
+        
         // make a new transaction and pass it to model
+        transaction = new Transaction(0, itemId, name, vendor, amount, date);
+        Model.SendSaveTransactionRequest(transaction);
         closeTransactionDialog();
     }
     
@@ -228,10 +231,10 @@ function BudgetSummaryViewController() {
     }
     
     function openNewTransactionDialog(event) {
-        var itemId, itemIdField;
+        var itemId;
         
         itemId = event.target.parentNode.parentNode.id;
-        itemIdField = document.getElementById("ItemIdField");
+        document.getElementById("ItemIdField").value = itemId;
         document.getElementById("NewTransactionDialog").style.display = "block";
     }
     
