@@ -7,7 +7,7 @@
 }
 
 #PieChartContainer {
-    width: 15em;
+    max-width: 14em;
     margin: 0 auto;
 }
 

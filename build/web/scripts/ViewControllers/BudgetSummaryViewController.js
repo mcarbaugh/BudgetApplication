@@ -3,6 +3,8 @@ function BudgetSummaryViewController() {
     var piechart;
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
+    initializeChart(); // make sure the pie chart is initiated for an empty budget
+    
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
@@ -216,8 +218,8 @@ function BudgetSummaryViewController() {
         } 
         else {
             categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
-            backgroundColor = ["#ff2d2d", "#ff9749", "#ffd026", "#16d30c", "#50e1f4", "#b35fdd"];
-            labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance & Tax", "Giving"];
+            backgroundColor = ["#113d59", "#1d5374", "#3d5d76", "#518198", "#659db8", "#aadbff"];
+            labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance", "Giving"];
             data = {labels: labels,
                     datasets: [{
                             data: categoryData, 
@@ -235,8 +237,37 @@ function BudgetSummaryViewController() {
                     }
                 }
             });
+            piechart.update();
         }
     }
+    
+    function initializeChart() {
+        var categoryData ,labels, backgroundColor, data;
+        
+        categoryData = [1, 1, 1, 1, 1, 1];
+        backgroundColor = ["#113d59", "#1d5374", "#3d5d76", "#518198", "#659db8", "#aadbff"];
+        labels = [" Food", " Transportation", " Lifestyle", " Housing", " Insurance", " Giving"];
+        data = {labels: labels,
+                datasets: [{
+                        data: categoryData, 
+                        backgroundColor: backgroundColor, 
+                        hoverBackgroundColor: backgroundColor}]
+                };
+
+        piechart = document.getElementById("PieChart");
+        piechart = new Chart(piechart, {
+            type: 'doughnut',
+            data: data,
+            labels: labels,
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+        piechart.update();
+    }
+    
     
     // make changes to the model
     function saveNewItem() {
@@ -455,10 +486,21 @@ function BudgetSummaryViewController() {
         event.preventDefault();
     }
     
+    function handlePieChartClick(event) {
+        
+        var activePoints = piechart.getElementsAtEvent(event);
+        var firstPoint = activePoints[0];
+        var label = piechart.data.labels[firstPoint._index];        
+        location.href = "#";
+        location.href = "#" + label;
+    }
+    
     // initialize listeners
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
     
+        document.getElementById("PieChart").addEventListener('click', handlePieChartClick);
+        
         // new item form save and close events
         document.getElementById("SaveNewItemButton").addEventListener('click', saveNewItem);
         document.getElementById("CancelNewItemButton").addEventListener('click', closeItemDialog);

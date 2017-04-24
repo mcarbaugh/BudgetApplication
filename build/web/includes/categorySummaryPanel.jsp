@@ -4,7 +4,7 @@
 <div class="categorySummaryPanel">
     
     <div id="PieChartContainer">
-        <h3>Budget Categories</h3>
+        <h2>Budget Categories</h2>
         <canvas id="PieChart"></canvas>
     </div>
     

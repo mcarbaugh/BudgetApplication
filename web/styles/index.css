@@ -49,6 +49,11 @@ h1 {
     padding: 0;
 }
 
+h2 {
+    font-weight: 400;
+    margin: 10px 0;
+}
+
 h3 {
     margin: 0;
     margin-top: 5px;
@@ -76,6 +81,7 @@ h4 {
     left: 0;
     overflow: hidden;
 }
+
 
 .columnContainer {
     display: block;
@@ -113,6 +119,7 @@ h4 {
     overflow: hidden;
     position: relative;
 }
+
 
 /******* FEATURE CONTAINERS (THESE WILL BE MOVED LATER) ****************/
 .userAccountSummaryContainer {
