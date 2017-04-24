@@ -1,6 +1,7 @@
 
 function BudgetSummaryViewController() {
     
+    var piechart;
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
     Model.ItemLoaded.subscribe(loadItem);
@@ -195,7 +196,8 @@ function BudgetSummaryViewController() {
     
     function updatePieChart() {
         var foodAmount, transportationAmount, lifestyleAmount, housingAmount,
-                insuranceAmount, givingAmount;
+                insuranceAmount, givingAmount, categoryData ,labels, backgroundColor,
+                data;
         
         foodAmount = Model.FoodItemList.GetTotalAmount();
         transportationAmount = Model.TransportationItemList.GetTotalAmount();
@@ -204,35 +206,37 @@ function BudgetSummaryViewController() {
         insuranceAmount = Model.InsuranceItemList.GetTotalAmount();
         givingAmount = Model.GivingItemList.GetTotalAmount();
         
-        var categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
-        var backgroundColor = ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"];
-        var labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance & Tax", "Giving"];
-        
-        var data = {labels: labels,
+        if(piechart) {
+            piechart.data.datasets[0].data[0] = foodAmount;
+            piechart.data.datasets[0].data[1] = transportationAmount;
+            piechart.data.datasets[0].data[2] = lifestyleAmount;
+            piechart.data.datasets[0].data[3] = housingAmount;
+            piechart.data.datasets[0].data[4] = insuranceAmount;
+            piechart.data.datasets[0].data[5] = givingAmount;
+            piechart.update();
+        } 
+        else {
+            categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
+            backgroundColor = ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"];
+            labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance & Tax", "Giving"];
+            data = {labels: labels,
                     datasets: [{
                             data: categoryData, 
                             backgroundColor: backgroundColor, 
                             hoverBackgroundColor: backgroundColor}]
                     };
-        
-        var piechart = document.getElementById("PieChart");
-        var container = piechart.parentNode;
-        container.removeChild(piechart);
-        
-        piechart = document.createElement("canvas");
-        piechart.id = "PieChart";
-        container.append(piechart);
-        
-        piechart = new Chart(piechart, {
-            type: 'doughnut',
-            data: data,
-            options: {
-                legend: {
-                    display: false
+            
+            piechart = document.getElementById("PieChart");
+            piechart = new Chart(piechart, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    legend: {
+                        display: false
+                    }
                 }
-            }
-        });
-        
+            });
+        }
     }
     
     // make changes to the model
