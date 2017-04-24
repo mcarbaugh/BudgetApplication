@@ -208,6 +208,18 @@ function BudgetSummaryViewController() {
         givingAmount = Model.GivingItemList.GetTotalAmount();
         
         if(piechart) {
+            // make sure something shows up if data is empty
+            if(foodAmount <= 0 && transportationAmount <= 0 && lifestyleAmount <= 0 && 
+                    housingAmount <= 0 && insuranceAmount <= 0 && givingAmount <= 0) {
+                
+                foodAmount = 1;
+                transportationAmount = 1;
+                lifestyleAmount = 1;
+                housingAmount = 1;
+                insuranceAmount = 1;
+                givingAmount = 1;
+            }
+            
             piechart.data.datasets[0].data[0] = foodAmount;
             piechart.data.datasets[0].data[1] = transportationAmount;
             piechart.data.datasets[0].data[2] = lifestyleAmount;
@@ -217,6 +229,7 @@ function BudgetSummaryViewController() {
             piechart.update();
         } 
         else {
+            
             categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
             backgroundColor = ["#113d59", "#1d5374", "#3d5d76", "#518198", "#659db8", "#aadbff"];
             labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance", "Giving"];
@@ -237,6 +250,7 @@ function BudgetSummaryViewController() {
                     }
                 }
             });
+            
             piechart.update();
         }
     }
