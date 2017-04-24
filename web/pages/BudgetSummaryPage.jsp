@@ -25,6 +25,7 @@
         <script src="<c:url value='/scripts/Models/BudgetSummaryModel.js'/>"></script>
         <script src="<c:url value='/scripts/ViewControllers/ButtonFactory.js'/>"></script>
         <script src="<c:url value='/scripts/ViewControllers/BudgetSummaryViewController.js'/>"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>

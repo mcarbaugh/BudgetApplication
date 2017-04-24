@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="categorySummaryPanel">
-    <h3>Budget Categories</h3>
-    <div class="imageContainer">
-        <img src="<c:url value='/images/piechart.png'/>" class="piechart"/>
+    
+    <div id="PieChartContainer">
+        <h3>Budget Categories</h3>
+        <canvas id="PieChart"></canvas>
     </div>
     
     <div class="categoryListContainer">

@@ -10,6 +10,10 @@ function BudgetSummaryViewController() {
     Model.ItemLoaded.subscribe(updateCategoryProgressBars);
     Model.ItemDeleted.subscribe(updateCategoryProgressBars);
     Model.ItemChanged.subscribe(updateCategoryProgressBars);
+    
+    Model.ItemLoaded.subscribe(updatePieChart);
+    Model.ItemDeleted.subscribe(updatePieChart);
+    Model.ItemChanged.subscribe(updatePieChart);
     Model.SendGetAllItemsRequest(BudgetId);
     
     // event handlers
@@ -186,6 +190,48 @@ function BudgetSummaryViewController() {
             progressWidth = (totalSpent/totalAmount) * width;
             document.getElementById("GivingProgressBar").style.width = progressWidth + "px";
         }
+        
+    }
+    
+    function updatePieChart() {
+        var foodAmount, transportationAmount, lifestyleAmount, housingAmount,
+                insuranceAmount, givingAmount;
+        
+        foodAmount = Model.FoodItemList.GetTotalAmount();
+        transportationAmount = Model.TransportationItemList.GetTotalAmount();
+        lifestyleAmount = Model.LifestyleItemList.GetTotalAmount();
+        housingAmount = Model.HousingItemList.GetTotalAmount();
+        insuranceAmount = Model.InsuranceItemList.GetTotalAmount();
+        givingAmount = Model.GivingItemList.GetTotalAmount();
+        
+        var categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
+        var backgroundColor = ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"];
+        var labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance & Tax", "Giving"];
+        
+        var data = {labels: labels,
+                    datasets: [{
+                            data: categoryData, 
+                            backgroundColor: backgroundColor, 
+                            hoverBackgroundColor: backgroundColor}]
+                    };
+        
+        var piechart = document.getElementById("PieChart");
+        var container = piechart.parentNode;
+        container.removeChild(piechart);
+        
+        piechart = document.createElement("canvas");
+        piechart.id = "PieChart";
+        container.append(piechart);
+        
+        piechart = new Chart(piechart, {
+            type: 'doughnut',
+            data: data,
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
         
     }
     

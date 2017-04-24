@@ -6,20 +6,73 @@
     padding-top: 10px;
 }
 
-.imageContainer {
-    width: 14em;
+#PieChartContainer {
+    width: 15em;
     margin: 0 auto;
-    position: relative;
 }
 
-.piechart {
-    width: 12em;
+#PieChart { 
+    
 }
 
 .categoryListContainer {
     margin: 20px;
 }
 
-.categoryListContainer label, categoryListContainer label h4, categoryListContainer label span {
-    margin: 0;
+h4 {
+    margin-left: 1em;
+}
+
+.ProgressBarContainer {
+    display: block;
+    position: relative;
+    background: #3d638e;
+    width: 22em;
+    height: 1.65em;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.ProgressBarTop {
+    background: rgba(68, 132, 206, 0.7);
+    transition: all .5s ease-in-out;
+    width: 0;
+}
+
+.ProgressBarInnerElement {
+    height: 1.65em;
+    vertical-align: middle;
+    position: relative;
+    max-width: 22em;
+    position: absolute;
+}
+
+.ProgressBarTextContainer {
+    color: white;
+    background: none;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;       
+}
+
+.ProgressBarTextContainer span {
+    font-size: 1em;
+    height: 100%;
+    line-height: 1.65em;
+    vertical-align: middle;
+}
+
+.ProgressColumnMiddle {
+    width: 20%;
+    float: left;
+    display: block;
+    position: relative;
+}
+
+.ProgressColumn {
+    width: 40%;
+    float: left;
+    display: block;
+    position: relative;
 }
