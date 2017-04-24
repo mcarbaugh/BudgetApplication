@@ -1,6 +1,5 @@
 
 function BudgetSummaryViewController() {
-    
     var piechart;
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
@@ -217,7 +216,7 @@ function BudgetSummaryViewController() {
         } 
         else {
             categoryData = [foodAmount, transportationAmount, lifestyleAmount, housingAmount, insuranceAmount, givingAmount];
-            backgroundColor = ["#FF6384", "#36A2EB", "#FFCE56", "#FF6384", "#36A2EB", "#FFCE56"];
+            backgroundColor = ["#ff2d2d", "#ff9749", "#ffd026", "#16d30c", "#50e1f4", "#b35fdd"];
             labels = ["Food", "Transportation", "Lifestyle", "Housing", "Insurance & Tax", "Giving"];
             data = {labels: labels,
                     datasets: [{
@@ -301,13 +300,12 @@ function BudgetSummaryViewController() {
         var itemId, name, vendor, amount, date, transaction;
         
         itemId = document.getElementById("ItemIdField").value;
-        name = document.getElementById("TransactionNameField").value;
         vendor = document.getElementById("TransactionVendorField").value;
         amount = document.getElementById("TransactionAmountField").value;
         date = document.getElementById("TransactionDateField").value;
         
         // make a new transaction and pass it to model
-        transaction = new Transaction(0, itemId, name, vendor, amount, date);
+        transaction = new Transaction(0, itemId, "NONE", vendor, amount, date);
         Model.SendSaveTransactionRequest(transaction);
         closeTransactionDialog();
     }

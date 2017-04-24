@@ -1,15 +1,22 @@
 
-/********** APPLICATION COLORS **********/
-/* cerulean: #4484CE
-   aluminium: #D9D9D9
-   light: #F9CF00
-   tangerine: #F19F4D
-   green: #007849
-   gray_dark: #222
-   gray_medium: #888
-   gray_light: #f9f9f9
-   dark_blue: #3d638e */
-/****************************************/
+/********** APPLICATION COLORS *********
+    cerulean: #4484CE
+    aluminium: #D9D9D9
+    light: #F9CF00
+    tangerine: #F19F4D
+    green: #007849
+    gray_dark: #222
+    gray_medium: #888
+    gray_light: #f9f9f9
+    dark_blue: #3d638e
+
+    food color:             #f44242
+    giving color:           #b23377
+    housing color:          #9741f4
+    insurance color:        #f47741
+    lifestyle color:        #f4c058
+    transportation color:   #41c4f4
+***************************************/
 
 * {
     margin: 0;

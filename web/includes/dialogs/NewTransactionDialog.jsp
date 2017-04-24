@@ -5,10 +5,6 @@
         <form id="NewTransactionForm" class="modalForm">
             <h1>New Transaction</h1>
             <label>
-                <span>Name: </span>
-                <input type="text" name="name" id="TransactionNameField"/>
-            </label>
-            <label>
                 <span>Vendor: </span>
                 <input type="text" name="vendor" id="TransactionVendorField"/>
             </label>

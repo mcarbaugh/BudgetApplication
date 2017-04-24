@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Dev/BudgetApplication/web/scripts/ViewControllers/BudgetSummaryViewController.js</file>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/dialogs/NewTransactionDialog.jsp</file>
             <file>file:/C:/Dev/BudgetApplication/web/pages/BudgetSummaryPage.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/includes/categorySummaryPanel.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/styles/categorySummaryPanel.css</file>
+            <file>file:/C:/Dev/BudgetApplication/web/styles/dialogWindow.css</file>
         </group>
     </open-files>
 </project-private>
