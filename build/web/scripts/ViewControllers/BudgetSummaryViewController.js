@@ -124,7 +124,7 @@ function BudgetSummaryViewController() {
     function updateCategoryProgressBars() {
         
         var width, totalSpent, totalAmount, progressWidth;
-        width = document.getElementById("ProgressBarBottom").offsetWidth;
+        width = document.getElementById("FoodProgressBarBottom").offsetWidth;
         
         updateFoodProgress();
         updateTransportationProgress();
@@ -259,7 +259,7 @@ function BudgetSummaryViewController() {
         var categoryData ,labels, backgroundColor, data;
         
         categoryData = [1, 1, 1, 1, 1, 1];
-        backgroundColor = ["#113d59", "#1d5374", "#3d5d76", "#518198", "#659db8", "#aadbff"];
+        backgroundColor = ["#e55a50", "#ffa866", "#698c9e", "#80c6e2", "#64afa4", "#aa75b2"];
         labels = [" Food", " Transportation", " Lifestyle", " Housing", " Insurance", " Giving"];
         data = {labels: labels,
                 datasets: [{
@@ -460,7 +460,13 @@ function BudgetSummaryViewController() {
     
     // Miscellaneous
     function handleWindowClick(event) {
-        var newItemDialog, editItemDialog, newTransactionDialog;
+        var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog;
+        
+        newBudgetDialog = document.getElementById("NewBudgetDialog");
+        if(event.target === newBudgetDialog) {
+            newBudgetDialog.style.display = "none";
+            document.getElementById("NewBudgetForm").reset();
+        }
         
         newItemDialog = document.getElementById("NewItemDialog");
         if(event.target === newItemDialog) {

@@ -11,7 +11,7 @@
     <div class="categoryListContainer">
         
         <h4>Food</h4>
-        <div class="ProgressBarContainer" id="ProgressBarBottom">
+        <div class="ProgressBarContainer" id="FoodProgressBarBottom">
             <div class="ProgressBarInnerElement ProgressBarTop" id="FoodProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
                 <span col="0" id="FoodTotalSpent">$0.00</span>
@@ -21,7 +21,7 @@
         </div>                   
         
         <h4>Transportation</h4>
-        <div class="ProgressBarContainer">
+        <div class="ProgressBarContainer" id="TransportationProgressBarBottom">
             <div class="ProgressBarInnerElement"></div>
             <div class="ProgressBarInnerElement ProgressBarTop" id="TransportationProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
@@ -32,7 +32,7 @@
         </div>
         
         <h4>Lifestyle</h4>
-        <div class="ProgressBarContainer">
+        <div class="ProgressBarContainer" id="LifestyleProgressBarBottom">
             <div class="ProgressBarInnerElement"></div>
             <div class="ProgressBarInnerElement ProgressBarTop" id="LifestyleProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
@@ -43,7 +43,7 @@
         </div>
         
         <h4>Housing</h4>
-        <div class="ProgressBarContainer">
+        <div class="ProgressBarContainer" id="HousingProgressBarBottom">
             <div class="ProgressBarInnerElement"></div>
             <div class="ProgressBarInnerElement ProgressBarTop" id="HousingProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
@@ -54,7 +54,7 @@
         </div>
 
         <h4>Insurance & Tax</h4>
-        <div class="ProgressBarContainer">
+        <div class="ProgressBarContainer" id="InsuranceProgressBarBottom">
             <div class="ProgressBarInnerElement"></div>
             <div class="ProgressBarInnerElement ProgressBarTop" id="InsuranceProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">
@@ -65,7 +65,7 @@
         </div>
         
         <h4>Giving</h4>
-        <div class="ProgressBarContainer">
+        <div class="ProgressBarContainer" id="GivingProgressBarBottom">
             <div class="ProgressBarInnerElement"></div>
             <div class="ProgressBarInnerElement ProgressBarTop" id="GivingProgressBar"></div>
             <div class="ProgressBarInnerElement ProgressBarTextContainer">

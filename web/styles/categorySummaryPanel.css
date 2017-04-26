@@ -23,6 +23,64 @@ h4 {
     margin-left: 1em;
 }
 
+#FoodProgressBar {
+    background: #d24136;
+}
+
+#FoodProgressBarBottom {
+    background: #931d14;
+    border: 3px solid #d24136;
+}
+
+#TransportationProgressBar {
+    background: #ffa866;
+}
+
+#TransportationProgressBarBottom {
+    background: #d87c36;
+    border: 3px solid #ffa866;
+}
+
+
+#LifestyleProgressBar {
+    background: #698c9e;
+}
+
+#LifestyleProgressBarBottom {
+    background: #3b5968;
+    border: 3px solid #698c9e;
+}
+
+
+#HousingProgressBar {
+    background: #80c6e2;
+}
+
+#HousingProgressBarBottom {
+    background: #327f9e;
+    border: 3px solid #80c6e2;
+}
+
+#InsuranceProgressBar {
+    background: #64afa4;
+}
+
+#InsuranceProgressBarBottom {
+    background: #347c72;
+    border: 3px solid #64afa4;
+}
+
+
+#GivingProgressBar {
+    background: #aa75b2;
+}
+
+#GivingProgressBarBottom {
+    background: #673d6d;
+    border: 3px solid #aa75b2;
+}
+
+
 .ProgressBarContainer {
     display: block;
     position: relative;
