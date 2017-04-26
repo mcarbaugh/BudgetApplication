@@ -1,18 +1,24 @@
 
 .categorySummaryPanel {
     height: 100%;
-    width: 100%;
+    width: 26em;
     background: white;
     padding-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
 }
 
 #PieChartContainer {
+    max-height: 13.5em;
     max-width: 13.5em;
     margin: 0 auto;
 }
 
-#PieChart { 
-    
+#PieChart {
+    height: 13.5em;
+    max-width: 13.5em;
+    transition: all .5s ease-in-out;
 }
 
 .categoryListContainer {

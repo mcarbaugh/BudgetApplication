@@ -48,6 +48,7 @@
     text-align: left;
     font-size: 1.0em;
     letter-spacing: 0.06em;
+    overflow: hidden;
 }
 
 #NewBudgetButton:hover, #NewBudgetButton:focus, #signoutButton:hover, #signoutButton:focus {

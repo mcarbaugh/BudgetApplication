@@ -1,15 +1,14 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="categorySummaryPanel">
+<div class="categorySummaryPanel" id="CategorySummaryPanel">
     
+    <h2>Budget Categories</h2>
     <div id="PieChartContainer">
-        <h2>Budget Categories</h2>
         <canvas id="PieChart"></canvas>
     </div>
     
-    <div class="categoryListContainer">
-        
+    <div class="categoryListContainer" id="ProgressBarSection">
         <h4>Food</h4>
         <div class="ProgressBarContainer" id="FoodProgressBarBottom">
             <div class="ProgressBarInnerElement ProgressBarTop" id="FoodProgressBar"></div>

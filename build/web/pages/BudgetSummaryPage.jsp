@@ -35,7 +35,7 @@
         <jsp:include page="/includes/dialogs/NewItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/EditItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewTransactionDialog.jsp"/>
-        <div class="wrapper">
+        <div class="wrapper" id="Wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
                     <jsp:include page="/includes/categorySummaryPanel.jsp"/>    

@@ -4,7 +4,7 @@ function BudgetSummaryViewController() {
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
     initializeChart(); // make sure the pie chart is initiated for an empty budget
-    
+        
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
@@ -518,7 +518,28 @@ function BudgetSummaryViewController() {
     // initialize listeners
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
-    
+        
+        
+        window.addEventListener("resize", function() {
+            var wrapperHeight = document.getElementById("Wrapper").offsetHeight;
+            var piechartContainer = document.getElementById("PieChartContainer");
+            var piechart = document.getElementById("PieChart");
+            var categoryPanel = document.getElementById("CategorySummaryPanel");
+            
+            if(wrapperHeight > 635) {
+                piechart.style.visibility = "visible";
+                piechart.style.height = "13.5em";
+            }
+            else if(wrapperHeight > 400) {
+                piechart.style.visibility = "hidden";
+                piechart.style.height = "0em";
+                //categoryPanel.style.width = "26em";
+            }
+            else {
+                //categoryPanel.style.width = "0em";
+            }
+        });
+
         document.getElementById("PieChart").addEventListener('click', handlePieChartClick);
         
         // new item form save and close events
