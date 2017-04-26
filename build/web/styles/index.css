@@ -9,13 +9,13 @@
     gray_medium: #888
     gray_light: #f9f9f9
     dark_blue: #3d638e
-
-    food color:             #f44242
-    giving color:           #b23377
-    housing color:          #9741f4
-    insurance color:        #f47741
-    lifestyle color:        #f4c058
-    transportation color:   #41c4f4
+                            Light       Dark
+    food color:             #d24136     #931d14
+    giving color:           #aa75b2     #673d6d
+    housing color:          #80c6e2     #327f9e
+    insurance color:        #64afa4     #347c72
+    lifestyle color:        #698c9e     #3b5968
+    transportation color:   #ffa866     #d87c36
 ***************************************/
 
 * {
@@ -51,7 +51,9 @@ h1 {
 
 h2 {
     font-weight: 400;
-    margin: 10px 0;
+    margin: 5px 0;
+    font-size: 1.35em;
+    text-align: center;
 }
 
 h3 {

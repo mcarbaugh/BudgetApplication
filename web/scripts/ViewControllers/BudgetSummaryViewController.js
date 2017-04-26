@@ -21,7 +21,7 @@ function BudgetSummaryViewController() {
     // event handlers
     function loadItem(item) {
         var row, addTransactionCell, nameCell, plannedCell, spentCell, 
-                remainingCell, actionCell, addButton;
+                remainingCell, actionCell;
         
         row = {};
         if(item) {

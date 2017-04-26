@@ -19,6 +19,7 @@ public class GetAllItemsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
     }
     
     
@@ -31,6 +32,10 @@ public class GetAllItemsController extends HttpServlet {
             int budgetId = 0;
             if(request.getParameterMap().containsKey("budgetId")) {
                 budgetId = Integer.parseInt(request.getParameter("budgetId"));
+            }
+            else {
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/Login");
             }
             
             List<Item> items;
