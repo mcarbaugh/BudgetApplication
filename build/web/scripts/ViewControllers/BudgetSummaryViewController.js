@@ -458,6 +458,27 @@ function BudgetSummaryViewController() {
     }
     
     
+    function handleWindowSize() {
+        var wrapperHeight = document.getElementById("Wrapper").offsetHeight;
+        var piechartContainer = document.getElementById("PieChartContainer");
+        var piechart = document.getElementById("PieChart");
+        var categoryPanel = document.getElementById("CategorySummaryPanel");
+
+        if(wrapperHeight > 635) {
+            piechart.style.visibility = "visible";
+            piechart.style.height = "13.5em";
+        }
+        else if(wrapperHeight > 400) {
+            piechart.style.visibility = "hidden";
+            piechart.style.height = "0em";
+            //categoryPanel.style.width = "26em";
+        }
+        else {
+            //categoryPanel.style.width = "0em";
+        }
+    }
+    
+    
     // Miscellaneous
     function handleWindowClick(event) {
         var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog;
@@ -520,25 +541,8 @@ function BudgetSummaryViewController() {
         var i, button, numericField, numericFields, addItemButtons;
         
         
-        window.addEventListener("resize", function() {
-            var wrapperHeight = document.getElementById("Wrapper").offsetHeight;
-            var piechartContainer = document.getElementById("PieChartContainer");
-            var piechart = document.getElementById("PieChart");
-            var categoryPanel = document.getElementById("CategorySummaryPanel");
-            
-            if(wrapperHeight > 635) {
-                piechart.style.visibility = "visible";
-                piechart.style.height = "13.5em";
-            }
-            else if(wrapperHeight > 400) {
-                piechart.style.visibility = "hidden";
-                piechart.style.height = "0em";
-                //categoryPanel.style.width = "26em";
-            }
-            else {
-                //categoryPanel.style.width = "0em";
-            }
-        });
+        window.addEventListener("resize", handleWindowSize);
+        window.addEventListener("load", handleWindowSize);
 
         document.getElementById("PieChart").addEventListener('click', handlePieChartClick);
         
