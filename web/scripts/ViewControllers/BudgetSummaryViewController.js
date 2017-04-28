@@ -540,7 +540,6 @@ function BudgetSummaryViewController() {
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
         
-        
         window.addEventListener("resize", handleWindowSize);
         window.addEventListener("load", handleWindowSize);
 
