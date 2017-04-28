@@ -3,7 +3,7 @@ package budgetApplication.BudgetSummary.DataAccess;
 
 import budgetApplication.dataContracts.*;
 import static budgetApplication.baseClasses.Utilities.getCategoryAsEnum;
-import budgetApplication.dataAccess.DatabaseFactory;
+import budgetApplication.baseClasses.DatabaseFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,5 +1,5 @@
 
-package budgetApplication.dataAccess;
+package budgetApplication.baseClasses;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -28,7 +28,9 @@
             ${user.getUsername()}
         </button>
         <div id="userInfoContainer" class="dropdown-content">
-            <a href="/#">PROFILE</a>
+            <c:url value="/Profile" var="profileURL">
+            </c:url>
+            <a href="${profileURL}">PROFILE</a>
             <a href="/#">SETTINGS</a>
             <form method="post" action="Logout">
                 <input type="submit" value="SIGN OUT" id="signoutButton"/>

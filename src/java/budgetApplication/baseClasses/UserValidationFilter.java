@@ -1,5 +1,5 @@
 
-package budgetApplication.controllers;
+package budgetApplication.baseClasses;
 
 import static budgetApplication.baseClasses.ConstantFields.*;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter({"/pages/*"})
-public class JSPFilter implements Filter {
+@WebFilter({"/Budget", "/DefaultBudget", "/TransactionHistory", "/Profile"})
+public class UserValidationFilter implements Filter {
     
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -27,9 +27,11 @@ public class JSPFilter implements Filter {
         res.setHeader("Pragma", "no-cache");
         res.setDateHeader("Expires", 0);
         
-        // redirect the user to the login screen if they try to access a .jsp file directly
-        session.invalidate();
-        res.sendRedirect(req.getContextPath() + "/" + LOGIN_PAGE); // No logged-in user found, so redirect to login page.
+        if (session == null || session.getAttribute(USER) == null) {
+            res.sendRedirect(req.getContextPath() + "/" + LOGIN_PAGE); // No logged-in user found, so redirect to login page.
+        } else {
+            chain.doFilter(request, response); // Logged-in user found, so just continue request.
+        }
     }
     
     @Override

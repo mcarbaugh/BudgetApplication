@@ -1,0 +1,54 @@
+
+#UserFormContainer {
+    margin: 20px;
+}
+
+#UserFormContainer h2 {
+    text-align: left;
+    margin: 10px;
+    font-size: 1.5em;
+}
+
+#UserFormContainer form label {
+    display: block;
+    font-size: 1.15em;
+    margin: 10px;
+}
+
+#UserFormContainer form label span {
+    width: 8em;
+    display: inline-block;
+}
+
+#UserFormContainer form label input {
+    font-size: 1.0em;
+    width: 8em;
+    display: inline-block;
+    width: 12em;
+    padding: 5px;
+}
+
+#UserButtonContainer form input {
+    display: inline-block;
+    font-size: 1.15em;
+    padding: 5px 10px;
+}
+
+#UserButtonContainer form input:hover {
+    cursor: pointer;
+}
+
+#UserButtonContainer form {
+    display: inline-block;
+}
+
+.RedButton {
+    background: #e81b1b;
+    color: white;
+    border-radius: 4px;
+}
+
+#editInfoBtn, #saveInfoBtn, #cancelBtn {
+    font-size: 1.15em;
+    padding: 5px 10px;
+}

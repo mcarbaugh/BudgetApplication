@@ -1,7 +1,7 @@
 
 package budgetApplication.TransactionHistory.DataAccess;
 
-import budgetApplication.dataAccess.DatabaseFactory;
+import budgetApplication.baseClasses.DatabaseFactory;
 import budgetApplication.dataContracts.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
