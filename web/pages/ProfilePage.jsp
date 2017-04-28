@@ -52,7 +52,7 @@
                 </form>
                 <div id="UserButtonContainer">
                     <button id="editInfoBtn">Edit Information</button>
-                    <button id="saveInfoBtn" class="HiddenField">Save</button>
+                    <button id="saveInfoBtn" class="HiddenField">Save Changes</button>
                     <button id="cancelBtn" class="HiddenField">Cancel</button>
                     <form action="DeleteProfile" method="post" id="deleteForm">
                         <input type="hidden" name="userId" value="<c:out value="${user.id}"/>">
@@ -71,7 +71,7 @@
                     document.getElementById("editInfoBtn").classList.add("HiddenField");
                     document.getElementById("saveInfoBtn").classList.remove("HiddenField");
                     document.getElementById("cancelBtn").classList.remove("HiddenField");
-                    document.getElementById("deleteForm").classList.add("HiddenField");                 
+                    document.getElementById("deleteAccountBtn").classList.add("HiddenField");                 
                     
                     userNameField = document.getElementById("usernameField");
                     username = userNameField.value;
@@ -99,7 +99,7 @@
                     document.getElementById("editInfoBtn").classList.remove("HiddenField");
                     document.getElementById("saveInfoBtn").classList.add("HiddenField");
                     document.getElementById("cancelBtn").classList.add("HiddenField");
-                    document.getElementById("deleteForm").classList.remove("HiddenField");                 
+                    document.getElementById("deleteAccountBtn").classList.remove("HiddenField");                 
                     
                     userNameField = document.getElementById("usernameField");
                     userNameField.value = username;

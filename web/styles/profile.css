@@ -28,17 +28,12 @@
     padding: 5px;
 }
 
-#UserButtonContainer form input {
-    display: inline-block;
+#editInfoBtn, #saveInfoBtn, #cancelBtn, #deleteAccountBtn {
     font-size: 1.15em;
     padding: 5px 10px;
 }
 
-#UserButtonContainer form input:hover {
-    cursor: pointer;
-}
-
-#UserButtonContainer form {
+#deleteForm {
     display: inline-block;
 }
 
@@ -46,9 +41,4 @@
     background: #e81b1b;
     color: white;
     border-radius: 4px;
-}
-
-#editInfoBtn, #saveInfoBtn, #cancelBtn {
-    font-size: 1.15em;
-    padding: 5px 10px;
 }
