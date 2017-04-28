@@ -13,14 +13,25 @@
         <link rel="stylesheet" type="text/css" href="styles/budgetBanner.css">
         <link rel="stylesheet" type="text/css" href="styles/menuBar.css">
         <link rel="stylesheet" type="text/css" href="styles/links.css">
-        <script src="scripts/budgetBannerScript.js"></script>
-        <script src="scripts/windowScript.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <jsp:include page="/includes/budgetBanner.jsp"/>
-        <jsp:include page="/includes/menuBar.jsp"/>
+        <div class="budgetBannerContainer">
+            <div id="userInfoDropDown" class="dropdown">
+                <button class="dropbtn" id="UserDropDownBtn">
+                    ${user.getUsername()}
+                </button>
+                <div id="userInfoContainer" class="dropdown-content">
+                    <c:url value="/Profile" var="profileURL"></c:url>
+                    <a href="${profileURL}">PROFILE</a>
+                    <a href="/#">SETTINGS</a>
+                    <form method="post" action="Logout">
+                        <input type="submit" value="SIGN OUT" id="signoutButton"/>
+                    </form>
+                </div>
+            </div>
+        </div>        
         <div class="wrapper">
             <div id="UserFormContainer">
                 <h2>Account Information:</h2>
@@ -131,6 +142,21 @@
                     var r = confirm("This will delete all budgets, items under the user. Do you want to continue?");
                     if(r === true){
                         document.getElementById('deleteForm').submit();
+                    }
+                });
+                
+                document.getElementById("UserDropDownBtn").addEventListener("click", function() {
+                    
+                    if(!document.getElementById("userInfoContainer").classList.contains("show")) {
+                        document.getElementById("userInfoContainer").classList.toggle("show");
+                    }
+                    
+                    
+                });
+                
+                document.addEventListener("click", function(event) {
+                    if (!event.target.matches('.dropbtn')) {
+                        document.getElementById("userInfoContainer").classList.remove("show");
                     }
                 });
             })();

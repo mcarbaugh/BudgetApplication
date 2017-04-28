@@ -1,12 +1,15 @@
 
 #UserFormContainer {
     margin: 20px;
+    margin-left: 40px;
 }
 
 #UserFormContainer h2 {
     text-align: left;
     margin: 10px;
     font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 #UserFormContainer form label {

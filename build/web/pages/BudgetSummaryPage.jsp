@@ -30,11 +30,43 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/dialogs/NewBudgetDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/EditItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewTransactionDialog.jsp"/>
+        <div class="budgetBannerContainer">
+            <div id="monthDropdown" class="dropdown">
+                <button onclick="getMonthContainer()" class="dropbtn">
+                    ${budget.year} ${budget.month}
+                </button>
+
+                <div id="monthContainer" class="dropdown-content">
+                    <c:forEach items="${budgets}" var="budget" varStatus="counter">
+                        <c:url value="/Budget" var="readBudgetURL">
+                            <c:param name="budgetId" value="${budget.id}"/>
+                        </c:url>
+                        <a href="${readBudgetURL}">
+                            <c:out value="${budget.year} ${budget.month.name()}"/>
+                        </a>
+                    </c:forEach>
+                    <button id="NewBudgetButton">NEW BUDGET</button>
+                </div>
+            </div>
+            <div id="userInfoDropDown" class="dropdown">
+                <button onclick="getUserInfoContainer()" class="dropbtn">
+                    ${user.getUsername()}
+                </button>
+                <div id="userInfoContainer" class="dropdown-content">
+                    <c:url value="/Profile" var="profileURL">
+                    </c:url>
+                    <a href="${profileURL}">PROFILE</a>
+                    <a href="/#">SETTINGS</a>
+                    <form method="post" action="Logout">
+                        <input type="submit" value="SIGN OUT" id="signoutButton"/>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="wrapper" id="Wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
