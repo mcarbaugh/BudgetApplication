@@ -23,17 +23,13 @@ public class ProfileDefaultController extends HttpServlet {
         try {
              HttpSession currentSession;
              User user;
-             List<Budget> budgets;
+             int userId;
  
              currentSession = request.getSession();
              if(currentSession.getAttribute(USER) != null) {
                  // get data from session
                  user = (User) currentSession.getAttribute(USER);
-                 
-                 // get data from URL (a.k.a GET parameters)
-                 // for example:
-                 // String blah = request.getParamter("parameterName");
-                 int userId= user.getId();
+                 userId= user.getId();
                  user = getUserProfileById(userId);
                  
                  // setup your data (outgoing)

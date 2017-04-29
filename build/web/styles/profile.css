@@ -39,8 +39,8 @@
     margin: 10px;
 }
 
-#UserFormContainer form label span {
-    width: 8em;
+#UserFormContainer form label span:first-child {
+    width: 10em;
     display: inline-block;
 }
 

@@ -42,25 +42,24 @@
                     <label>
                         <span>Username:</span>
                         <input name="username" value="${user.username}" disabled id="usernameField"/>
+                        <span id="usernameMessage" class="RedText"/>
                     </label>
-
                     <label>
                         <span>First Name:</span>
                         <input name="firstName" value="${user.firstName}" disabled id="firstNameField"/>
+                        <span id="firstNameMessage" class="RedText"/>
                     </label>
-
                     <label>
                         <span>Last Name:</span>
                         <input name="lastName" value="${user.lastName}" disabled id="lastNameField"/>
+                        <span id="lastNameMessage" class="RedText"/>
                     </label>
-                    
                     <label>
-                        <span>Email:</span>
+                        <span>Email (optional):</span>
                         <input name="email" value="${user.email}" disabled id="emailField"/>
                     </label>
-
                     <label>
-                        <span>Phone:</span>
+                        <span>Phone (optional):</span>
                         <input name="phone" value="${user.phoneNumber}" disabled id="phoneNumberField"/>
                     </label>
                 </form>
@@ -135,10 +134,54 @@
                     phoneField = document.getElementById("phoneNumberField");
                     phoneField.value = phone;
                     phoneField.disabled = true;
+                    
+                    document.getElementById("usernameMessage").innerHTML = "";
+                    document.getElementById("firstNameMessage").innerHTML = "";
+                    document.getElementById("lastNameMessage").innerHTML = "";
                 });
                 
                 document.getElementById("saveInfoBtn").addEventListener("click", function() {
-                    document.getElementById("profileInfoForm").submit();
+                    var errorFound, usernameValue, firstNameValue, lastNameValue, usernameField, firstNameField, lastNameField;
+                    
+                    usernameField = document.getElementById("usernameField");
+                    firstNameField = document.getElementById("firstNameField");
+                    lastNameField = document.getElementById("lastNameField");
+                    
+                    errorFound = false;
+                    usernameValue = usernameField.value.trim();
+                    firstNameValue = firstNameField.value.trim();
+                    lastNameValue = lastNameField.value.trim();
+                    
+                    if(usernameValue === "") {
+                        errorFound = true;
+                        usernameField.value = usernameValue;
+                        document.getElementById("usernameMessage").innerHTML = "Enter a valid username.";
+                    }
+                    else {
+                        document.getElementById("usernameMessage").innerHTML = "";
+                    }
+                    
+                    if(firstNameValue === "") {
+                        errorFound = true;
+                        firstNameField.value = firstNameValue;
+                        document.getElementById("firstNameMessage").innerHTML = "Enter your first name.";
+                    }
+                    else {
+                        document.getElementById("firstNameMessage").innerHTML = "";
+                    }
+                    
+                    if(lastNameValue === "") {
+                        errorFound = true;
+                        lastNameField.value = lastNameValue;
+                        document.getElementById("lastNameMessage").innerHTML = "Enter your last name.";
+                    }
+                    else {
+                        document.getElementById("lastNameMessage").innerHTML = "";
+                    }
+                    
+                    if(!errorFound) {
+                        document.getElementById("profileInfoForm").submit();
+                    }
                 });
                 
                 document.getElementById("deleteAccountBtn").addEventListener("click", function() {
