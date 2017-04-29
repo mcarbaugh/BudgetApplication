@@ -13,7 +13,6 @@ import com.mysql.jdbc.StringUtils;
  import javax.servlet.http.HttpServletResponse;
  import javax.servlet.http.HttpSession;
 
-
 @WebServlet(urlPatterns = {"/UpdateProfile"})
 public class UpdateProfile extends HttpServlet {
     

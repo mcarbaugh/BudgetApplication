@@ -1,6 +1,7 @@
 
 package budgetApplication.baseClasses;
 
+import budgetApplication.dataContracts.DailyTransaction;
 import budgetApplication.dataContracts.TransactionHistory;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,13 +24,13 @@ public class TransactionUtilities {
             b = 7;
         }
         
-        Date fdate = new Date();
+        Date fdate1 = new Date();
+        Date fdate2 = new Date();
         Long fTime = current.getTime() - b * 24 * 3600000;
-        fdate.setTime(fTime + (1 * 24 * 3600000));
-        res[0] = fdate;
-        fdate.setTime(fTime + (8 * 24 * 3600000));
-        res[1] = fdate;
-        
+        fdate1.setTime(fTime + (1 * 24 * 3600000));
+        res[0] = fdate1;
+        fdate2.setTime(fTime + (8 * 24 * 3600000));
+        res[1] = fdate2;
         return res;
     }
     
@@ -39,7 +40,6 @@ public class TransactionUtilities {
             return null;
         }
         Date[] res = new Date[2];
-        Date fdate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, 1);    //set date to be the 1st of the month
         res[0] = calendar.getTime();
@@ -55,13 +55,48 @@ public class TransactionUtilities {
             return null;
         }
         Date start = date[0];
+        Long sl = start.getTime();
         Date end = date[1];
+        Long el = end.getTime();
         Date d;
+        Long dl;
         List<TransactionHistory> res = new ArrayList<>();
         for (TransactionHistory t : transactions) {
             d = t.getDate();
-            if ((d.equals(start) || d.after(start)) && d.before(end)) {
+            dl = d.getTime();
+            if (dl >= sl  && dl < el) {
                 res.add(t);
+            }
+        }        
+        return res;
+    }
+    
+    public static List<DailyTransaction> getDailyTransactions(List<TransactionHistory> transactions, Date[] date) {
+        List<DailyTransaction> res = new ArrayList<>();
+        Long[] days = new Long[31];
+        Long day = date[0].getTime();
+        DailyTransaction d;
+        Long hl;
+        for (int i = 0; i < 31; i++) {
+            days[i] = day + i * 24 * 3600000;
+            if (days[i] >= date[1].getTime()) {
+                break;
+            }
+            else {
+                d = new DailyTransaction();
+                d.setDay(days[i]);
+                d.setAmount(0.0);
+                res.add(d);
+            }
+        }
+        
+        for (TransactionHistory h : transactions) {
+            hl = h.getDate().getTime();
+            for (DailyTransaction t : res) {
+                if (t.getDay().equals(hl)) {
+                    double amount = t.getAmount() + h.getAmount();
+                    t.setAmount(amount);
+                }
             }
         }
         

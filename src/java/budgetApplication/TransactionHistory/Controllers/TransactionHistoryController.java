@@ -30,6 +30,9 @@ public class TransactionHistoryController extends HttpServlet {
             List<TransactionHistory> transactions;
             List<TransactionHistory> weekTransactions;
             List<TransactionHistory> monthTransactions;
+            
+            List<DailyTransaction> weekGraph;
+            List<DailyTransaction> monthGraph;
             Date[] week;
             Date[] month;
             
@@ -43,14 +46,19 @@ public class TransactionHistoryController extends HttpServlet {
                 Date current = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 
                 week = getCurrentWeekPeroid(current);
+
                 month = getCurrentMonthPeroid(current);
                 
                 weekTransactions = getTransactionsInPeriod(transactions, week);
                 monthTransactions = getTransactionsInPeriod(transactions, month);
+                
+                weekGraph = getDailyTransactions(weekTransactions, week);
+                monthGraph = getDailyTransactions(monthTransactions, month);
          
                 request.setAttribute("transactions", transactions);
-                request.setAttribute("weekTransactions", weekTransactions);
-                request.setAttribute("monthTransactions", monthTransactions);
+                request.setAttribute("weekTransactions", weekGraph);
+
+                request.setAttribute("monthTransactions", monthGraph);
                 //navigate to the page
                 request.getRequestDispatcher("/pages/TransactionHistory.jsp").forward(request, response);
             }

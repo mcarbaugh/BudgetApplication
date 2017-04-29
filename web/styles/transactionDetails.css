@@ -1,4 +1,9 @@
 
+#LineChartContainer {
+    max-height: 250px;
+    max-width: 400px;
+}
+
 #transactionHeader {
     font-size: 1.2em;
     overflow: hidden;

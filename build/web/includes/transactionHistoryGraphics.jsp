@@ -3,30 +3,63 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
 <div class="transactionGraphicsSection">
     <table>
         <thead>
             <tr id="transactionHeader">
                 <td colSpan="5" class="headerCell">Transaction Graphics</td>
             </tr>
-            <tr class="headerRow">
-                <th></th>
-                <th class="leftAlignColumn">Date</th>
-                <th class="rightAlignColumn">Name</th>
-                <th class="rightAlignColumn">Vendor</th>
-                <th class="rightAlignColumn">Amount</th>
-            </tr>  
+             
         </thead>
         <tbody id="transactionTableBody">
             <c:forEach items="${weekTransactions}" var="transaction" varStatus="counter">
-                <tr>
-                    <td></td>
-                    <td class="leftAlignColumn"><c:out value="${transaction.date}"/></td>
-                    <td class="rightAlignColumn"><c:out value="${transaction.name}"/></td>
-                    <td class="rightAlignColumn"><c:out value="${transaction.vendor}"/></td>
-                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${transaction.amount}"/></td>
-                </tr>
+
             </c:forEach>
         </tbody>
     </table>
 </div>
+
+<div id="LineChartContainer">
+    <canvas id="myChart" width="400" height="250"></canvas>
+</div>
+
+<input type="button" value="Add data" id="testButton">
+<script>
+    
+    (function() {
+        var canvas = document.getElementById("myChart");
+        var data = {
+            labels:["1yue", "2yue"], 
+            datasets: [{ 
+                    label: "my FD",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    boderColor:"rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    data: [65, 59]}]
+        };
+        
+        document.getElementById("testButton").addEventListener("click", addData);
+
+        function addData(){
+            myLineChart.data.datasets[0].data[2] = 90;
+            myLineChart.data.labels[2] = "Newly Added";
+            myLineChart.update();
+        }
+
+        var option = {
+            showLines: true
+        };
+
+        var myLineChart = new Chart(canvas,{
+            type: "line",
+            data:data,
+            options:option
+        });
+    })();
+</script>
