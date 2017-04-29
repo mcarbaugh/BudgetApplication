@@ -18,6 +18,9 @@
     </head>
     <body>
         <div class="budgetBannerContainer">
+            <form post="GET" action="DefaultBudget" id="BackToBudgetsForm">
+                <input type="submit" value="Back to Budgets" id="BackToBudgetsButton"/>
+            </form>
             <div id="userInfoDropDown" class="dropdown">
                 <button class="dropbtn" id="UserDropDownBtn">
                     ${user.getUsername()}
@@ -31,10 +34,10 @@
                     </form>
                 </div>
             </div>
-        </div>        
+        </div>      
         <div class="wrapper">
             <div id="UserFormContainer">
-                <h2>Account Information:</h2>
+                <h2>Profile Information:</h2>
                 <form method="POST" action="UpdateProfile" id="profileInfoForm">
                     <label>
                         <span>Username:</span>
@@ -139,7 +142,7 @@
                 });
                 
                 document.getElementById("deleteAccountBtn").addEventListener("click", function() {
-                    var r = confirm("This will delete all budgets, items under the user. Do you want to continue?");
+                    var r = confirm("Your information will be permanently removed. Are you sure you want to delete your account?");
                     if(r === true){
                         document.getElementById('deleteForm').submit();
                     }

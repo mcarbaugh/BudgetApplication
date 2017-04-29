@@ -1,12 +1,8 @@
 
 package budgetApplication.Login.Controllers;
 
-import static budgetApplication.baseClasses.ConstantFields.LOGIN_ERROR_MESSAGE;
-import static budgetApplication.baseClasses.ConstantFields.MESSAGE;
-import static budgetApplication.baseClasses.ConstantFields.PASSWORD;
-import static budgetApplication.baseClasses.ConstantFields.USER;
-import static budgetApplication.baseClasses.ConstantFields.USERNAME;
-import budgetApplication.businessLogic.LoginFormManager;
+import budgetApplication.Login.BusinessLogic.LoginFormManager;
+import static budgetApplication.baseClasses.ConstantFields.*;
 import budgetApplication.dataContracts.User;
 import java.io.IOException;
 import javax.servlet.ServletException;

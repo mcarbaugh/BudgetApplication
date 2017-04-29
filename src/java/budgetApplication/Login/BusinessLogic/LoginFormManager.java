@@ -1,8 +1,7 @@
 
-package budgetApplication.businessLogic;
+package budgetApplication.Login.BusinessLogic;
 
 import budgetApplication.Login.DataAccess.LoginFormDataAccess;
-import budgetApplication.dataAccess.*;
 import budgetApplication.dataContracts.*;
 
 public class LoginFormManager implements AutoCloseable {
