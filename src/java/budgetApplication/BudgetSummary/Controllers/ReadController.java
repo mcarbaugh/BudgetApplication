@@ -45,7 +45,7 @@ public class ReadController extends HttpServlet {
                     budgetId = Integer.parseInt(request.getParameter(BUDGET_ID));
                 }
                 else {
-                    budgetId = 1;
+                    budgetId = 0;
                 }
                 
                 budgets = getBudgetsByUserId(userId);
