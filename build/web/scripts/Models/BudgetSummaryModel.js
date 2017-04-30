@@ -89,7 +89,7 @@ function BudgetSummaryModel() {
         self = this;
         
         saveItemRequest = new XMLHttpRequest();
-        saveItemRequest.onreadystatechange = handleSaveItemResponse;
+        saveItemRequest.onreadystatechange = handleSaveTransactionResponse;
         saveItemRequest.open(method, url, isAsync);
         saveItemRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "budgetId=" + encodeURIComponent(item.budgetId)
@@ -100,7 +100,7 @@ function BudgetSummaryModel() {
        
         saveItemRequest.send(arguments);
         
-        function handleSaveItemResponse() {
+        function handleSaveTransactionResponse() {
             if (saveItemRequest.readyState === XMLHttpRequest.DONE) {
                 if (saveItemRequest.status === 200) {
                    
@@ -193,7 +193,7 @@ function BudgetSummaryModel() {
         self = this;
         
         updateItemRequest = new XMLHttpRequest();
-        updateItemRequest.onreadystatechange = handleSaveItemResponse;
+        updateItemRequest.onreadystatechange = handleSaveTransactionResponse;
         updateItemRequest.open(method, url, isAsync);
         updateItemRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "itemId=" + encodeURIComponent(item.id)
@@ -203,7 +203,7 @@ function BudgetSummaryModel() {
        
         updateItemRequest.send(arguments);
         
-        function handleSaveItemResponse() {
+        function handleSaveTransactionResponse() {
             if (updateItemRequest.readyState === XMLHttpRequest.DONE) {
                 if (updateItemRequest.status === 200) {
                    
@@ -271,7 +271,7 @@ function BudgetSummaryModel() {
         self = this;
         
         saveTransactionRequest = new XMLHttpRequest();
-        saveTransactionRequest.onreadystatechange = handleSaveItemResponse;
+        saveTransactionRequest.onreadystatechange = handleSaveTransactionResponse;
         saveTransactionRequest.open(method, url, isAsync);
         saveTransactionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "itemId=" + encodeURIComponent(transaction.itemId)
@@ -282,7 +282,7 @@ function BudgetSummaryModel() {
        
         saveTransactionRequest.send(arguments);
         
-        function handleSaveItemResponse() {
+        function handleSaveTransactionResponse() {
             if (saveTransactionRequest.readyState === XMLHttpRequest.DONE) {
                 if (saveTransactionRequest.status === 200) {
                    

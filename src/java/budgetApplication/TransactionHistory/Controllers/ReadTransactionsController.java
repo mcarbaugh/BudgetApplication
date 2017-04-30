@@ -1,13 +1,10 @@
 
 package budgetApplication.TransactionHistory.Controllers;
-import static budgetApplication.baseClasses.TransactionUtilities.*;
 import budgetApplication.TransactionHistory.BusinessLogic.TransactionHistoryManager;
+import static budgetApplication.baseClasses.ConstantFields.BUDGET_ID;
 import static budgetApplication.baseClasses.ConstantFields.USER;
 import budgetApplication.dataContracts.*;
 import java.io.IOException;
-import java.time.ZoneId;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/TransactionHistory"})
-public class TransactionHistoryController extends HttpServlet {
+@WebServlet(urlPatterns = {"/Transaction"})
+public class ReadTransactionsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,40 +23,19 @@ public class TransactionHistoryController extends HttpServlet {
             
             HttpSession currentSession;
             User user;
-            int userId;
-            List<TransactionHistory> transactions;
-            List<TransactionHistory> weekTransactions;
-            List<TransactionHistory> monthTransactions;
-            
-            List<DailyTransaction> weekGraph;
-            List<DailyTransaction> monthGraph;
-            Date[] week;
-            Date[] month;
+            int budgetId;
             
             currentSession = request.getSession();
             if(currentSession.getAttribute(USER) != null) {
                 user = (User) currentSession.getAttribute(USER);
-                userId = user.getId();
-                
-                transactions = getTransactionsByUserId(userId);
-                LocalDate localDate = LocalDate.now();
-                Date current = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                
-                week = getCurrentWeekPeroid(current);
-
-                month = getCurrentMonthPeroid(current);
-                
-                weekTransactions = getTransactionsInPeriod(transactions, week);
-                monthTransactions = getTransactionsInPeriod(transactions, month);
-                
-                weekGraph = getDailyTransactions(weekTransactions, week);
-                monthGraph = getDailyTransactions(monthTransactions, month);
-         
-                request.setAttribute("transactions", transactions);
-                request.setAttribute("weekTransactions", weekGraph);
-
-                request.setAttribute("monthTransactions", monthGraph);
+                if(request.getParameterMap().containsKey(BUDGET_ID)){
+                    budgetId = Integer.parseInt(request.getParameter(BUDGET_ID));
+                }
+                else {
+                    budgetId = 0;
+                }
                 //navigate to the page
+                request.setAttribute("budgetId", budgetId);
                 request.getRequestDispatcher("/pages/TransactionHistory.jsp").forward(request, response);
             }
             else {

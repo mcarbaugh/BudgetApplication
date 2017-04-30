@@ -4,9 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="categoryTableContainer">
     <div id="TransactionsButtonContainer">
-        <c:url value="/TransactionHistory" var="transactionURL"/>
+        <c:url value="/Transaction" var="transactionURL"/>
         <form method="GET" Action="${transactionURL}">
-            <input type="text" value="${user.getId()}" name="userId" class="HiddenField"/>
+            <input type="text" value="${budget.id}" name="budgetId" class="HiddenField"/>
             <input type="submit" value="Show Transaction History" id="TransactionsButton"/>
         </form>
     </div>

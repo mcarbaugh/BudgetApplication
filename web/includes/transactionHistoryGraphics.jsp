@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -13,8 +16,10 @@
              
         </thead>
         <tbody id="transactionTableBody">
+           
+            
             <c:forEach items="${weekTransactions}" var="transaction" varStatus="counter">
-
+                
             </c:forEach>
         </tbody>
     </table>
@@ -24,15 +29,16 @@
     <canvas id="myChart" width="400" height="250"></canvas>
 </div>
 
-<input type="button" value="Add data" id="testButton">
+<input type="button" value="Week" id="weekButton">
+<input type="button" value="Month" id="monthButton">
 <script>
-    
+    /*
     (function() {
         var canvas = document.getElementById("myChart");
         var data = {
             labels:["1yue", "2yue"], 
             datasets: [{ 
-                    label: "my FD",
+                    label: "week transactions",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(75,192,192,0.4)",
@@ -61,5 +67,5 @@
             data:data,
             options:option
         });
-    })();
+    })();*/
 </script>
