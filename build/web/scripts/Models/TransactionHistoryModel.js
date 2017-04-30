@@ -57,7 +57,7 @@ function TransactionHistoryModel() {
                         } else {
                             date = "";    
                         }
-                        newTransaction = new Transaction(id, vendor, item, category, amount, date);
+                        newTransaction = new TransactionDetails(id, vendor, item, category, amount, date);
                         self.transactionsList.AddTransaction(newTransaction);
                         self.TransactionLoaded.fire(newTransaction);
                     }   
@@ -110,7 +110,7 @@ function TransactionHistoryModel() {
                         category = transaction.getElementsByTagName("category")[0].childNodes[0].nodeValue;
                         amount = transaction.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
                         date = transaction.getElementsByTagName("date")[0].childNodes[0].nodeValue;
-                        newTransaction = new Transaction(id, vendor, item, category, amount, date);
+                        newTransaction = new TransactionDetails(id, vendor, item, category, amount, date);
                         
                         self.transactionsList.UpdateTransaction(newTransaction);
                         self.TransactionChanged.fire(newTransaction);

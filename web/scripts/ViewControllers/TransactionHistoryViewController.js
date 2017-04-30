@@ -80,7 +80,7 @@ function TransactionHistoryViewController() {
         category = document.getElementById("EditTransactionCategoryField").value;
         amount = document.getElementById("EditTransactionAmountField").value;
         date = document.getElementById("EditTransactionDateField").value;
-        transaction = new Transaction(id, vendor, item, category, amount, date);
+        transaction = new TransactionDetails(id, vendor, item, category, amount, date);
         Model.SendUpdateITransactionRequest(transaction);
         document.getElementById("EditTransactionDialog").style.display = "none";
         document.getElementById("EditTransactionForm").reset();
@@ -174,6 +174,7 @@ function TransactionHistoryViewController() {
         event.preventDefault();
     }
     
+    /*
     // initialize listeners
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
@@ -196,5 +197,5 @@ function TransactionHistoryViewController() {
             numericField.addEventListener("paste", cancelPasteEvent);
             numericField.addEventListener("keypress", isNumberKey);
         }
-    })();
+    })();*/
 }

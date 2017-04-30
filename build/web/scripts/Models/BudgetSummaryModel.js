@@ -328,7 +328,6 @@ function BudgetSummaryModel() {
                             default:
                                 break;
                         }
-                        alert(newItem.spent);
                         
                         self.ItemChanged.fire(newItem);
                     }

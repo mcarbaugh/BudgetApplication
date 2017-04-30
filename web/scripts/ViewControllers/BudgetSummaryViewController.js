@@ -431,6 +431,7 @@ function BudgetSummaryViewController() {
         var itemId;
         
         itemId = event.target.parentNode.parentNode.id;
+        
         document.getElementById("ItemIdField").value = itemId;
         document.getElementById("NewTransactionDialog").style.display = "block";
     }
