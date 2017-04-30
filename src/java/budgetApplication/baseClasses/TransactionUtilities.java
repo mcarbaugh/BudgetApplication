@@ -2,10 +2,10 @@
 package budgetApplication.baseClasses;
 
 import budgetApplication.dataContracts.DailyTransaction;
-import budgetApplication.dataContracts.Item;
 import budgetApplication.dataContracts.TransactionHistory;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -149,4 +149,44 @@ public class TransactionUtilities {
             throw ex;
         }
     }
+    
+    public static void order(List<TransactionHistory> transactions) {
+        
+        Collections.sort(transactions, (Object b1, Object b2) -> {
+            Date x1 = ((TransactionHistory) b1).getDate();
+            Date x2 = ((TransactionHistory) b2).getDate();
+            int dComp = x2.compareTo(x1);
+            
+            if (dComp != 0) {
+                return dComp;
+            } else {
+                String c1 = ((TransactionHistory) b1).getCategory();
+                String c2 = ((TransactionHistory) b2).getCategory();
+                int cComp = c1.compareTo(c2);
+                if (cComp != 0) {
+                    return cComp;
+                }
+                else {
+                    String i1 = ((TransactionHistory) b1).getItem();
+                    String i2 = ((TransactionHistory) b2).getItem();
+                    int iComp = i1.compareTo(i2);
+                    if (iComp != 0) {
+                        return iComp;
+                    }
+                    else {
+                        String v1 = ((TransactionHistory) b1).getVendor();
+                        String v2 = ((TransactionHistory) b2).getVendor();
+                        int vComp = v1.compareTo(v2);
+                        if (vComp != 0) {
+                            return vComp;
+                        }
+                        else {
+                            return ((TransactionHistory) b1).getId() - ((TransactionHistory) b2).getId();
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
 }

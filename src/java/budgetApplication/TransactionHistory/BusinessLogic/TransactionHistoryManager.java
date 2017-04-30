@@ -2,7 +2,7 @@
 package budgetApplication.TransactionHistory.BusinessLogic;
 
 import budgetApplication.TransactionHistory.DataAccess.TransactionHistoryDataAccess;
-import static budgetApplication.baseClasses.Utilities.order;
+import static budgetApplication.baseClasses.TransactionUtilities.order;
 import budgetApplication.dataContracts.TransactionHistory;
 import java.util.List;
 
@@ -13,7 +13,11 @@ public class TransactionHistoryManager implements AutoCloseable {
         
         try(TransactionHistoryDataAccess transactionDataAccess = new TransactionHistoryDataAccess()) {            
             List<TransactionHistory> transactions =transactionDataAccess.getAllTransactionsByBudgetId(BudgetId);         
-            //order(transactions);
+            // sort transactions by date
+            // then by category
+            // then by item
+            // then by vendor
+            order(transactions);
             return transactions;
         }
         catch(Exception ex) {
