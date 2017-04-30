@@ -60,7 +60,19 @@ public class CreateAccountController extends HttpServlet {
             }
             
             
-            if(StringUtils.isNullOrEmpty(username) || StringUtils.isEmptyOrWhitespaceOnly(username)) {
+            String usernameCheck;
+            try (CreateAccountManager accountManager = new CreateAccountManager()) {
+                usernameCheck = accountManager.getUsername(username);
+            }
+            
+            if(!StringUtils.isEmptyOrWhitespaceOnly(usernameCheck)) {
+                username_message = "Username already exists.";
+                username = "";
+                firstName = "";
+                lastName = "";
+                errorFound = true;
+            }
+            else if(StringUtils.isNullOrEmpty(username) || StringUtils.isEmptyOrWhitespaceOnly(username)) {
                 username_message = "Enter a username.";
                 errorFound = true;
                 username = "";

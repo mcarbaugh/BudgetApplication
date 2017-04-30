@@ -6,6 +6,19 @@ import budgetApplication.dataContracts.UserAccount;
 
 public class CreateAccountManager implements AutoCloseable {
 
+    public String getUsername(String username) throws Exception {
+        
+        try {
+            
+            try(CreateAccountDataAccess dataAccess = new CreateAccountDataAccess()) {
+                return dataAccess.getUsername(username);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
     public void insertUser(UserAccount user) throws Exception {
         
         try {
