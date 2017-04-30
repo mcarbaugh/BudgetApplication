@@ -7,10 +7,9 @@
     <table>
         <thead>
             <tr id="transactionHeader">
-                <td colSpan="7" class="headerCell">Transaction Details</td>
+                <td colSpan="6" class="headerCell">Transaction Details</td>
             </tr>
             <tr class="headerRow">
-                <th></th>
                 <th class="leftAlignColumn">Vendor</th>
                 <th class="leftAlignColumn">Item</th>
                 <th class="leftAlignColumn">Category</th>

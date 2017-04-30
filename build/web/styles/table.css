@@ -23,13 +23,6 @@ th, td {
     overflow: hidden;
 }
 
-tr th:first-child, tr td:first-child {
-    max-width: 2.5em;
-    width: 2.5em;
-    min-width: 2.5em;
-    overflow: hidden;
-}
-
 tr th:last-child, tr td:last-child {
     min-width: 6em;
 }

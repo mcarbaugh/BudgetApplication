@@ -14,13 +14,8 @@
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
-<<<<<<< HEAD
-        <link rel="stylesheet" href="<c:url value='/styles/transactionTable.css'/>" type="text/css">
-=======
-        <link rel="stylesheet" href="<c:url value='/styles/categoryTable.css'/>" type="text/css">
->>>>>>> master
-        <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/transactionDetails.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <script src="<c:url value='/scripts/Models/TransactionHistoryModel.js'/>"></script>

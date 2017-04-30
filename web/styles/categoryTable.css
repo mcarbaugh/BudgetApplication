@@ -1,4 +1,11 @@
 
+tr th:first-child, tr td:first-child {
+    max-width: 2.5em;
+    width: 2.5em;
+    min-width: 2.5em;
+    overflow: hidden;
+}
+
 #foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
     font-size: 1.2em;
     overflow: hidden;

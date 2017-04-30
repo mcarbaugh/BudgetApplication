@@ -12,19 +12,18 @@ function TransactionHistoryViewController() {
     
     // event handlers
     function loadTransaction(transaction) {
-        var row, blankCell, vendorCell, itemCell, categoryCell, amountCell, dateCell, actionCell;
+        var row, vendorCell, itemCell, categoryCell, amountCell, dateCell, actionCell;
         
         row = document.getElementById("transactionTableBody").insertRow(-1);
         if(row) {  
             row.id = transaction.id;
-            
-            blankCell = row.insertCell(0);
-            vendorCell = row.insertCell(1);
-            itemCell = row.insertCell(2);
-            categoryCell = row.insertCell(3);
-            amountCell = row.insertCell(4);
-            dateCell = row.insertCell(5);
-            actionCell = row.insertCell(6);
+
+            vendorCell = row.insertCell(0);
+            itemCell = row.insertCell(1);
+            categoryCell = row.insertCell(2);
+            amountCell = row.insertCell(3);
+            dateCell = row.insertCell(4);
+            actionCell = row.insertCell(5);
             
             vendorCell.innerHTML = transaction.vendor;
             itemCell.innerHTML = transaction.item;

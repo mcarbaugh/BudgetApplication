@@ -30,9 +30,9 @@
     background: #e5e5e5;
 }
 
-.transactionDetailsSection, .transactionGraphicsSection {
-    width: 70%;
-    min-width: 41em;
+.transactionDetailsSection {
+    width: 80%;
+    min-width: 54em;
     margin: 15px auto;
     margin-bottom: 50px;
     padding: 0;
