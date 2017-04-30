@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/transactionTable.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/transactionDetails.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>

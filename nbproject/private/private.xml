@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Dev/BudgetApplication/web/pages/CreateAccountPage.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/web/pages/TransactionHistory.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/transactionHistoryDetails.jsp</file>
+            <file>file:/C:/Dev/BudgetApplication/web/styles/transactionTable.css</file>
+            <file>file:/C:/Dev/BudgetApplication/web/styles/categoryTable.css</file>
         </group>
     </open-files>
 </project-private>
