@@ -93,8 +93,6 @@ function TransactionHistoryViewController() {
         message = "Delete Transaction. Continue?";
         if(confirm(message)) {
             Model.SendDeleteTransactionRequest(transactionId);
-//            table = sender.target.parentNode.parentNode.parentNode.id;
-            
             Model.transactionsList.RemoveTransaction(transactionId);
         }
     }
@@ -102,8 +100,6 @@ function TransactionHistoryViewController() {
     // open and close dialogs
     function openEditTransactionDialog(event) {
         var id, transaction;
-        
-  //      table = event.target.parentNode.parentNode.parentNode.id;
         id = event.target.parentNode.parentNode.id;
         transaction = Model.transactionsList.GetTransactionById(id);
         
@@ -123,33 +119,13 @@ function TransactionHistoryViewController() {
         document.getElementById("EditTransactionForm").reset();
     }
     
-    function handleWindowSize() {
-        var wrapperHeight = document.getElementById("Wrapper").offsetHeight;
-//        var piechartContainer = document.getElementById("PieChartContainer");
-        var piechart = document.getElementById("PieChart");
-//        var categoryPanel = document.getElementById("CategorySummaryPanel");
-
-        if(wrapperHeight > 635) {
-            piechart.style.visibility = "visible";
-            piechart.style.height = "13.5em";
-        }
-        else if(wrapperHeight > 400) {
-            piechart.style.visibility = "hidden";
-            piechart.style.height = "0em";
-            //categoryPanel.style.width = "26em";
-        }
-        else {
-            //categoryPanel.style.width = "0em";
-        }
-    }
-    
     // Miscellaneous
     function handleWindowClick(event) {
         var editTransactionDialog;
-        editTransactionDialog = document.getElementById("EditTransactionDialog");
+        //editTransactionDialog = document.getElementById("EditTransactionDialog");
         if(event.target === editTransactionDialog) {
-            editTransactionDialog.style.display = "none";
-            document.getElementById("EditTransactionForm").reset();
+            //editTransactionDialog.style.display = "none";
+            //document.getElementById("EditTransactionForm").reset();
         }
         
     }
@@ -173,17 +149,16 @@ function TransactionHistoryViewController() {
         event.preventDefault();
     }
     
-    /*
+    
     // initialize listeners
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
-        
-        window.addEventListener("resize", handleWindowSize);
-        window.addEventListener("load", handleWindowSize);
                
         // edit transaction form save and close events
-        document.getElementById("SaveEditTransactionButton").addEventListener('click', saveExistingTransaction);
-        document.getElementById("CancelEditTransactionButton").addEventListener('click', closeTransactionDialog);
+        //document.getElementById("SaveEditTransactionButton").addEventListener('click', saveExistingTransaction);
+        //document.getElementById("CancelEditTransactionButton").addEventListener('click', closeTransactionDialog);
+        // ^^^^ DIALOG BUTTONS ^^^
+         
         
         // window events
         window.addEventListener("click", handleWindowClick);
@@ -196,5 +171,5 @@ function TransactionHistoryViewController() {
             numericField.addEventListener("paste", cancelPasteEvent);
             numericField.addEventListener("keypress", isNumberKey);
         }
-    })();*/
+    })();
 }

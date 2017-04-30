@@ -161,8 +161,8 @@ public class Utilities {
         return size > 0;
     }
     
-    private static Set<String> dates = new HashSet<String>();
-    static {
+    public static boolean isDate(String value) {
+        Set<String> dates = new HashSet<String>();
         for (int year = 1900; year < 2050; year++) {
             for (int month = 1; month <= 12; month++) {
                 Calendar monthStart = new GregorianCalendar(year, month - 1, 1);
@@ -176,11 +176,6 @@ public class Utilities {
                 }
             }
         }
-    }
-    
-    public static boolean isDate(String value) {
-        
-        
         return dates.contains(value);
     }
     
