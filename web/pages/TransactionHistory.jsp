@@ -14,10 +14,16 @@
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/categoryTable.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/transactionDetails.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
         <script src="<c:url value='/scripts/windowScript.js'/>"></script>
+        <script src="<c:url value='/scripts/Models/TransactionHistoryModel.js'/>"></script>
+        <script src="<c:url value='/scripts/Models/TransactionList.js'/>"></script>
+        <script src="<c:url value='/scripts/Models/Transaction.js'/>"></script>
+        <script src="<c:url value='/scripts/ViewControllers/TransactionHistoryViewController.js'/>"></script>
+        <script src="<c:url value='/scripts/ViewControllers/ButtonFactory.js'/>"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equi v="Content-Type" content="text/html; charset=UTF-8">
@@ -45,7 +51,13 @@
                     </div>
                 </div>
             </div>
+            <input type="text" name="budgetId" class="HiddenField" value="${budgetId}" id="BudgetIdField"/>
         </div>        
+        <script>
+            (function() {
+                var viewController = new TransactionHistoryViewController();
+            })();
+        </script>
     </body>
 
 </html>

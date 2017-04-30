@@ -7,19 +7,21 @@ import java.util.Date;
 
 public class TransactionHistory implements Serializable{
     private int id;
-    private int itemId;
+    private String item;
     private String name;
     private String vendor;
     private double amount;
     private Date date;
+    private String category;
     
     public TransactionHistory() {
         id = 0;
-        itemId = 0;
+        item = "";
         name = "";
         vendor = "";
         amount = 0.0;
         date = null;
+        category = "";
     }
 
     public int getId() {
@@ -30,13 +32,22 @@ public class TransactionHistory implements Serializable{
         this.id = id;
     }
 
-    public int getItemId() {
-        return itemId;
+    public String getItem() {
+        return item;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setItem(String item) {
+        this.item = item;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 
     public String getName() {
         return name;

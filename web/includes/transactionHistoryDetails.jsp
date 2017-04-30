@@ -7,26 +7,20 @@
     <table>
         <thead>
             <tr id="transactionHeader">
-                <td colSpan="5" class="headerCell">Transaction Details</td>
+                <td colSpan="7" class="headerCell">Transaction Details</td>
             </tr>
             <tr class="headerRow">
                 <th></th>
-                <th class="leftAlignColumn">Date</th>
-                <th class="rightAlignColumn">Name</th>
-                <th class="rightAlignColumn">Vendor</th>
+                <th class="leftAlignColumn">Vendor</th>
+                <th class="leftAlignColumn">Item</th>
+                <th class="leftAlignColumn">Category</th>
                 <th class="rightAlignColumn">Amount</th>
+                <th>Date</th>
+                <th>Action</th>
             </tr>  
         </thead>
         <tbody id="transactionTableBody">
-            <c:forEach items="${transactions}" var="transaction" varStatus="counter">
-                <tr>
-                    <td></td>
-                    <td class="leftAlignColumn"><c:out value="${transaction.date}"/></td>
-                    <td class="rightAlignColumn"><c:out value="${transaction.name}"/></td>
-                    <td class="rightAlignColumn"><c:out value="${transaction.vendor}"/></td>
-                    <td class="rightAlignColumn"><fmt:formatNumber type="currency" value="${transaction.amount}"/></td>
-                </tr>
-            </c:forEach>
+
         </tbody>
     </table>
 </div>

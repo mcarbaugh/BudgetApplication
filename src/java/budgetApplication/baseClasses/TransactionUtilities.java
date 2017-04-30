@@ -2,6 +2,7 @@
 package budgetApplication.baseClasses;
 
 import budgetApplication.dataContracts.DailyTransaction;
+import budgetApplication.dataContracts.Item;
 import budgetApplication.dataContracts.TransactionHistory;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -101,5 +102,51 @@ public class TransactionUtilities {
         }
         
         return res;
+    }
+    
+    public static String convertTransactionsToXML(List<TransactionHistory> transactions) {
+        
+        try {
+            
+            String xmlDocument = "";
+            StringBuilder buffer;
+            for(int i = 0; i < transactions.size(); i++) {
+                buffer = new StringBuilder();
+                buffer.append("<transaction>");
+                buffer.append("<id>" + transactions.get(i).getId() + "</id>");
+                buffer.append("<vendor>" + transactions.get(i).getVendor() + "</vendor>");
+                buffer.append("<item>" + transactions.get(i).getItem() + "</item>");
+                buffer.append("<category>" + transactions.get(i).getCategory() + "</category>");
+                buffer.append("<amount>" + transactions.get(i).getAmount() + "</amount>");
+                buffer.append("<date>" + transactions.get(i).getDate() + "</date>");
+                buffer.append("</transaction>");
+                xmlDocument = String.format("%s%s", xmlDocument, buffer.toString());
+            }
+            
+            return String.format("%s%s%s", "<transactions>", xmlDocument, "</transactions>");
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public static String convertTransactionToXML(TransactionHistory transaction) {
+        
+        try {
+            StringBuilder buffer = new StringBuilder();
+            buffer.append("<transaction>");
+                buffer.append("<id>" + transaction.getId() + "</id>");
+                buffer.append("<vendor>" + transaction.getVendor() + "</vendor>");
+                buffer.append("<item>" + transaction.getItem() + "</item>");
+                buffer.append("<category>" + transaction.getCategory() + "</category>");
+                buffer.append("<amount>" + transaction.getAmount() + "</amount>");
+                buffer.append("<date>" + transaction.getDate() + "</date>");
+                buffer.append("</transaction>");
+
+            return String.format("%s%s%s", "<transactions>", buffer.toString(), "</transactions>");
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
     }
 }

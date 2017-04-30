@@ -1,9 +1,9 @@
 
-function Transaction(id, itemId, name, vendor, amount, date) {
+function Transaction(id, vendor, item, category, amount, date) {
     this.id = id;
-    this.itemId = itemId;
-    this.name = name;
     this.vendor = vendor;
+    this.item = item;
+    this.category = category;  
     this.amount = amount;
     this.date = date;
 }
