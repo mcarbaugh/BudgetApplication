@@ -27,6 +27,32 @@
     min-width: 8em;
 }
 
+#monthDropDown {
+    float: left;
+}
+
+#BalanceDisplayContainer {
+    padding-top: 5px;
+    text-align: center;
+    margin: 0 auto;
+    width: 12%;
+    min-width: 8em;
+    float: left;
+    display: inline-block;
+    position: absolute;
+    right: 40%;
+    transform: translateX(-38%);
+    white-space: nowrap;
+    background: white;
+    border-radius: 4px;
+    top: 5px;
+    bottom: 5px;
+    font-size: 1.1em;
+    overflow: hidden;
+    background: #364c66;
+    color: white;
+}
+
 #userInfoDropDown {
     float: right;
 }

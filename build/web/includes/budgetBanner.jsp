@@ -22,7 +22,7 @@
             <button id="NewBudgetButton">NEW BUDGET</button>
         </div>
     </div>
-    
+  
     <div id="userInfoDropDown" class="dropdown">
         <button onclick="getUserInfoContainer()" class="dropbtn">
             ${user.getUsername()}

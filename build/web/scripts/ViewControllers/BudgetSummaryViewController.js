@@ -4,12 +4,11 @@ function BudgetSummaryViewController() {
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
     initializeChart();
-     
+    
     Model.IncomeLoaded.subscribe(loadIncome);
     Model.IncomeDeleted.subscribe(removeIncomeFromView);
     Model.IncomeChanged.subscribe(refreshIncomeInView);
-    Model.SendGetAllIncomesRequest(BudgetId);
-    
+
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
@@ -21,9 +20,16 @@ function BudgetSummaryViewController() {
     Model.ItemLoaded.subscribe(updatePieChart);
     Model.ItemDeleted.subscribe(updatePieChart);
     Model.ItemChanged.subscribe(updatePieChart);
+
+    Model.IncomeLoaded.subscribe(updateBudgetBalance);
+    Model.IncomeChanged.subscribe(updateBudgetBalance);
+    Model.IncomeDeleted.subscribe(updateBudgetBalance);
+    Model.ItemLoaded.subscribe(updateBudgetBalance);
+    Model.ItemChanged.subscribe(updateBudgetBalance);
+    Model.ItemDeleted.subscribe(updateBudgetBalance);
+    
+    Model.SendGetAllIncomesRequest(BudgetId);
     Model.SendGetAllItemsRequest(BudgetId);
-    
-    
     
     //ITEMS
     function openNewItemDialog(event) {
@@ -209,13 +215,11 @@ function BudgetSummaryViewController() {
             
             if(item.getRemaining() >= 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
-                remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");
             }
             else {
                 remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
                 remainingCell.classList.add("negativeNumber");
-                remainingCell.classList.remove("positiveNumber");
             }
             
             actionCell.append(new ButtonFactory().EditItem(openEditItemDialog));
@@ -245,13 +249,11 @@ function BudgetSummaryViewController() {
             
             if(item.getRemaining() >= 0) {
                 remainingCell.innerHTML = "$" + parseFloat(item.getRemaining()).toFixed(2);
-                remainingCell.classList.add("positiveNumber");
                 remainingCell.classList.remove("negativeNumber");
             }
             else {
                 remainingCell.innerHTML = "-$" + Math.abs(parseFloat(item.getRemaining())).toFixed(2);
                 remainingCell.classList.add("negativeNumber");
-                remainingCell.classList.remove("positiveNumber");
             }
             
         }
@@ -355,7 +357,7 @@ function BudgetSummaryViewController() {
     }
     
     function loadIncome(income) {
-        var row, blankCell, nameCell, amountCell, actionCell;
+        var row, blankCell, nameCell, amountCell, bufferCell, bufferCell2, actionCell;
         
         row = {};
         if(income) {
@@ -366,10 +368,14 @@ function BudgetSummaryViewController() {
             blankCell = row.insertCell(0);
             nameCell = row.insertCell(1);
             amountCell = row.insertCell(2);
-            actionCell = row.insertCell(3);
+            bufferCell = row.insertCell(3);
+            bufferCell2 = row.insertCell(4);
+            actionCell = row.insertCell(5);
             
             nameCell.innerHTML = income.name;
             amountCell.innerHTML = "$" + parseFloat(income.amount).toFixed(2);
+            bufferCell.innerHTML = " ";
+            bufferCell2.innerHTML = " ";
             actionCell.append(new ButtonFactory().EditItem(openEditIncomeDialog));
             actionCell.append(new ButtonFactory().DeleteItem(deleteIncome));
             
@@ -417,6 +423,33 @@ function BudgetSummaryViewController() {
     
     
     // PIE CHART AND PROGRESS BARS
+    function updateBudgetBalance() {
+        var totalIncome, totalExpenses, remainingBalance;
+        
+        totalIncome = parseFloat(Model.Incomes.GetTotalAmount());
+        totalExpenses = parseFloat(0.0);
+        totalExpenses = totalExpenses + parseFloat(Model.FoodItemList.GetTotalAmount());
+        totalExpenses = totalExpenses + parseFloat(Model.GivingItemList.GetTotalAmount());
+        totalExpenses = totalExpenses + parseFloat(Model.HousingItemList.GetTotalAmount());
+        totalExpenses = totalExpenses + parseFloat(Model.InsuranceItemList.GetTotalAmount());
+        totalExpenses = totalExpenses + parseFloat(Model.LifestyleItemList.GetTotalAmount());
+        totalExpenses = totalExpenses + parseFloat(Model.TransportationItemList.GetTotalAmount());
+        
+        remainingBalance = (totalIncome - totalExpenses).toFixed(2);
+        
+        if(remainingBalance >= 0) {
+            document.getElementById("RemainingBalance").innerHTML = "$" + remainingBalance;
+            document.getElementById("RemainingBalance").classList.add("positiveNumber");
+            document.getElementById("RemainingBalance").classList.remove("negativeNumber");
+        }
+        else {
+            document.getElementById("RemainingBalance").innerHTML = "($" + Math.abs(remainingBalance) + ")";
+            document.getElementById("RemainingBalance").classList.remove("positiveNumber");
+            document.getElementById("RemainingBalance").classList.add("negativeNumber");
+        }
+        
+    }
+    
     function updateCategoryProgressBars() {
         
         var width, totalSpent, totalAmount, progressWidth;

@@ -8,16 +8,14 @@
                     <div>
                         <label>Income</label>
                     </div>
-                    <div>
-                        <label>Balance = </label>
-                        <span>$0.00</span>
-                    </div>
                 </td>
             </tr>
             <tr>
                 <th>&nbsp;</th>
                 <th class="leftAlignColumn">Source</th>
                 <th class="rightAlignColumn">Amount</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th>Action</th>
             </tr>
         </thead>

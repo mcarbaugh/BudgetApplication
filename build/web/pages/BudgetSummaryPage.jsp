@@ -39,11 +39,16 @@
         <jsp:include page="/includes/dialogs/EditItemDialog.jsp"/>
         <jsp:include page="/includes/dialogs/NewTransactionDialog.jsp"/>
         <div class="budgetBannerContainer">
+            <div id="BalanceDisplayContainer">
+                <label id="LeftToBudget">Left to Budget</label>
+                <div>
+                    <span id="RemainingBalance">$0.00</span>
+                </div>
+            </div>
             <div id="monthDropdown" class="dropdown">
                 <button onclick="getMonthContainer()" class="dropbtn">
                     ${budget.year} ${budget.month}
                 </button>
-
                 <div id="monthContainer" class="dropdown-content">
                     <c:forEach items="${budgets}" var="budget" varStatus="counter">
                         <c:url value="/Budget" var="readBudgetURL">
@@ -64,7 +69,6 @@
                     <c:url value="/Profile" var="profileURL">
                     </c:url>
                     <a href="${profileURL}">PROFILE</a>
-                    <a href="/#">SETTINGS</a>
                     <form method="post" action="Logout">
                         <input type="submit" value="SIGN OUT" id="signoutButton"/>
                     </form>
