@@ -12,10 +12,6 @@
                 <span>Amount: </span>
                 <input type="text" class="NumericField" id="TransactionAmountField"/>
             </label>
-            <label>
-                <span>Date: </span>
-                <input type="date" id="TransactionDateField"/>
-            </label>
         </form>
         <input type="text" value="0" class="HiddenField" id="ItemIdField"/>
         <input type=button value="Submit" id ="SaveNewTransactionButton"/>

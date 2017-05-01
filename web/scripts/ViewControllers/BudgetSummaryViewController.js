@@ -274,10 +274,9 @@ function BudgetSummaryViewController() {
         itemId = document.getElementById("ItemIdField").value;
         vendor = document.getElementById("TransactionVendorField").value;
         amount = document.getElementById("TransactionAmountField").value;
-        date = document.getElementById("TransactionDateField").value;
         
         // make a new transaction and pass it to model
-        transaction = new Transaction(0, itemId, "NONE", vendor, amount, date);
+        transaction = new Transaction(0, itemId, "NONE", vendor, amount, "");
         Model.SendSaveTransactionRequest(transaction);
         closeTransactionDialog();
     }
