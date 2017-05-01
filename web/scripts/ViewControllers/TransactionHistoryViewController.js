@@ -190,6 +190,7 @@ function TransactionHistoryViewController() {
         
         foodTotal = 0;
         givingTotal = 0;
+        housingTotal = 0;
         insuranceTotal = 0;
         lifestyleTotal = 0;
         transportationTotal = 0;

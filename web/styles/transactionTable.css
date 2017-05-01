@@ -56,16 +56,16 @@ select {
 }
 
 .transactionDetailsSection {
-    margin: 15px auto;
+    margin: 0px auto;
     background: white;
     padding: 0;
     border: 4px solid #4484CE;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.55);
     position: absolute;
-    bottom: 0;
-    right: 10%;
-    left: 10%;
-    top: 0;
+    bottom: 5%;
+    right: 2.5%;
+    left: 2.5%;
+    top: 5%;
     overflow: hidden;
 }
 
