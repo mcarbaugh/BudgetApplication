@@ -164,33 +164,6 @@ public class Utilities {
         return size > 0;
     }
     
-    public static Date isDate(String value) throws ParseException {
-//        Set<String> dates = new HashSet<String>();
-        Date res = null;
-//        for (int year = 1900; year < 2050; year++) {
-//            for (int month = 1; month <= 12; month++) {
-//                Calendar monthStart = new GregorianCalendar(year, month - 1, 1);
-//                int days = monthStart.getActualMaximum(Calendar.DAY_OF_MONTH);
-//                for (int day = 1; day <= days; day++) {
-//                    StringBuilder date = new StringBuilder();
-//                    date.append(String.format("%04d", year));
-//                    date.append(String.format("%02d", month));
-//                    date.append(String.format("%02d", day));
-//                    dates.add(date.toString());
-//                }
-//            }
-//        }
-//        if (dates.contains(value)) {
-            try {
-                res = new SimpleDateFormat("yyyy-MM-dd").parse(value); 
-            }
-            catch (Exception ex){
-                throw ex;
-            }
-//        }
-        return res;
-    }
-    
     public static MonthEnum getMonthAsEnum(String monthInput) {
         
         MonthEnum month = MonthEnum.NONE;

@@ -19,7 +19,7 @@
     <body>
         <div class="budgetBannerContainer">
             <form post="GET" action="DefaultBudget" id="BackToBudgetsForm">
-                <input type="submit" value="Back to Budgets" id="BackToBudgetsButton"/>
+                <input type="submit" value="Back to Budget" id="BackToBudgetsButton"/>
             </form>
             <div id="userInfoDropDown" class="dropdown">
                 <button class="dropbtn" id="UserDropDownBtn">
@@ -28,7 +28,6 @@
                 <div id="userInfoContainer" class="dropdown-content">
                     <c:url value="/Profile" var="profileURL"></c:url>
                     <a href="${profileURL}">PROFILE</a>
-                    <a href="/#">SETTINGS</a>
                     <form method="post" action="Logout">
                         <input type="submit" value="SIGN OUT" id="signoutButton"/>
                     </form>

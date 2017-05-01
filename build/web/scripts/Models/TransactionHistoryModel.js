@@ -4,6 +4,7 @@ function TransactionHistoryModel() {
     this.TransactionLoaded = new Event();
     this.TransactionChanged = new Event();
     this.TransactionDeleted = new Event();
+    this.ListChanged = new Event();
     this.sendGetAllTransactionsRequest = function(budgetId) {
         var getAllTransactionsRequest, url, method, isAsync, self, arguments;
         
@@ -76,36 +77,35 @@ function TransactionHistoryModel() {
         self = this;
         
         updateTransactionRequest = new XMLHttpRequest();
-        updateTransactionRequest.onreadystatechange = handleSaveTransactionResponse;
+        updateTransactionRequest.onreadystatechange = handleUpdateTransactionResponse;
         updateTransactionRequest.open(method, url, isAsync);
         updateTransactionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "transactionId=" + encodeURIComponent(transaction.id)
                 + "&transactionVendor=" + encodeURIComponent(transaction.vendor)
-                + "&transactionItem=" + encodeURIComponent(transaction.item)
-                + "&transactionCategory=" + encodeURIComponent(transaction.category)
-                + "&transactionAmount=" + encodeURIComponent(transaction.amount)
-                + "&transactionDate=" + encodeURIComponent(transaction.date);
+                + "&transactionAmount=" + encodeURIComponent(transaction.amount);
        
         updateTransactionRequest.send(arguments);
         
-        function handleSaveTransactionResponse() {
+        function handleUpdateTransactionResponse() {
             if (updateTransactionRequest.readyState === XMLHttpRequest.DONE) {
                 if (updateTransactionRequest.status === 200) {
                    
-                   var transaction, id, vendor, item, category, amount, date, newTransaction, i, xml, transactions, oldTransaction;
+                   var transaction, id, vendor, item, category, amount, date, newTransaction, i, xml, transactions;
                    
                     xml = updateTransactionRequest.responseXML;
-                    transactions = xml.getElementsByTagName("items")[0];
+                    transactions = xml.getElementsByTagName("transactions")[0];
                     
                     for(i = 0; i < transactions.childNodes.length; i += 1) {
                         transaction = transactions.childNodes[i];
                         id = transaction.getElementsByTagName("id")[0].childNodes[0].nodeValue;
                         
                         if(transaction.getElementsByTagName("vendor")[0].childNodes.length > 0) {
-                            name = transaction.getElementsByTagName("vendor")[0].childNodes[0].nodeValue;
-                        } else {
-                            name = "";    
+                            vendor = transaction.getElementsByTagName("vendor")[0].childNodes[0].nodeValue;
+                        } 
+                        else {
+                            vendor = "";    
                         }
+                        
                         item = transaction.getElementsByTagName("item")[0].childNodes[0].nodeValue;
                         category = transaction.getElementsByTagName("category")[0].childNodes[0].nodeValue;
                         amount = transaction.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
@@ -151,6 +151,43 @@ function TransactionHistoryModel() {
             }
         }
     };
+    this.SortByCategory = function(direction) {
+        
+        switch(direction) {
+            case "ascending":
+                this.transactionsList.SortByCategoryAscending();
+                break;
+            case "descending":
+                this.transactionsList.SortByCategoryDescending();
+                break;
+        }
+            
+        this.ListChanged.fire();
+    };
+    this.SortByAmount = function(direction) {
+        switch(direction) {
+            case "ascending":
+                this.transactionsList.SortByAmountAscending();
+                break;
+            case "descending":
+                this.transactionsList.SortByAmountDescending();
+                break;
+        }
+            
+        this.ListChanged.fire();
+    };
+    this.SortByDate = function(direction) {
+        switch(direction) {
+            case "ascending":
+                this.transactionsList.SortByDateAscending();
+                break;
+            case "descending":
+                this.transactionsList.SortByDateDescending();
+                break;
+        }
+            
+        this.ListChanged.fire();
+    };
 } 
     
 function Event() {
@@ -161,7 +198,6 @@ Event.prototype = {
     subscribe: function(fn) {
         this.handlers.push(fn);
     },
-
     unsubscribe: function(fn) {
         this.handlers = this.handlers.filter(
             function(item) {
@@ -171,7 +207,6 @@ Event.prototype = {
             }
         );
     },
-
     fire: function(o, thisObj) {
         var scope = thisObj || window;
         this.handlers.forEach(function(item) {

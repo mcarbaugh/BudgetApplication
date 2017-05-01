@@ -12,7 +12,7 @@ public class TransactionHistory implements Serializable{
     private String name;
     private String vendor;
     private double amount;
-    private Date date;
+    private String date;
     private String category;
     
     public TransactionHistory() {
@@ -74,19 +74,11 @@ public class TransactionHistory implements Serializable{
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
-
-    public String toString(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String res = format.format(date);
-        return res;
-    }
-    
-    
 }

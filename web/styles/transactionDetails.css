@@ -1,7 +1,23 @@
 
-#LineChartContainer {
-    max-height: 250px;
-    max-width: 400px;
+#BackToBudgetForm {
+    height: 100%;
+    display: inline-block;
+}
+
+#BackToBudgetButton {
+    padding: 0 15px;
+    background-color: #4484CE;
+    color: white;
+    font-size: 1.4em;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    display: block;
+}
+
+#BackToBudgetButton:hover {
+    cursor: pointer;
+    background: #364c66;
 }
 
 #transactionHeader {

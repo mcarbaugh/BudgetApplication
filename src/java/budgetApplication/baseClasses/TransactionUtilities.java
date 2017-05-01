@@ -1,9 +1,7 @@
 
 package budgetApplication.baseClasses;
 
-import budgetApplication.dataContracts.DailyTransaction;
 import budgetApplication.dataContracts.TransactionHistory;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -47,59 +45,6 @@ public class TransactionUtilities {
         calendar.add(Calendar.MONTH, 1);    //month++ -- next month
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         res[1] = calendar.getTime();
-        
-        return res;
-    }
-    
-    public static List<TransactionHistory> getTransactionsInPeriod(List<TransactionHistory> transactions, Date[] date) {
-        if (transactions == null) {
-            return null;
-        }
-        Date start = date[0];
-        Long sl = start.getTime();
-        Date end = date[1];
-        Long el = end.getTime();
-        Date d;
-        Long dl;
-        List<TransactionHistory> res = new ArrayList<>();
-        for (TransactionHistory t : transactions) {
-            d = t.getDate();
-            dl = d.getTime();
-            if (dl >= sl  && dl < el) {
-                res.add(t);
-            }
-        }        
-        return res;
-    }
-    
-    public static List<DailyTransaction> getDailyTransactions(List<TransactionHistory> transactions, Date[] date) {
-        List<DailyTransaction> res = new ArrayList<>();
-        Long[] days = new Long[31];
-        Long day = date[0].getTime();
-        DailyTransaction d;
-        Long hl;
-        for (int i = 0; i < 31; i++) {
-            days[i] = day + i * 24 * 3600000;
-            if (days[i] >= date[1].getTime()) {
-                break;
-            }
-            else {
-                d = new DailyTransaction();
-                d.setDay(days[i]);
-                d.setAmount(0.0);
-                res.add(d);
-            }
-        }
-        
-        for (TransactionHistory h : transactions) {
-            hl = h.getDate().getTime();
-            for (DailyTransaction t : res) {
-                if (t.getDay().equals(hl)) {
-                    double amount = t.getAmount() + h.getAmount();
-                    t.setAmount(amount);
-                }
-            }
-        }
         
         return res;
     }
@@ -153,8 +98,8 @@ public class TransactionUtilities {
     public static void order(List<TransactionHistory> transactions) {
         
         Collections.sort(transactions, (Object b1, Object b2) -> {
-            Date x1 = ((TransactionHistory) b1).getDate();
-            Date x2 = ((TransactionHistory) b2).getDate();
+            String x1 = ((TransactionHistory) b1).getDate();
+            String x2 = ((TransactionHistory) b2).getDate();
             int dComp = x2.compareTo(x1);
             
             if (dComp != 0) {
@@ -188,5 +133,4 @@ public class TransactionUtilities {
             }
         });
     }
-    
 }

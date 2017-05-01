@@ -9,20 +9,8 @@
                 <input type="text" name="vendor" id="EditTransactionVendorField"/>
             </label>
             <label>
-                <span>Item: </span>
-                <input type="text" name="vendor" id="EditTransactionItemField"/>
-            </label>
-            <label>
-                <span>Category: </span>
-                <input type="text" name="vendor" id="EditTransactionCategoryField"/>
-            </label>
-            <label>
                 <span>Amount: </span>
                 <input type="text" class="NumericField" id="EditTransactionAmountField"/>
-            </label>
-            <label>
-                <span>Date: </span>
-                <input type="date" id="EditTransactionDateField"/>
             </label>
         </form>
         <input type="text" value="0" class="HiddenField" id="EditTransactionIdField"/>

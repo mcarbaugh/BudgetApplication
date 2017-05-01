@@ -9,12 +9,10 @@ import budgetApplication.BudgetSummary.BusinessLogic.ItemManager;
 import budgetApplication.TransactionHistory.BusinessLogic.TransactionHistoryManager;
 import static budgetApplication.baseClasses.ConstantFields.USER;
 import static budgetApplication.baseClasses.TransactionUtilities.convertTransactionToXML;
-import static budgetApplication.baseClasses.Utilities.isDate;
 import static budgetApplication.baseClasses.Utilities.isDouble;
 import static budgetApplication.baseClasses.Utilities.isInteger;
 import budgetApplication.dataContracts.TransactionHistory;
 import java.io.IOException;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Eclat
- */
 @WebServlet(name = "EditTransactionController", urlPatterns = {"/EditTransaction"})
 public class EditTransactionController extends HttpServlet {
 
@@ -49,7 +43,7 @@ public class EditTransactionController extends HttpServlet {
             String transactionItem = null;
             String transactionCategory = null;
             double transactionAmount = 0;            
-            Date transactionDate = null;
+            String transactionDate = null;
             
             currentSession = request.getSession();
             if(currentSession.getAttribute(USER) != null) {
@@ -63,24 +57,23 @@ public class EditTransactionController extends HttpServlet {
                     transactionVendor = request.getParameter("transactionVendor");
                     transactionVendor = transactionVendor.replaceAll("'", ""); //apostrophe messes up UI
                 }
+                
                 if(request.getParameterMap().containsKey("transactionItem")) {
                     transactionItem = request.getParameter("transactionItem");
                     transactionItem = transactionItem.replaceAll("'", ""); //apostrophe messes up UI
                 }
+                
                 if(request.getParameterMap().containsKey("transactionCategory")) {
                     transactionCategory = request.getParameter("transactionCategory");
                     transactionCategory = transactionCategory.replaceAll("'", ""); //apostrophe messes up UI
                 }
+                
                 if(request.getParameterMap().containsKey("transactionAmount")) {
                     String transactionAmountInput = request.getParameter("transactionAmount");
                     
                     if(isDouble(transactionAmountInput)) {
                         transactionAmount = Double.parseDouble(transactionAmountInput);
                     }
-                }
-                if(request.getParameterMap().containsKey("transactionDate")) {
-                    String transactionDateInput = request.getParameter("transactionDate");
-                    transactionDate = isDate(transactionDateInput);   
                 }
 
                 TransactionHistory transaction = new TransactionHistory();
@@ -89,7 +82,6 @@ public class EditTransactionController extends HttpServlet {
                 transaction.setItem(transactionItem);
                 transaction.setCategory(transactionCategory);
                 transaction.setAmount(transactionAmount);
-                transaction.setDate(transactionDate);
                 saveTransaction(transaction);
                 transaction = getTransactionById(transaction.getId());
                 String xmlDocument = convertTransactionToXML(transaction);

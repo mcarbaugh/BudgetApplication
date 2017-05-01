@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/dialogWindow.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/transactionDetails.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/transactionTable.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
-        <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
-        <script src="<c:url value='/scripts/windowScript.js'/>"></script>
         <script src="<c:url value='/scripts/Models/TransactionHistoryModel.js'/>"></script>
         <script src="<c:url value='/scripts/Models/TransactionList.js'/>"></script>
         <script src="<c:url value='/scripts/Models/TransactionDetails.js'/>"></script>
@@ -28,27 +27,46 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <meta http-equi v="Content-Type" content="text/html; charset=UTF-8">
     </head>
-
     <body>
-        <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/menuBar.jsp"/>
         <jsp:include page="/includes/dialogs/EditTransactionDialog.jsp"/>
+        <div class="budgetBannerContainer">
+            <div id="BalanceDisplayContainer">
+                <label id="LeftToBudget">Left to Budget</label>
+                <div>
+                    <span id="RemainingBalance">$0.00</span>
+                </div>
+            </div>
+            <c:url value="/Budget" var="budgetURL"/>
+            <form method="GET" Action="${budgetURL}" id="BackToBudgetForm">
+                <input type="text" value="${budgetId}" name="budgetId" class="HiddenField"/>
+                <input type="submit" value="Back to Budget" id="BackToBudgetButton"/>
+            </form>
+            <div id="userInfoDropDown" class="dropdown">
+                <button class="dropbtn" id="UserDropDownBtn">
+                    ${user.getUsername()}
+                </button>
+                <div id="userInfoContainer" class="dropdown-content">
+                    <c:url value="/Profile" var="profileURL">
+                    </c:url>
+                    <a href="${profileURL}">PROFILE</a>
+                    <form method="post" action="Logout">
+                        <input type="submit" value="SIGN OUT" id="signoutButton"/>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
-                    <jsp:include page="/includes/categorySummaryPanel.jsp"/>    
+                     
                 </div>
                 <div class="rightColumn">
                     <div class="transactionHistoryContainer">
-                        <div id="BudgetItemsButtonContainer">
-                            <c:url value="/TransactionHistory" var="transactionURL"/>
-                            <form method="GET" Action="${transactionURL}">
-                                <input type="text" value="${user.getId()}" name="userId" class="HiddenField"/>
-                                <input type="submit" value="Show Budget Items" id="TransactionsButton"/>
-                            </form>
+                        <div>
+                            
                         </div>
                         <jsp:include page="/includes/transactionHistoryDetails.jsp"/>
-                        
                     </div>
                 </div>
             </div>

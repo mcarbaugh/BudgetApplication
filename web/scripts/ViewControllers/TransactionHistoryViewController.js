@@ -10,6 +10,8 @@ function TransactionHistoryViewController() {
     budgetId = document.getElementById("BudgetIdField").value;
     Model.sendGetAllTransactionsRequest(budgetId);
     
+    Model.ListChanged.subscribe(refreshTransactionTable);
+    
     // event handlers
     function loadTransaction(transaction) {
         var row, vendorCell, itemCell, categoryCell, amountCell, dateCell, actionCell;
@@ -28,7 +30,7 @@ function TransactionHistoryViewController() {
             vendorCell.innerHTML = transaction.vendor;
             itemCell.innerHTML = transaction.item;
             categoryCell.innerHTML = transaction.category;
-            amountCell.innerHTML = transaction.amount;
+            amountCell.innerHTML = "$" + parseFloat(transaction.amount).toFixed(2);
             dateCell.innerHTML = transaction.date;
             actionCell.append(new ButtonFactory().EditItem(openEditTransactionDialog));
             actionCell.append(new ButtonFactory().DeleteItem(deleteTransaction));
@@ -43,23 +45,16 @@ function TransactionHistoryViewController() {
     }
     
     function refreshTransactionInView(transaction) {
-        var row, vendorCell, itemCell, categoryCell, amountCell, dateCell;
+        var row, vendorCell, amountCell;
         
         row = document.getElementById(transaction.id);
         if(row) {
             
-            vendorCell = row.cells[1];
-            itemCell = row.cells[2];
-            categoryCell = row.cells[3];
-            amountCell = row.cells[4];
-            dateCell = row.cells[5];
-                        
-            // fill cell content with data
+            vendorCell = row.cells[0];
+            amountCell = row.cells[3];
+
             vendorCell.innerHTML = transaction.vendor;
-            itemCell.innerHTML = transaction.item;
-            categoryCell.innerHTML = transaction.category;
-            amountCell.innerHTML = transaction.amount;
-            dateCell.innerHTML = transaction.date;    
+            amountCell.innerHTML = "$" + parseFloat(transaction.amount).toFixed(2);
         }
     }
     
@@ -69,17 +64,16 @@ function TransactionHistoryViewController() {
         row.parentNode.removeChild(row);
     }
     
+    
+    
     // make changes to the model
     function saveExistingTransaction() {
-        var id, vendor, item, category, amount, date, transaction;
+        var id, vendor, amount, transaction;
         
         id = document.getElementById("EditTransactionIdField").value;
         vendor = document.getElementById("EditTransactionVendorField").value;
-        item = document.getElementById("EditTransactionItemField").value;
-        category = document.getElementById("EditTransactionCategoryField").value;
         amount = document.getElementById("EditTransactionAmountField").value;
-        date = document.getElementById("EditTransactionDateField").value;
-        transaction = new TransactionDetails(id, vendor, item, category, amount, date);
+        transaction = new TransactionDetails(id, vendor, "", "", amount, "");
         Model.SendUpdateTransactionRequest(transaction);
         document.getElementById("EditTransactionDialog").style.display = "none";
         document.getElementById("EditTransactionForm").reset();
@@ -97,6 +91,8 @@ function TransactionHistoryViewController() {
         }
     }
     
+    
+    
     // open and close dialogs
     function openEditTransactionDialog(event) {
         var id, transaction;
@@ -108,10 +104,7 @@ function TransactionHistoryViewController() {
             
             document.getElementById("EditTransactionIdField").value = id;
             document.getElementById("EditTransactionVendorField").value = transaction.vendor;
-            document.getElementById("EditTransactionItemField").value = transaction.item;
-            document.getElementById("EditTransactionCategoryField").value = transaction.category;
             document.getElementById("EditTransactionAmountField").value = transaction.amount;
-            document.getElementById("EditTransactionDateField").value = transaction.date;
             document.getElementById("EditTransactionDialog").style.display = "block";
         }
     }
@@ -121,6 +114,64 @@ function TransactionHistoryViewController() {
         document.getElementById("EditTransactionForm").reset();
     }
     
+    
+    function sortTransactions() {
+        var field, direction;
+        field = document.getElementById("SortField").value;
+        direction = document.getElementById("SortDirection").value;
+        
+        switch(field) {
+            case "category":
+                Model.SortByCategory(direction);
+                break;
+            case "amount":
+                Model.SortByAmount(direction);
+                break;
+            case "date":
+                Model.SortByDate(direction);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    function refreshTransactionTable() {
+        var row, vendorCell, itemCell, categoryCell, amountCell, dateCell, actionCell, transaction;
+        var oldTable = document.getElementById('transactionTableBody');
+        var newTable = document.createElement('Tbody');
+        newTable.id = "transactionTableBody";
+        
+        var i;
+        for(i = 0; i< Model.transactionsList.List.length; i = i + 1) {
+            
+            transaction = Model.transactionsList.List[i];
+            row = newTable.insertRow(-1);
+            
+            vendorCell = row.insertCell(0);
+            itemCell = row.insertCell(1);
+            categoryCell = row.insertCell(2);
+            amountCell = row.insertCell(3);
+            dateCell = row.insertCell(4);
+            actionCell = row.insertCell(5);
+            
+            vendorCell.innerHTML = transaction.vendor;
+            itemCell.innerHTML = transaction.item;
+            categoryCell.innerHTML = transaction.category;
+            amountCell.innerHTML = "$" + parseFloat(transaction.amount).toFixed(2);
+            dateCell.innerHTML = transaction.date;
+            actionCell.append(new ButtonFactory().EditItem(openEditTransactionDialog));
+            actionCell.append(new ButtonFactory().DeleteItem(deleteTransaction));
+            
+            vendorCell.classList.add("leftAlignColumn");
+            itemCell.classList.add("leftAlignColumn");
+            categoryCell.classList.add("leftAlignColumn");
+            amountCell.classList.add("rightAlignColumn");
+        }
+        
+        oldTable.parentNode.replaceChild(newTable, oldTable);
+    }
+    
+    
     // Miscellaneous
     function handleWindowClick(event) {
         var editTransactionDialog;
@@ -129,6 +180,7 @@ function TransactionHistoryViewController() {
             editTransactionDialog.style.display = "none";
             document.getElementById("EditTransactionForm").reset();
         }
+        
         
     }
     
@@ -154,16 +206,28 @@ function TransactionHistoryViewController() {
     
     // initialize listeners
     (function() {
-        var i, button, numericField, numericFields;
+        var i, numericField, numericFields;
                
         // edit transaction form save and close events
         document.getElementById("SaveEditTransactionButton").addEventListener('click', saveExistingTransaction);
         document.getElementById("CancelEditTransactionButton").addEventListener('click', closeTransactionDialog);
-        // ^^^^ DIALOG BUTTONS ^^^
-         
+        
+        document.getElementById("ApplySortButton").addEventListener("click", sortTransactions);
         
         // window events
         window.addEventListener("click", handleWindowClick);
+        
+        document.getElementById("UserDropDownBtn").addEventListener("click", function() {
+            if(!document.getElementById("userInfoContainer").classList.contains("show")) {
+                document.getElementById("userInfoContainer").classList.toggle("show");
+            }
+        });
+        
+        document.addEventListener("click", function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                document.getElementById("userInfoContainer").classList.remove("show");
+            }
+        });
         
         // input field events
         numericFields = document.getElementsByClassName("NumericField");

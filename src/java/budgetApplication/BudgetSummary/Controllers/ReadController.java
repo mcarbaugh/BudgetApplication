@@ -96,18 +96,6 @@ public class ReadController extends HttpServlet {
         return activeBudget;
     }
     
-    private List<Item> getItemsByBudgetId(int budgetId) throws Exception {
-        try {
-            try(ItemManager itemManager = new ItemManager()) {
-                
-                return itemManager.getAllItemsByBudgetId(budgetId);
-            }
-        }
-        catch(Exception ex) {
-            throw ex;
-        }
-    }
-    
     private List<String> getMonthDropDownItems() {
         
         List<String> months = new ArrayList();
