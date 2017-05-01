@@ -105,6 +105,36 @@ public class IncomeDataAccess implements AutoCloseable {
         }
     }
     
+    public int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try {
+            String query = "SELECT MAX(i.id) as maxId "
+                         + "FROM income i "
+                         + "WHERE i.budgetId = ?";
+            
+            int maxId = 0;
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, budgetId);
+                data = statement.executeQuery();
+                
+                while(data.next()) {
+                    maxId = data.getInt("maxId");
+                }
+                
+                mySqlConnection.close();
+            }
+            
+            return maxId;
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
     @Override
     public void close() throws Exception {
         

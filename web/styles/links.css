@@ -50,7 +50,7 @@ a, a:visited, .editButton {
     text-decoration: underline;
 }
 
-.AddItemButton {
+.AddItemButton, .AddIncomeButton {
     width: 100%;
     line-height: 2.4em;
     padding: 2px 0;
@@ -64,7 +64,7 @@ a, a:visited, .editButton {
     color: #4484CE;
 }
 
-.AddItemButton:hover {
+.AddItemButton:hover, .AddIncomeButton:hover {
     background: #f8f8f8;
     cursor: pointer;
 }

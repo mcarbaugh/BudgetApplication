@@ -3,8 +3,12 @@ function BudgetSummaryViewController() {
     var piechart;
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
-    initializeChart(); // make sure the pie chart is initiated for an empty budget
+    initializeChart();
      
+    Model.IncomeLoaded.subscribe(loadIncome);
+    Model.IncomeDeleted.subscribe(removeIncomeFromView);
+    Model.SendGetAllIncomesRequest(BudgetId);
+    
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
@@ -18,46 +22,144 @@ function BudgetSummaryViewController() {
     Model.ItemChanged.subscribe(updatePieChart);
     Model.SendGetAllItemsRequest(BudgetId);
     
-    // income setup
-    Model.IncomeLoaded.subscribe(loadIncome);
-    Model.IncomeDeleted.subscribe(removeIncomeFromView);
-    Model.SendGetAllIncomesRequest(BudgetId);
     
-    // income event handlers
-    function loadIncome(income) {
-        var row, blankCell, nameCell, amountCell, actionCell;
+    
+    //ITEMS
+    function openNewItemDialog(event) {
+        var id, categoryField;
         
-        row = {};
-        if(income) {
-            row = document.getElementById("IncomeCategoryTable").insertRow(-1);
+        categoryField = document.getElementById("NewItemCategoryField");
+        id = event.target.id;
+        switch(id) {
+            case "AddFoodItemButton":
+                categoryField.value = "FOOD";
+                break;
+            case "AddGivingItemButton":
+                categoryField.value = "GIVING";
+                break;
+            case "AddHousingItemButton":
+                categoryField.value = "HOUSING";
+                break;
+            case "AddInsuranceItemButton":
+                categoryField.value = "INSURANCE_TAX";
+                break;
+            case "AddLifestyleItemButton":
+                categoryField.value = "LIFESTYLE";
+                break;
+            case "AddTransportationItemButton":
+                categoryField.value = "TRANSPORTATION";
+                break;
+            default:
+                categoryField.value = "NONE";
+                break;
         }
         
-        if(row) {
-            blankCell = row.insertCell(0);
-            nameCell = row.insertCell(1);
-            amountCell = row.insertCell(2);
-            actionCell = row.insertCell(3);
-            
-            nameCell.innerHTML = income.name;
-            amountCell.innerHTML = income.amount;
-            actionCell.append(new ButtonFactory().EditItem());
-            actionCell.append(new ButtonFactory().DeleteItem(deleteIncome));
-            
-            row.id = "income-" + income.id;
-            
-            nameCell.classList.add("leftAlignColumn");
-            amountCell.classList.add("rightAlignColumn");
+        document.getElementById("NewItemDialog").style.display = "block";
+    }
+    
+    function openEditItemDialog(event) {
+        var table, id, item;
+        
+        table = event.target.parentNode.parentNode.parentNode.id;
+        id = event.target.parentNode.parentNode.id;
+        
+        switch(table) {
+            case "FoodCategoryTable":
+                item = Model.FoodItemList.GetItemById(id);
+                break;
+            case "GivingCategoryTable":
+                item = Model.GivingItemList.GetItemById(id);
+                break;
+            case "HousingCategoryTable":
+                item = Model.HousingItemList.GetItemById(id);
+                break;
+            case "InsuranceCategoryTable":
+                item = Model.InsuranceItemList.GetItemById(id);
+                break;
+            case "LifestyleCategoryTable":
+                item = Model.LifestyleItemList.GetItemById(id);
+                break;
+            case "TransportationCategoryTable":
+                item = Model.TransportationItemList.GetItemById(id);
+                break;
+            default:
+                break;
+        }
+        
+        if(item) {
+            document.getElementById("EditItemIdField").value = id;
+            document.getElementById("EditItemNameField").value = item.name;
+            document.getElementById("EditItemAmountField").value = item.amount;
+            document.getElementById("EditItemCategoryField").value = item.category;
+            document.getElementById("EditItemDialog").style.display = "block";
         }
     }
     
-    function removeIncomeFromView(incomeId) {
-        var row;
-        incomeId = "income-" + incomeId;
-        row = document.getElementById(incomeId);
-        row.parentNode.removeChild(row);
+    function closeItemDialog(event) {
+        document.getElementById("NewItemDialog").style.display = "none";
+        document.getElementById("NewItemForm").reset();
+        
+        document.getElementById("EditItemDialog").style.display = "none";
+        document.getElementById("EditItemForm").reset();
     }
     
-    // item event handlers
+    function saveNewItem() {
+        var name, category, amount, item;
+        
+        name = document.getElementById("NewItemNameField").value;
+        category = document.getElementById("NewItemCategoryField").value;
+        amount = document.getElementById("NewItemAmountField").value;
+        item = new BudgetItem(0, BudgetId, name, category, amount, 0);
+        Model.SendSaveItemRequest(item);
+        closeItemDialog();
+    }
+    
+    function saveExistingItem() {
+        var id, name, category, amount, item;
+        
+        id = document.getElementById("EditItemIdField").value;
+        name = document.getElementById("EditItemNameField").value;
+        category = document.getElementById("EditItemCategoryField").value;
+        amount = document.getElementById("EditItemAmountField").value;
+        item = new BudgetItem(id, BudgetId, name, category, amount, 0);
+        Model.SendUpdateItemRequest(item);
+        document.getElementById("EditItemDialog").style.display = "none";
+        document.getElementById("EditItemForm").reset();
+    }
+    
+    function deleteItem(sender) {
+        var message, itemId, table;
+        
+        itemId = sender.target.parentNode.parentNode.id;
+        
+        message = "Deleting a budget item may also delete a few transactions. Continue?";
+        if(confirm(message)) {
+            Model.SendDeleteItemRequest(itemId);
+            table = sender.target.parentNode.parentNode.parentNode.id;
+            
+            switch(table) {
+                case "FoodCategoryTable":
+                    Model.FoodItemList.RemoveItem(itemId);
+                    break;
+                case "GivingCategoryTable":
+                    Model.GivingItemList.RemoveItem(itemId);
+                    break;
+                case "HousingCategoryTable":
+                    Model.HousingItemList.RemoveItem(itemId);
+                    break;
+                case "InsuranceCategoryTable":
+                    Model.InsuranceItemList.RemoveItem(itemId);
+                    break;
+                case "LifestyleCategoryTable":
+                    Model.LifestyleItemList.RemoveItem(itemId);
+                    break;
+                case "TransportationCategoryTable":
+                    Model.TransportationItemList.RemoveItem(itemId);
+                    break;
+            }
+        }
+    }
+    
     function loadItem(item) {
         var row, addTransactionCell, nameCell, plannedCell, spentCell, 
                 remainingCell, actionCell;
@@ -160,6 +262,123 @@ function BudgetSummaryViewController() {
         row.parentNode.removeChild(row);
     }
     
+    
+
+    // TRANSACTIONS
+    function saveTransaction() {
+        var itemId, name, vendor, amount, date, transaction;
+        
+        itemId = document.getElementById("ItemIdField").value;
+        vendor = document.getElementById("TransactionVendorField").value;
+        amount = document.getElementById("TransactionAmountField").value;
+        date = document.getElementById("TransactionDateField").value;
+        
+        // make a new transaction and pass it to model
+        transaction = new Transaction(0, itemId, "NONE", vendor, amount, date);
+        Model.SendSaveTransactionRequest(transaction);
+        closeTransactionDialog();
+    }
+    
+    function openNewTransactionDialog(event) {
+        var itemId;
+        
+        itemId = event.target.parentNode.parentNode.id;
+        
+        document.getElementById("ItemIdField").value = itemId;
+        document.getElementById("NewTransactionDialog").style.display = "block";
+    }
+    
+    function closeTransactionDialog(event) {
+        document.getElementById("NewTransactionDialog").style.display = "none";
+        document.getElementById("NewTransactionForm").reset();
+    }
+    
+    
+    
+    // INCOME
+    function openNewIncomeDialog(event) {
+        document.getElementById("NewIncomeDialog").style.display = "block";
+    }
+    
+    function openEditIncomeDialog(event) {
+        
+    }
+    
+    function closeNewIncomeDialog() {
+        document.getElementById("NewIncomeDialog").style.display = "none";
+        document.getElementById("NewIncomeForm").reset();
+    }
+    
+    function saveNewIncome() {
+        var name, amount, income;
+        name = document.getElementById("NewIncomeNameField").value;
+        amount = document.getElementById("NewIncomeAmountField").value;
+        income = new Income(0, BudgetId, name, amount);
+        Model.SendSaveIncomeRequest(income);
+        closeNewIncomeDialog();
+    }
+    
+    function saveExistingIncome() {
+        
+    }
+    
+    function deleteIncome(sender) {
+        var incomeId;
+        
+        incomeId = sender.target.parentNode.parentNode.id;
+        incomeId = incomeId.split("-")[1];
+        Model.SendDeleteIncomeRequest(incomeId);
+        Model.Incomes.RemoveIncome(incomeId);
+    }
+    
+    function loadIncome(income) {
+        var row, blankCell, nameCell, amountCell, actionCell;
+        
+        row = {};
+        if(income) {
+            row = document.getElementById("IncomeCategoryTable").insertRow(-1);
+        }
+        
+        if(row) {
+            blankCell = row.insertCell(0);
+            nameCell = row.insertCell(1);
+            amountCell = row.insertCell(2);
+            actionCell = row.insertCell(3);
+            
+            nameCell.innerHTML = income.name;
+            amountCell.innerHTML = "$" + parseFloat(income.amount).toFixed(2);
+            actionCell.append(new ButtonFactory().EditItem(openEditIncomeDialog));
+            actionCell.append(new ButtonFactory().DeleteItem(deleteIncome));
+            
+            row.id = "income-" + income.id;
+            
+            nameCell.classList.add("leftAlignColumn");
+            amountCell.classList.add("rightAlignColumn");
+        }
+    }
+    
+    function removeIncomeFromView(incomeId) {
+        var row;
+        incomeId = "income-" + incomeId;
+        row = document.getElementById(incomeId);
+        row.parentNode.removeChild(row);
+    }
+    
+    
+    
+    // BUDGETS
+    function openNewBudgetDialog(event) {
+        document.getElementById("NewBudgetDialog").style.display = "block";
+    }
+
+    function closeBudgetDialog(event) {
+        document.getElementById("NewBudgetDialog").style.display = "none";
+        document.getElementById("NewBudgetForm").reset();
+    }
+    
+    
+    
+    // PIE CHART AND PROGRESS BARS
     function updateCategoryProgressBars() {
         
         var width, totalSpent, totalAmount, progressWidth;
@@ -321,215 +540,11 @@ function BudgetSummaryViewController() {
         piechart.update();
     }
     
-    
-    // make changes to the model
-    function saveNewItem() {
-        var name, category, amount, item;
-        
-        name = document.getElementById("NewItemNameField").value;
-        category = document.getElementById("NewItemCategoryField").value;
-        amount = document.getElementById("NewItemAmountField").value;
-        item = new BudgetItem(0, BudgetId, name, category, amount, 0);
-        Model.SendSaveItemRequest(item);
-        closeItemDialog();
-    }
-    
-    function saveExistingItem() {
-        var id, name, category, amount, item;
-        
-        id = document.getElementById("EditItemIdField").value;
-        name = document.getElementById("EditItemNameField").value;
-        category = document.getElementById("EditItemCategoryField").value;
-        amount = document.getElementById("EditItemAmountField").value;
-        item = new BudgetItem(id, BudgetId, name, category, amount, 0);
-        Model.SendUpdateItemRequest(item);
-        document.getElementById("EditItemDialog").style.display = "none";
-        document.getElementById("EditItemForm").reset();
-    }
-    
-    function deleteItem(sender) {
-        var message, itemId, table;
-        
-        itemId = sender.target.parentNode.parentNode.id;
-        
-        message = "Deleting a budget item may also delete a few transactions. Continue?";
-        if(confirm(message)) {
-            Model.SendDeleteItemRequest(itemId);
-            table = sender.target.parentNode.parentNode.parentNode.id;
-            
-            switch(table) {
-                case "FoodCategoryTable":
-                    Model.FoodItemList.RemoveItem(itemId);
-                    break;
-                case "GivingCategoryTable":
-                    Model.GivingItemList.RemoveItem(itemId);
-                    break;
-                case "HousingCategoryTable":
-                    Model.HousingItemList.RemoveItem(itemId);
-                    break;
-                case "InsuranceCategoryTable":
-                    Model.InsuranceItemList.RemoveItem(itemId);
-                    break;
-                case "LifestyleCategoryTable":
-                    Model.LifestyleItemList.RemoveItem(itemId);
-                    break;
-                case "TransportationCategoryTable":
-                    Model.TransportationItemList.RemoveItem(itemId);
-                    break;
-            }
-        }
-    }
-    
-    function saveTransaction() {
-        var itemId, name, vendor, amount, date, transaction;
-        
-        itemId = document.getElementById("ItemIdField").value;
-        vendor = document.getElementById("TransactionVendorField").value;
-        amount = document.getElementById("TransactionAmountField").value;
-        date = document.getElementById("TransactionDateField").value;
-        
-        // make a new transaction and pass it to model
-        transaction = new Transaction(0, itemId, "NONE", vendor, amount, date);
-        Model.SendSaveTransactionRequest(transaction);
-        closeTransactionDialog();
-    }
-    
-    function deleteIncome(sender) {
-        var incomeId;
-        
-        incomeId = sender.target.parentNode.parentNode.id;
-        incomeId = incomeId.split("-")[1];
-        Model.SendDeleteIncomeRequest(incomeId);
-        Model.Incomes.RemoveIncome(incomeId);
-    }
-    
-    
-    // open and close dialogs
-    function openNewItemDialog(event) {
-        var id, categoryField;
-        
-        categoryField = document.getElementById("NewItemCategoryField");
-        id = event.target.id;
-        switch(id) {
-            case "AddFoodItemButton":
-                categoryField.value = "FOOD";
-                break;
-            case "AddGivingItemButton":
-                categoryField.value = "GIVING";
-                break;
-            case "AddHousingItemButton":
-                categoryField.value = "HOUSING";
-                break;
-            case "AddInsuranceItemButton":
-                categoryField.value = "INSURANCE_TAX";
-                break;
-            case "AddLifestyleItemButton":
-                categoryField.value = "LIFESTYLE";
-                break;
-            case "AddTransportationItemButton":
-                categoryField.value = "TRANSPORTATION";
-                break;
-            default:
-                categoryField.value = "NONE";
-                break;
-        }
-        
-        document.getElementById("NewItemDialog").style.display = "block";
-    }
-    
-    function openEditItemDialog(event) {
-        var table, id, item;
-        
-        table = event.target.parentNode.parentNode.parentNode.id;
-        id = event.target.parentNode.parentNode.id;
-        
-        switch(table) {
-            case "FoodCategoryTable":
-                item = Model.FoodItemList.GetItemById(id);
-                break;
-            case "GivingCategoryTable":
-                item = Model.GivingItemList.GetItemById(id);
-                break;
-            case "HousingCategoryTable":
-                item = Model.HousingItemList.GetItemById(id);
-                break;
-            case "InsuranceCategoryTable":
-                item = Model.InsuranceItemList.GetItemById(id);
-                break;
-            case "LifestyleCategoryTable":
-                item = Model.LifestyleItemList.GetItemById(id);
-                break;
-            case "TransportationCategoryTable":
-                item = Model.TransportationItemList.GetItemById(id);
-                break;
-            default:
-                break;
-        }
-        
-        if(item) {
-            document.getElementById("EditItemIdField").value = id;
-            document.getElementById("EditItemNameField").value = item.name;
-            document.getElementById("EditItemAmountField").value = item.amount;
-            document.getElementById("EditItemCategoryField").value = item.category;
-            document.getElementById("EditItemDialog").style.display = "block";
-        }
-    }
-    
-    function openNewTransactionDialog(event) {
-        var itemId;
-        
-        itemId = event.target.parentNode.parentNode.id;
-        
-        document.getElementById("ItemIdField").value = itemId;
-        document.getElementById("NewTransactionDialog").style.display = "block";
-    }
-    
-    function openNewBudgetDialog(event) {
-        document.getElementById("NewBudgetDialog").style.display = "block";
-    }
-    
-    function closeItemDialog(event) {
-        document.getElementById("NewItemDialog").style.display = "none";
-        document.getElementById("NewItemForm").reset();
-        
-        document.getElementById("EditItemDialog").style.display = "none";
-        document.getElementById("EditItemForm").reset();
-    }
-    
-    function closeTransactionDialog(event) {
-        document.getElementById("NewTransactionDialog").style.display = "none";
-        document.getElementById("NewTransactionForm").reset();
-    }
-    
-    function closeBudgetDialog(event) {
-        document.getElementById("NewBudgetDialog").style.display = "none";
-        document.getElementById("NewBudgetForm").reset();
-    }
-    
-    function handleWindowSize() {
-        var wrapperHeight = document.getElementById("Wrapper").offsetHeight;
-        var piechartContainer = document.getElementById("PieChartContainer");
-        var piechart = document.getElementById("PieChart");
-        var categoryPanel = document.getElementById("CategorySummaryPanel");
 
-        if(wrapperHeight > 635) {
-            piechart.style.visibility = "visible";
-            piechart.style.height = "13.5em";
-        }
-        else if(wrapperHeight > 400) {
-            piechart.style.visibility = "hidden";
-            piechart.style.height = "0em";
-            //categoryPanel.style.width = "26em";
-        }
-        else {
-            //categoryPanel.style.width = "0em";
-        }
-    }
-    
-    
+
     // Miscellaneous
     function handleWindowClick(event) {
-        var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog;
+        var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog, newIncomeDialog;
         
         newBudgetDialog = document.getElementById("NewBudgetDialog");
         if(event.target === newBudgetDialog) {
@@ -553,6 +568,12 @@ function BudgetSummaryViewController() {
         if(event.target === newTransactionDialog) {
             newTransactionDialog.style.display = "none";
             document.getElementById("NewTransactionForm").reset();
+        }
+        
+        newIncomeDialog = document.getElementById("NewIncomeDialog");
+        if(event.target === newIncomeDialog) {
+            newIncomeDialog.style.display = "none";
+            document.getElementById("NewIncomeForm").reset();
         }
     }
     
@@ -587,9 +608,6 @@ function BudgetSummaryViewController() {
     // initialize listeners
     (function() {
         var i, button, numericField, numericFields, addItemButtons;
-        
-        window.addEventListener("resize", handleWindowSize);
-        window.addEventListener("load", handleWindowSize);
 
         document.getElementById("PieChart").addEventListener('click', handlePieChartClick);
         
@@ -608,6 +626,11 @@ function BudgetSummaryViewController() {
         // budget close events
         document.getElementById("NewBudgetButton").addEventListener('click', openNewBudgetDialog);
         document.getElementById("CancelNewBudgetButton").addEventListener('click', closeBudgetDialog);
+        
+        // income save and close events
+        document.getElementById("AddIncomeButton").addEventListener("click", openNewIncomeDialog);
+        document.getElementById("SaveNewIncomeButton").addEventListener('click', saveNewIncome);
+        document.getElementById("CancelNewIncomeButton").addEventListener('click', closeNewIncomeDialog);
         
         // window events
         window.addEventListener("click", handleWindowClick);

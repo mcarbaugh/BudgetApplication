@@ -92,7 +92,7 @@ function BudgetSummaryModel() {
         self = this;
         
         saveItemRequest = new XMLHttpRequest();
-        saveItemRequest.onreadystatechange = handleSaveTransactionResponse;
+        saveItemRequest.onreadystatechange = handleSaveItemResponse;
         saveItemRequest.open(method, url, isAsync);
         saveItemRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "budgetId=" + encodeURIComponent(item.budgetId)
@@ -103,7 +103,7 @@ function BudgetSummaryModel() {
        
         saveItemRequest.send(arguments);
         
-        function handleSaveTransactionResponse() {
+        function handleSaveItemResponse() {
             if (saveItemRequest.readyState === XMLHttpRequest.DONE) {
                 if (saveItemRequest.status === 200) {
                    
@@ -411,6 +411,54 @@ function BudgetSummaryModel() {
                 }
                 else {
                     alert("Unable to delete item. Make sure you have an internet connection and try again.");
+                }
+            }
+        }
+    };
+    this.SendSaveIncomeRequest = function(income) {
+        var saveIncomeRequest, url, method, isAsync, self, arguments;
+        url = "CreateIncome";
+        method = "POST";
+        isAsync = true;
+        self = this;
+        
+        saveIncomeRequest = new XMLHttpRequest();
+        saveIncomeRequest.onreadystatechange = handleSaveIncomeResponse;
+        saveIncomeRequest.open(method, url, isAsync);
+        saveIncomeRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        arguments = "budgetId=" + encodeURIComponent(income.budgetId)
+               + "&incomeName=" + encodeURIComponent(income.name)
+               + "&incomeAmount=" + encodeURIComponent(income.amount);
+       
+       saveIncomeRequest.send(arguments);
+       
+       function handleSaveIncomeResponse() {
+            if (saveIncomeRequest.readyState === XMLHttpRequest.DONE) {
+                if (saveIncomeRequest.status === 200) {
+                   
+                   var item, id, name, amount, newIncome, i, xml, items;
+                   
+                    xml = saveIncomeRequest.responseXML;
+                    items = xml.getElementsByTagName("incomes")[0];
+                    
+                    for(i = 0; i < items.childNodes.length; i += 1) {
+                        item = items.childNodes[i];
+                        id = item.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                        
+                        if(item.getElementsByTagName("name")[0].childNodes.length > 0) {
+                            name = item.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                        } else {
+                            name = "";    
+                        }
+
+                        amount = item.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+                        newIncome = new Income(id, self.BudgetId, name, amount);
+                        self.Incomes.AddIncome(newIncome);
+                        self.IncomeLoaded.fire(newIncome);
+                    }
+                }
+                else {
+                    alert("Unable to create new income. Try again after refreshing the page.");
                 }
             }
         }

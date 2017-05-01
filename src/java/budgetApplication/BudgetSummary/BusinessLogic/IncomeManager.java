@@ -44,6 +44,13 @@ public class IncomeManager implements AutoCloseable {
         }
     }
     
+    public int getLastIdByBudgetId(int budgetId) throws Exception {
+        
+        try (IncomeDataAccess dataAccess = new IncomeDataAccess()) {
+            return dataAccess.getLastIdByBudgetId(budgetId);
+        }
+    }
+    
     @Override
     public void close() throws Exception {
         try {
