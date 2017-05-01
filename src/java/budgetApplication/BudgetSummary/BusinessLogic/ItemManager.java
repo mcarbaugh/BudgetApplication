@@ -64,6 +64,16 @@ public class ItemManager implements AutoCloseable {
         }
     }
     
+    public int getItemIdByName(String name) throws Exception {
+        
+        try(ItemDataAccess itemDataAccess = new ItemDataAccess()) {
+            return itemDataAccess.getItemIdByName(name);
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
     @Override
     public void close() throws Exception {
         try {

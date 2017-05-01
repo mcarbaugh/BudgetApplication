@@ -35,12 +35,12 @@ public class TransactionHistoryManager implements AutoCloseable {
         }
     }
     
-    public void saveTransaction(TransactionHistory transaction) throws Exception {
+    public void saveTransaction(TransactionHistory transaction, int itemId) throws Exception {
         try {
             try (TransactionHistoryDataAccess dataAccess = new TransactionHistoryDataAccess()) {
                 
                 
-                dataAccess.updateTransaction(transaction);
+                dataAccess.updateTransaction(transaction, itemId);
                 
             }
         }

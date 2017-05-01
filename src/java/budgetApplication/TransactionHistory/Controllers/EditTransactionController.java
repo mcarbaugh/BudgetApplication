@@ -5,6 +5,7 @@
  */
 package budgetApplication.TransactionHistory.Controllers;
 
+import budgetApplication.BudgetSummary.BusinessLogic.ItemManager;
 import budgetApplication.TransactionHistory.BusinessLogic.TransactionHistoryManager;
 import static budgetApplication.baseClasses.ConstantFields.USER;
 import static budgetApplication.baseClasses.TransactionUtilities.convertTransactionToXML;
@@ -79,10 +80,7 @@ public class EditTransactionController extends HttpServlet {
                 }
                 if(request.getParameterMap().containsKey("transactionDate")) {
                     String transactionDateInput = request.getParameter("transactionDate");
-                    
-                    if(isDate(transactionDateInput)) {
-                        transactionAmount = Double.parseDouble(transactionDateInput);
-                    }
+                    transactionDate = isDate(transactionDateInput);   
                 }
 
                 TransactionHistory transaction = new TransactionHistory();
@@ -113,7 +111,10 @@ public class EditTransactionController extends HttpServlet {
         
         try {
             try(TransactionHistoryManager manager = new TransactionHistoryManager()) {
-                manager.saveTransaction(newTransaction);
+                try(ItemManager iManager = new ItemManager()) {
+                    int itemId = iManager.getItemIdByName(newTransaction.getItem());
+                    manager.saveTransaction(newTransaction, itemId);
+                }
             }
         }
         catch(Exception ex) {

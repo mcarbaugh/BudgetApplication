@@ -86,6 +86,35 @@ public class ItemDataAccess implements AutoCloseable {
         }
     }
     
+    public int getItemIdByName(String name) throws Exception {
+        try {
+            String query = "SELECT id "
+                         + "FROM item "
+                         + "WHERE name = ?";
+            int id = 0;
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setString(1, name);
+                data = statement.executeQuery();
+                
+                while(data.next()) {
+                    id = data.getInt("id");
+                }
+                
+                mySqlConnection.close();
+            }
+            
+            return id;
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    
     public void insertItemByBudgetId(Item item, int budgetId) throws Exception {
         try {
             String query = "INSERT INTO item (budgetId, name, category, amount) VALUES (?, ?, ?, ?)";

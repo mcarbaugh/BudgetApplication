@@ -72,19 +72,19 @@ public class TransactionHistoryDataAccess implements AutoCloseable {
         }
     }
     
-    public void updateTransaction(TransactionHistory transaction) throws Exception {
+    public void updateTransaction(TransactionHistory transaction, int itemId) throws Exception {
         try {
-            String query = "UPDATE transaction SET vendor = ?, item = ?, category = ?, amount = ? date = ? WHERE id = ?";
+            String query = "UPDATE transaction SET vendor = ?, itemId = ?, category = ?, amount = ? date = ? WHERE id = ?";
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 
                 PreparedStatement statement;
                 statement = mySqlConnection.prepareStatement(query);
                 statement.setString(1, transaction.getVendor());
-                statement.setString(2, transaction.getItem());
+                statement.setInt(2, itemId);
                 statement.setString(3, transaction.getCategory());
                 statement.setDouble(4, transaction.getAmount());
-                statement.setDate(5, (Date) transaction.getDate());
+                statement.setString(5, transaction.toString(transaction.getDate()));
                 statement.setInt(6, transaction.getId());
                 statement.executeUpdate();
                 mySqlConnection.close();
