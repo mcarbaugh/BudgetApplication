@@ -7,6 +7,7 @@ function BudgetSummaryViewController() {
      
     Model.IncomeLoaded.subscribe(loadIncome);
     Model.IncomeDeleted.subscribe(removeIncomeFromView);
+    Model.IncomeChanged.subscribe(refreshIncomeInView);
     Model.SendGetAllIncomesRequest(BudgetId);
     
     Model.ItemLoaded.subscribe(loadItem);
@@ -301,12 +302,27 @@ function BudgetSummaryViewController() {
     }
     
     function openEditIncomeDialog(event) {
+        var table, id, income;
         
+        table = event.target.parentNode.parentNode.parentNode.id;
+        id = event.target.parentNode.parentNode.id;
+        id = id.split("-")[1];
+        income = Model.Incomes.GetIncomeById(id);
+        
+        if(income) {
+            document.getElementById("EditIncomeIdField").value = id;
+            document.getElementById("EditIncomeNameField").value = income.name;
+            document.getElementById("EditIncomeAmountField").value = income.amount;
+            document.getElementById("EditIncomeDialog").style.display = "block";
+        }
     }
     
-    function closeNewIncomeDialog() {
+    function closeIncomeDialog() {
         document.getElementById("NewIncomeDialog").style.display = "none";
         document.getElementById("NewIncomeForm").reset();
+        
+        document.getElementById("EditIncomeDialog").style.display = "none";
+        document.getElementById("EditIncomeForm").reset();
     }
     
     function saveNewIncome() {
@@ -315,11 +331,18 @@ function BudgetSummaryViewController() {
         amount = document.getElementById("NewIncomeAmountField").value;
         income = new Income(0, BudgetId, name, amount);
         Model.SendSaveIncomeRequest(income);
-        closeNewIncomeDialog();
+        closeIncomeDialog();
     }
     
     function saveExistingIncome() {
+        var id, name, amount, income;
         
+        id = document.getElementById("EditIncomeIdField").value;
+        name = document.getElementById("EditIncomeNameField").value;
+        amount = document.getElementById("EditIncomeAmountField").value;
+        income = new Income(id, BudgetId, name, amount);
+        Model.SendUpdateIncomeRequest(income);
+        closeIncomeDialog();
     }
     
     function deleteIncome(sender) {
@@ -362,6 +385,21 @@ function BudgetSummaryViewController() {
         incomeId = "income-" + incomeId;
         row = document.getElementById(incomeId);
         row.parentNode.removeChild(row);
+    }
+    
+    function refreshIncomeInView(income) {
+        var row;
+        
+        row = document.getElementById("income-" + income.id);
+        if(row) {
+            
+            nameCell = row.cells[1];
+            amountCell = row.cells[2];
+                        
+            // fill cell content with data
+            nameCell.innerHTML = income.name;
+            amountCell.innerHTML = "$" + parseFloat(income.amount).toFixed(2);            
+        }
     }
     
     
@@ -544,7 +582,8 @@ function BudgetSummaryViewController() {
 
     // Miscellaneous
     function handleWindowClick(event) {
-        var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog, newIncomeDialog;
+        var newBudgetDialog, newItemDialog, editItemDialog, newTransactionDialog, 
+                newIncomeDialog, editIncomeDialog;
         
         newBudgetDialog = document.getElementById("NewBudgetDialog");
         if(event.target === newBudgetDialog) {
@@ -574,6 +613,12 @@ function BudgetSummaryViewController() {
         if(event.target === newIncomeDialog) {
             newIncomeDialog.style.display = "none";
             document.getElementById("NewIncomeForm").reset();
+        }
+        
+        editIncomeDialog = document.getElementById("EditIncomeDialog");
+        if(event.target === editIncomeDialog) {
+            editIncomeDialog.style.display = "none";
+            document.getElementById("EditIncomeForm").reset();
         }
     }
     
@@ -630,7 +675,9 @@ function BudgetSummaryViewController() {
         // income save and close events
         document.getElementById("AddIncomeButton").addEventListener("click", openNewIncomeDialog);
         document.getElementById("SaveNewIncomeButton").addEventListener('click', saveNewIncome);
-        document.getElementById("CancelNewIncomeButton").addEventListener('click', closeNewIncomeDialog);
+        document.getElementById("SaveEditIncomeButton").addEventListener('click', saveExistingIncome);
+        document.getElementById("CancelNewIncomeButton").addEventListener('click', closeIncomeDialog);
+        document.getElementById("CancelEditIncomeButton").addEventListener('click', closeIncomeDialog);
         
         // window events
         window.addEventListener("click", handleWindowClick);

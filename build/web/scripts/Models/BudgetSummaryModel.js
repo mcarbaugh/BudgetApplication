@@ -12,6 +12,7 @@ function BudgetSummaryModel() {
     this.ItemChanged = new Event();
     this.IncomeLoaded = new Event();
     this.IncomeDeleted = new Event();
+    this.IncomeChanged = new Event();
     this.SendGetAllItemsRequest = function(budgetId) {
         var getAllItemsRequest, url, method, isAsync, self, arguments;
         
@@ -196,7 +197,7 @@ function BudgetSummaryModel() {
         self = this;
         
         updateItemRequest = new XMLHttpRequest();
-        updateItemRequest.onreadystatechange = handleSaveTransactionResponse;
+        updateItemRequest.onreadystatechange = handleUpdateItemResponse;
         updateItemRequest.open(method, url, isAsync);
         updateItemRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         arguments = "itemId=" + encodeURIComponent(item.id)
@@ -206,11 +207,11 @@ function BudgetSummaryModel() {
        
         updateItemRequest.send(arguments);
         
-        function handleSaveTransactionResponse() {
+        function handleUpdateItemResponse() {
             if (updateItemRequest.readyState === XMLHttpRequest.DONE) {
                 if (updateItemRequest.status === 200) {
                    
-                   var item, id, name, category, amount, spent, newItem, i, xml, items, oldItem;
+                   var item, id, name, category, amount, spent, newItem, i, xml, items;
                    
                     xml = updateItemRequest.responseXML;
                     items = xml.getElementsByTagName("items")[0];
@@ -459,6 +460,54 @@ function BudgetSummaryModel() {
                 }
                 else {
                     alert("Unable to create new income. Try again after refreshing the page.");
+                }
+            }
+        }
+    };
+    this.SendUpdateIncomeRequest = function(income) {
+        var sendUpdateIncomeRequest, url, method, isAsync, self, arguments;
+        url = "EditIncome";
+        method = "POST";
+        isAsync = true;
+        self = this;
+        
+        sendUpdateIncomeRequest = new XMLHttpRequest();
+        sendUpdateIncomeRequest.onreadystatechange = handleUpdateIncomeResponse;
+        sendUpdateIncomeRequest.open(method, url, isAsync);
+        sendUpdateIncomeRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        arguments = "incomeId=" + encodeURIComponent(income.id)
+               + "&incomeName=" + encodeURIComponent(income.name)
+               + "&incomeAmount=" + encodeURIComponent(income.amount);
+       
+        sendUpdateIncomeRequest.send(arguments);
+        
+        function handleUpdateIncomeResponse() {
+            if (sendUpdateIncomeRequest.readyState === XMLHttpRequest.DONE) {
+                if (sendUpdateIncomeRequest.status === 200) {
+                   
+                   var income, id, name, amount, newIncome, i, xml, incomes;
+                   
+                    xml = sendUpdateIncomeRequest.responseXML;
+                    incomes = xml.getElementsByTagName("incomes")[0];
+                    
+                    for(i = 0; i < incomes.childNodes.length; i += 1) {
+                        income = incomes.childNodes[i];
+                        id = income.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                        
+                        if(income.getElementsByTagName("name")[0].childNodes.length > 0) {
+                            name = income.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                        } else {
+                            name = "";    
+                        }
+
+                        amount = income.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+                        newIncome = new Income(id, self.BudgetId, name, amount);
+                        self.Incomes.UpdateIncome(newIncome);
+                        self.IncomeChanged.fire(newIncome);
+                    }
+                }
+                else {
+                    alert("Unable to update income. Try again after refreshing the page.");
                 }
             }
         }

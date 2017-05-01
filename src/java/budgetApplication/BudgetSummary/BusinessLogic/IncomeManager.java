@@ -17,6 +17,17 @@ public class IncomeManager implements AutoCloseable {
         }
     }
 
+    public Income getIncomeById(int id) throws Exception {
+        try {
+            try (IncomeDataAccess dataAccess = new IncomeDataAccess()) {
+                return dataAccess.getIncomeById(id);
+            }
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
     public void saveIncome(Income income, int budgetId) throws Exception {
         try {
             try (IncomeDataAccess dataAccess = new IncomeDataAccess()) {

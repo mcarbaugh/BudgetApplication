@@ -2,7 +2,9 @@
 package budgetApplication.BudgetSummary.DataAccess;
 
 import budgetApplication.baseClasses.DatabaseFactory;
+import static budgetApplication.baseClasses.Utilities.getCategoryAsEnum;
 import budgetApplication.dataContracts.Income;
+import budgetApplication.dataContracts.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +27,37 @@ public class IncomeDataAccess implements AutoCloseable {
                 statement.executeUpdate();
                 mySqlConnection.close();
             }  
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    public Income getIncomeById(int id) throws Exception {
+        try {
+            String query = "SELECT i.id, i.name, i.amount "
+                         + "FROM income i "
+                         + "WHERE i.id = ?";
+            
+            Income income = new Income();
+            ResultSet data;
+            try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
+                
+                PreparedStatement statement;
+                statement = mySqlConnection.prepareStatement(query); 
+                statement.setInt(1, id);
+                data = statement.executeQuery();
+                
+                while(data.next()) {
+                    income.setId(data.getInt("id"));
+                    income.setName(data.getString("name"));
+                    income.setAmount(data.getDouble("amount"));
+                }
+                
+                mySqlConnection.close();
+            }
+            
+            return income;
         }
         catch (Exception ex) {
             throw ex;

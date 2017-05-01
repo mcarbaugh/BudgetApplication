@@ -1,88 +1,106 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package budgetApplication.BudgetSummary.Controllers;
 
+import budgetApplication.BudgetSummary.BusinessLogic.IncomeManager;
+import static budgetApplication.BudgetSummary.Controllers.Utilities.convertIncomeToXML;
+import static budgetApplication.baseClasses.ConstantFields.USER;
+import static budgetApplication.baseClasses.Utilities.isDouble;
+import static budgetApplication.baseClasses.Utilities.isInteger;
+import budgetApplication.dataContracts.Income;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author mcarb
- */
 @WebServlet(name = "EditIncomeController", urlPatterns = {"/EditIncome"})
 public class EditIncomeController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditIncomeController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditIncomeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        try {
+            
+            HttpSession currentSession;
+            double incomeAmount = 0;
+            String incomeName = null;
+            int incomeId = 0;
+            
+            currentSession = request.getSession();
+            if(currentSession.getAttribute(USER) != null) {
+                
+                if(request.getParameterMap().containsKey("incomeId")) {
+                    String itemIdInput = request.getParameter("incomeId");
+                    incomeId = isInteger(itemIdInput) ? Integer.parseInt(itemIdInput) : 0;
+                }
+                
+                if(request.getParameterMap().containsKey("incomeName")) {
+                    incomeName = request.getParameter("incomeName");
+                    incomeName = incomeName.replaceAll("'", ""); //apostrophe messes up UI
+                }
+                
+                if(request.getParameterMap().containsKey("incomeAmount")) {
+                    String itemAmountInput = request.getParameter("incomeAmount");
+                    
+                    if(isDouble(itemAmountInput)) {
+                        incomeAmount = Double.parseDouble(itemAmountInput);
+                    }
+                }
+
+                Income income = new Income();
+                income.setId(incomeId);
+                income.setName(incomeName);
+                income.setAmount(incomeAmount);
+                saveIncome(income, 0);
+                income = getIncomeById(income.getId());
+                String xmlDocument = convertIncomeToXML(income);
+                
+                response.setContentType("text/xml");
+                response.setHeader("Cache-Control", "no-cache");
+                response.getWriter().write(xmlDocument);
+            }
+            else {
+                currentSession.invalidate();
+            }
+        }
+        catch (Exception ex) {
+            throw new ServletException(ex);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
+    private void saveIncome(Income newIncome, int budgetId) throws Exception {
+        
+        try {
+            try(IncomeManager manager = new IncomeManager()) {
+                manager.saveIncome(newIncome, budgetId);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
+    
+    private Income getIncomeById(int id) throws Exception {
+        
+        try {
+            try(IncomeManager manager = new IncomeManager()) {
+                return manager.getIncomeById(id);
+            }
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+    }
 }

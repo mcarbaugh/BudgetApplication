@@ -7,7 +7,7 @@ IncomeList.prototype = {
     AddIncome: function(income) {
         this.List.push(income);
     },
-    UpdateItem: function(income) {
+    UpdateIncome: function(income) {
         var id, oldIncome;
         
         id = income.id;
