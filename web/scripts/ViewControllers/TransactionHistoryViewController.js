@@ -1,5 +1,6 @@
 
 function TransactionHistoryViewController() {
+    var chart;
     var budgetId = 0;
     var Model = new TransactionHistoryModel();
     
@@ -10,7 +11,18 @@ function TransactionHistoryViewController() {
     budgetId = document.getElementById("BudgetIdField").value;
     Model.sendGetAllTransactionsRequest(budgetId);
     
+    Model.TransactionLoaded.subscribe(refreshChart);
+    Model.TransactionDeleted.subscribe(refreshChart);
+    Model.TransactionChanged.subscribe(refreshChart);
+    
+    Model.TransactionLoaded.subscribe(refreshBalance);
+    Model.TransactionDeleted.subscribe(refreshBalance);
+    Model.TransactionChanged.subscribe(refreshBalance);
+    
+    Model.ListChanged.subscribe(refreshChart);
     Model.ListChanged.subscribe(refreshTransactionTable);
+    
+    initializeChart();
     
     // event handlers
     function loadTransaction(transaction) {
@@ -169,6 +181,87 @@ function TransactionHistoryViewController() {
         }
         
         oldTable.parentNode.replaceChild(newTable, oldTable);
+    }
+    
+    function refreshChart() {
+        var categoryData, labels, backgroundColor, 
+                foodTotal, givingTotal, housingTotal, insuranceTotal, lifestyleTotal, transportationTotal,
+                data, i;
+        
+        foodTotal = 0;
+        givingTotal = 0;
+        insuranceTotal = 0;
+        lifestyleTotal = 0;
+        transportationTotal = 0;
+        for(i = 0; i < Model.transactionsList.List.length; i = i + 1) {
+            if(Model.transactionsList.List[i].category === "FOOD") {
+                foodTotal = foodTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+            
+            if(Model.transactionsList.List[i].category === "GIVING") {
+                givingTotal = givingTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+            
+            if(Model.transactionsList.List[i].category === "HOUSING") {
+                housingTotal = housingTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+            
+            if(Model.transactionsList.List[i].category === "INSURANCE_TAX") {
+                insuranceTotal = insuranceTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+            
+            if(Model.transactionsList.List[i].category === "LIFESTYLE") {
+                lifestyleTotal = lifestyleTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+            
+            if(Model.transactionsList.List[i].category === "TRANSPORTATION") {
+                transportationTotal = transportationTotal + parseFloat(Model.transactionsList.List[i].amount);
+            }
+        }
+        
+        chart.data.datasets[0].data[0] = foodTotal;
+        chart.data.datasets[0].data[1] = transportationTotal;
+        chart.data.datasets[0].data[2] = lifestyleTotal;
+        chart.data.datasets[0].data[3] = housingTotal;
+        chart.data.datasets[0].data[4] = insuranceTotal;
+        chart.data.datasets[0].data[5] = givingTotal;
+        chart.update();
+    }
+    
+    function refreshBalance() {
+        var totalIncome, totalExpenses, remainingBalance;
+        
+        totalExpenses = parseFloat(Model.transactionsList.GetTotalAmount());
+
+        document.getElementById("RemainingBalance").innerHTML = "($" + totalExpenses.toFixed(2) + ")";
+        document.getElementById("RemainingBalance").classList.add("negativeNumber");
+    }
+    
+    function initializeChart() {
+        var categoryData ,labels, backgroundColor, data;
+        
+        categoryData = [1, 1, 1, 1, 1, 1];
+        backgroundColor = ["#e55a50", "#ffa866", "#698c9e", "#80c6e2", "#64afa4", "#aa75b2"];
+        labels = [" Food", " Transportation", " Lifestyle", " Housing", " Insurance", " Giving"];
+        data = {labels: labels,
+                datasets: [{
+                        data: categoryData, 
+                        backgroundColor: backgroundColor,
+                        hoverBackgroundColor: backgroundColor}]
+                };
+
+        chart = document.getElementById("TransactionChart");
+        chart = new Chart(chart, {
+            type: 'bar',
+            data: data,
+            labels: labels,
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+        chart.update();
     }
     
     

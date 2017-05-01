@@ -28,11 +28,10 @@
         <meta http-equi v="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <jsp:include page="/includes/menuBar.jsp"/>
         <jsp:include page="/includes/dialogs/EditTransactionDialog.jsp"/>
         <div class="budgetBannerContainer">
             <div id="BalanceDisplayContainer">
-                <label id="LeftToBudget">Left to Budget</label>
+                <label id="LeftToBudget">Total Transactions</label>
                 <div>
                     <span id="RemainingBalance">$0.00</span>
                 </div>
@@ -56,22 +55,54 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper">
+                    
+        <div class="wrapper" id="Wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
-                     
+                    <div id="TransactionSummaryPanel">
+                        <div id="TransactionChartContainer">
+                            <h2>Transactions by Category</h2>
+                            <canvas id="TransactionChart"></canvas>
+                        </div>    
+                    </div>
                 </div>
                 <div class="rightColumn">
                     <div class="transactionHistoryContainer">
-                        <div>
-                            
+                        <div class="transactionDetailsSection">
+                            <div id="TransactionFilterOptions">
+                                <select id="SortField">
+                                    <option value="default" selected>Sort By:</option>
+                                    <option value="category">Category</option>
+                                    <option value="amount">Amount</option>
+                                    <option value="date">Date</option>
+                                </select>
+                                <select id="SortDirection">
+                                    <option value="ascending">Ascending</option>
+                                    <option value="descending">Descending</option>
+                                </select>
+                                <input type="submit" value="Apply" id="ApplySortButton"/>
+                            </div>
+                            <div id="TransactionTableContainer">
+                                <table id="TransactionTable">
+                                    <thead>
+                                        <tr class="headerRow">
+                                            <th class="leftAlignColumn">Vendor</th>
+                                            <th class="leftAlignColumn">Item</th>
+                                            <th class="leftAlignColumn">Category</th>
+                                            <th class="rightAlignColumn">Amount</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>  
+                                    </thead>
+                                    <tbody id="transactionTableBody"></tbody>
+                                </table>    
+                            </div>
                         </div>
-                        <jsp:include page="/includes/transactionHistoryDetails.jsp"/>
                     </div>
                 </div>
             </div>
             <input type="text" name="budgetId" class="HiddenField" value="${budgetId}" id="BudgetIdField"/>
-        </div>        
+        </div>                 
         <script>
             var viewController = new TransactionHistoryViewController();
         </script>

@@ -55,6 +55,18 @@ TransactionList.prototype = {
     },
     SortByDateDescending: function() {
         this.List.sort(DateDescendingComp);
+    },
+    GetTotalAmount: function() {
+        var i;
+        
+        var total = 0;
+        for(i = 0; i < this.List.length; i += 1) {
+            if(this.List[i].amount) {
+                total = (parseFloat(this.List[i].amount) + total);
+            }
+        }
+        
+        return total.toFixed(2);
     }
 };
 
