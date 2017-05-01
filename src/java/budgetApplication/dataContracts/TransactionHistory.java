@@ -2,6 +2,7 @@
 package budgetApplication.dataContracts;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -80,5 +81,12 @@ public class TransactionHistory implements Serializable{
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String toString(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String res = format.format(date);
+        return res;
+    }
+    
     
 }

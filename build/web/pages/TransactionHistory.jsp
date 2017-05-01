@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<c:url value='/styles/menuBar.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/links.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/table.css'/>" type="text/css">
+        <link rel="stylesheet" href="<c:url value='/styles/dialogWindow.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/transactionDetails.css'/>" type="text/css">
         <link rel="stylesheet" href="<c:url value='/styles/categorySummaryPanel.css'/>" type="text/css">
         <script src="<c:url value='/scripts/budgetBannerScript.js'/>"></script>
@@ -31,6 +32,7 @@
     <body>
         <jsp:include page="/includes/budgetBanner.jsp"/>
         <jsp:include page="/includes/menuBar.jsp"/>
+        <jsp:include page="/includes/dialogs/EditTransactionDialog.jsp"/>
         <div class="wrapper">
             <div class="columnContainer">
                 <div class="leftColumn">
@@ -46,16 +48,14 @@
                             </form>
                         </div>
                         <jsp:include page="/includes/transactionHistoryDetails.jsp"/>
-                        <jsp:include page="/includes/transactionHistoryGraphics.jsp"/>
+                        
                     </div>
                 </div>
             </div>
             <input type="text" name="budgetId" class="HiddenField" value="${budgetId}" id="BudgetIdField"/>
         </div>        
         <script>
-            (function() {
-                var viewController = new TransactionHistoryViewController();
-            })();
+            var viewController = new TransactionHistoryViewController();
         </script>
     </body>
 

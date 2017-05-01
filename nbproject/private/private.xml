@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Dev/BudgetApplication/web/includes/dialogs/NewTransactionDialog.jsp</file>
             <file>file:/C:/Dev/BudgetApplication/web/scripts/ViewControllers/BudgetSummaryViewController.js</file>
-            <file>file:/C:/Dev/BudgetApplication/web/scripts/Models/BudgetSummaryModel.js</file>
-            <file>file:/C:/Dev/BudgetApplication/web/pages/BudgetSummaryPage.jsp</file>
-            <file>file:/C:/Dev/BudgetApplication/web/includes/categories/incomeSection.jsp</file>
         </group>
     </open-files>
 </project-private>

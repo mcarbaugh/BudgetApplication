@@ -80,7 +80,7 @@ function TransactionHistoryViewController() {
         amount = document.getElementById("EditTransactionAmountField").value;
         date = document.getElementById("EditTransactionDateField").value;
         transaction = new TransactionDetails(id, vendor, item, category, amount, date);
-        Model.SendUpdateITransactionRequest(transaction);
+        Model.SendUpdateTransactionRequest(transaction);
         document.getElementById("EditTransactionDialog").style.display = "none";
         document.getElementById("EditTransactionForm").reset();
     }
@@ -100,10 +100,12 @@ function TransactionHistoryViewController() {
     // open and close dialogs
     function openEditTransactionDialog(event) {
         var id, transaction;
+        
         id = event.target.parentNode.parentNode.id;
         transaction = Model.transactionsList.GetTransactionById(id);
         
         if(transaction) {
+            
             document.getElementById("EditTransactionIdField").value = id;
             document.getElementById("EditTransactionVendorField").value = transaction.vendor;
             document.getElementById("EditTransactionItemField").value = transaction.item;
@@ -122,10 +124,10 @@ function TransactionHistoryViewController() {
     // Miscellaneous
     function handleWindowClick(event) {
         var editTransactionDialog;
-        //editTransactionDialog = document.getElementById("EditTransactionDialog");
+        editTransactionDialog = document.getElementById("EditTransactionDialog");
         if(event.target === editTransactionDialog) {
-            //editTransactionDialog.style.display = "none";
-            //document.getElementById("EditTransactionForm").reset();
+            editTransactionDialog.style.display = "none";
+            document.getElementById("EditTransactionForm").reset();
         }
         
     }
@@ -152,11 +154,11 @@ function TransactionHistoryViewController() {
     
     // initialize listeners
     (function() {
-        var i, button, numericField, numericFields, addItemButtons;
+        var i, button, numericField, numericFields;
                
         // edit transaction form save and close events
-        //document.getElementById("SaveEditTransactionButton").addEventListener('click', saveExistingTransaction);
-        //document.getElementById("CancelEditTransactionButton").addEventListener('click', closeTransactionDialog);
+        document.getElementById("SaveEditTransactionButton").addEventListener('click', saveExistingTransaction);
+        document.getElementById("CancelEditTransactionButton").addEventListener('click', closeTransactionDialog);
         // ^^^^ DIALOG BUTTONS ^^^
          
         
