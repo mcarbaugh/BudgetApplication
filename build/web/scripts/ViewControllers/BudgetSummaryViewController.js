@@ -4,7 +4,7 @@ function BudgetSummaryViewController() {
     var BudgetId = document.getElementById("ActiveBudgetIdField").value;
     var Model = new BudgetSummaryModel();
     initializeChart(); // make sure the pie chart is initiated for an empty budget
-        
+     
     Model.ItemLoaded.subscribe(loadItem);
     Model.ItemDeleted.subscribe(removeItemFromView);
     Model.ItemChanged.subscribe(refreshItemInView);
@@ -18,7 +18,46 @@ function BudgetSummaryViewController() {
     Model.ItemChanged.subscribe(updatePieChart);
     Model.SendGetAllItemsRequest(BudgetId);
     
-    // event handlers
+    // income setup
+    Model.IncomeLoaded.subscribe(loadIncome);
+    Model.IncomeDeleted.subscribe(removeIncomeFromView);
+    Model.SendGetAllIncomesRequest(BudgetId);
+    
+    // income event handlers
+    function loadIncome(income) {
+        var row, blankCell, nameCell, amountCell, actionCell;
+        
+        row = {};
+        if(income) {
+            row = document.getElementById("IncomeCategoryTable").insertRow(-1);
+        }
+        
+        if(row) {
+            blankCell = row.insertCell(0);
+            nameCell = row.insertCell(1);
+            amountCell = row.insertCell(2);
+            actionCell = row.insertCell(3);
+            
+            nameCell.innerHTML = income.name;
+            amountCell.innerHTML = income.amount;
+            actionCell.append(new ButtonFactory().EditItem());
+            actionCell.append(new ButtonFactory().DeleteItem(deleteIncome));
+            
+            row.id = "income-" + income.id;
+            
+            nameCell.classList.add("leftAlignColumn");
+            amountCell.classList.add("rightAlignColumn");
+        }
+    }
+    
+    function removeIncomeFromView(incomeId) {
+        var row;
+        incomeId = "income-" + incomeId;
+        row = document.getElementById(incomeId);
+        row.parentNode.removeChild(row);
+    }
+    
+    // item event handlers
     function loadItem(item) {
         var row, addTransactionCell, nameCell, plannedCell, spentCell, 
                 remainingCell, actionCell;
@@ -355,6 +394,15 @@ function BudgetSummaryViewController() {
         closeTransactionDialog();
     }
     
+    function deleteIncome(sender) {
+        var incomeId;
+        
+        incomeId = sender.target.parentNode.parentNode.id;
+        incomeId = incomeId.split("-")[1];
+        Model.SendDeleteIncomeRequest(incomeId);
+        Model.Incomes.RemoveIncome(incomeId);
+    }
+    
     
     // open and close dialogs
     function openNewItemDialog(event) {
@@ -457,7 +505,6 @@ function BudgetSummaryViewController() {
         document.getElementById("NewBudgetDialog").style.display = "none";
         document.getElementById("NewBudgetForm").reset();
     }
-    
     
     function handleWindowSize() {
         var wrapperHeight = document.getElementById("Wrapper").offsetHeight;

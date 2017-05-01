@@ -6,7 +6,7 @@ tr th:first-child, tr td:first-child {
     overflow: hidden;
 }
 
-#foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
+#incomeHeader, #foodHeader, #givingHeader, #housingHeader, #insuranceHeader, #lifestyleHeader, #transportationHeader {
     font-size: 1.2em;
     overflow: hidden;
     margin: 2px;
@@ -19,18 +19,11 @@ tr th:first-child, tr td:first-child {
     font-weight: 400;
 }
 
-#foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
+#incomeHeader:hover, #foodHeader:hover, #givingHeader:hover, #housingHeader:hover, #insuranceHeader:hover, #lifestyleHeader:hover, #transportationHeader:hover {
     background: #4484CE;
     color: white;
     overflow: hidden;
 }
-
-
-#foodHeader {
-    background: #4484CE;
-    color: white;
-}
-
 
 .categoryTableContainer {
     overflow-x: hidden;

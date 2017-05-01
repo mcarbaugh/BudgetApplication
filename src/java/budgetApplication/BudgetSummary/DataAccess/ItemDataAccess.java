@@ -109,7 +109,7 @@ public class ItemDataAccess implements AutoCloseable {
     
     public void updateItem(Item item) throws Exception {
         try {
-            String query = "UPDATE item SET name = ?, amount = ? WHERE id = ?";
+            String query = "UPDATE item SET budgetId = ?, name = ?, amount = ? WHERE id = ?";
             
             try (Connection mySqlConnection = DatabaseFactory.getMySqlConnection()) {
                 

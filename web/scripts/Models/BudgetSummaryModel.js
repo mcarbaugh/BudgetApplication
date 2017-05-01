@@ -6,9 +6,12 @@ function BudgetSummaryModel() {
     this.InsuranceItemList = new ItemList();
     this.LifestyleItemList = new ItemList();
     this.TransportationItemList = new ItemList();
+    this.Incomes = new IncomeList();
     this.ItemLoaded = new Event();
     this.ItemDeleted = new Event();
     this.ItemChanged = new Event();
+    this.IncomeLoaded = new Event();
+    this.IncomeDeleted = new Event();
     this.SendGetAllItemsRequest = function(budgetId) {
         var getAllItemsRequest, url, method, isAsync, self, arguments;
         
@@ -334,6 +337,80 @@ function BudgetSummaryModel() {
                 }
                 else {
                     alert("Unable to create new item. Try again after refreshing the page.");
+                }
+            }
+        }
+    };
+    this.SendGetAllIncomesRequest = function(budgetId) {
+        var getAllIncomesRequest, url, method, isAsync, self, arguments;
+        
+        this.bdugetId = budgetId;
+        url = "GetAllIncomes";
+        method = "POST";
+        isAsync = true;
+        self = this;
+        
+        getAllIncomesRequest = new XMLHttpRequest();
+        getAllIncomesRequest.onreadystatechange = handleGetAllIncomesResponse;
+        getAllIncomesRequest.open(method, url, isAsync);
+        getAllIncomesRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        arguments = "budgetId=" + encodeURIComponent(budgetId);
+        getAllIncomesRequest.send(arguments);
+        
+        function handleGetAllIncomesResponse() {
+            if(getAllIncomesRequest.readyState === XMLHttpRequest.DONE) {
+                if(getAllIncomesRequest.status === 200) {
+                    var income, id, name, amount, newIncome, i, xml, incomes;
+                   
+                    xml = getAllIncomesRequest.responseXML;
+                    incomes = xml.getElementsByTagName("incomes")[0];
+                    
+                    for(i = 0; i < incomes.childNodes.length; i += 1) {
+                        income = incomes.childNodes[i];
+                        id = income.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+                        
+                        if(income.getElementsByTagName("name")[0].childNodes.length > 0) {
+                            name = income.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                        } else {
+                            name = "";    
+                        }
+
+                        amount = income.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+                        newIncome = new Income(id, self.BudgetId, name, amount);
+                        self.Incomes.AddIncome(newIncome);
+                        self.IncomeLoaded.fire(newIncome);
+                    }
+                }
+                else {
+                    alert("Unable to locate your income. Make sure you have an internet connection and try again.");
+                }
+            }
+        }
+    };
+    this.SendDeleteIncomeRequest = function(incomeId) {
+        var deleteIncomeRequest, url, method, isAsync, self, arguments;
+        url = "DeleteIncome";
+        method = "POST";
+        isAsync = true;
+        self = this;
+        
+        deleteIncomeRequest = new XMLHttpRequest();
+        deleteIncomeRequest.onreadystatechange = handleDeleteIncomeResponse;
+        deleteIncomeRequest.open(method, url, isAsync);
+        deleteIncomeRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        arguments = "incomeId=" + encodeURIComponent(incomeId);
+        deleteIncomeRequest.send(arguments);
+        
+        function handleDeleteIncomeResponse() {
+            if (deleteIncomeRequest.readyState === XMLHttpRequest.DONE) {
+                if (deleteIncomeRequest.status === 200) {
+                    var xml;
+                    
+                    xml = deleteIncomeRequest.responseXML;
+                    self.IncomeDeleted.fire(incomeId);
+                }
+                else {
+                    alert("Unable to delete item. Make sure you have an internet connection and try again.");
                 }
             }
         }

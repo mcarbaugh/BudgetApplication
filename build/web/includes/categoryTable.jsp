@@ -11,6 +11,8 @@
         </form>
     </div>
     
+    <jsp:include page="/includes/categories/incomeSection.jsp"/>
+            
     <div id=" Food"/>
     <jsp:include page="/includes/categories/foodSection.jsp"/>
     
