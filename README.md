@@ -4,9 +4,10 @@ A dynamic web application to help users manage their monthly spending. This proj
 #### Technology Stack:
 HTML5, CSS3, Javascript, JavaServer Pages, MySQL Database
 
-#### External Dependencies:
-MySQL Connector (https://dev.mysql.com/downloads/connector/j/5.1.html) <br/>
+#### Libraries and Dependencies:
+Chart.js (http://www.chartjs.org/)
 JSTL 1.2 (https://mvnrepository.com/artifact/javax.servlet/jstl/1.2)
+MySQL Connector (https://dev.mysql.com/downloads/connector/j/5.1.html) <br/>
 
 #### Login Screen:
 ![alt text](https://github.com/mcarbaugh/BudgetApplication/blob/master/screenshots/login_screen_2017_05_01.png?raw=true)
