@@ -3,8 +3,7 @@ A dynamic web application to help users manage their monthly spending. This proj
 
 <br/>
 Technology Stack: HTML5, CSS3, Javascript, JavaServer Pages, MySQL Database
-
-<br/><br/>
+<br/>
 
 #### External Dependencies (needed to build the project):
 MySQL Connector (https://dev.mysql.com/downloads/connector/j/5.1.html) <br/>
