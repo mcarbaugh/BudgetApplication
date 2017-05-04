@@ -5,8 +5,8 @@ A dynamic web application to help users manage their monthly spending. This proj
 HTML5, CSS3, Javascript, JavaServer Pages, MySQL Database
 
 #### Libraries and Dependencies:
-Chart.js (http://www.chartjs.org/)
-JSTL 1.2 (https://mvnrepository.com/artifact/javax.servlet/jstl/1.2)
+Chart.js (http://www.chartjs.org/) <br/>
+JSTL 1.2 (https://mvnrepository.com/artifact/javax.servlet/jstl/1.2) <br/>
 MySQL Connector (https://dev.mysql.com/downloads/connector/j/5.1.html) <br/>
 
 #### Login Screen:
