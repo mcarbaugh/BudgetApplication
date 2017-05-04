@@ -1,5 +1,9 @@
 # BudgetApplication
-A dynamic web application to help users manage their monthly spending.
+A dynamic web application to help users manage their monthly spending. This project was completed in four weeks as part of a class assignment.
+
+<br/>
+Technology Stack: HTML5, CSS3, Javascript, JavaServer Pages, MySQL Database
+
 <br/><br/>
 
 #### External Dependencies (needed to build the project):
