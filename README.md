@@ -3,7 +3,7 @@ A dynamic web application to help users manage their monthly spending.
 
 #### Technology Stack:
 HTML5, CSS3, Javascript, AJAX, JavaServer Pages, MySQL Database
-<br><br><i>Note: This was a class assignment and certain frameworks (i.e. Bootstrap, Semantic UI) were not permitted. Consequently, I had to use vanilla JS and CSS for entire project.</i>
+<br><br><i>Note: This was a class assignment and certain frameworks (i.e. Bootstrap, Semantic UI) were not permitted. Consequently, my team had to use vanilla JS and CSS for the entire project.</i>
 
 #### Libraries and Dependencies:
 Chart.js (http://www.chartjs.org/) <br/>
